@@ -46,8 +46,8 @@ sudo systemctl start gunicorn
 sudo systemctl enable gunicorn
 
 #Copiem els arxius pertinents i reiniciem
-sudo cp -p $descarregues/odroid_sites /etc/nginx/sites-available/odroid
-sudo ln -s /etc/nginx/sites-available/odroid /etc/nginx/sites-enabled
+sudo cp -p $descarregues/odroid_site /etc/nginx/sites-available/odroid_site
+sudo ln -s /etc/nginx/sites-available/odroid_site /etc/nginx/sites-enabled
 sudo systemctl restart nginx
 
 echo "Instal·lació completada, si obre un navegador, hauria de poguer veure anant a 0.0.0.0:8000 la nostra pagina web en django per monitoritzar les plaques odroid"
