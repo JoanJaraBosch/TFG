@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Registre d'usuaris{% endblock %}
+
+{% block background %}{% load static %}{% static 'core/img/home-bg.jpg' %}{% endblock %}
+
+{% block headers %}
+<h1>URV-Odroid</h1>
+{% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="jumbotron">
+      {% if registered %}
+        <h1>Gracies per registrar-te</h1>
+      {% else %}
+        <h1>Registris a la nostra web</h1>
+        <h3>Ompli el formulari</h3><form enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          {{ user_form.as_p }}
+          {{ profile_form.as_p }}
+          <input type="submit" name="" value="Register">
+        </form>
+        
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

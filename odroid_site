@@ -1,0 +1,16 @@
+server {
+    listen 80;
+    listen 8000;
+    server_name www.urv-odroid.com;
+    server_name 127.0.0.0;
+    server_name 0.0.0.0;
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/joan/odroid;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/joan/odroid/odroid.sock;
+    }
+}
