@@ -46,6 +46,8 @@ sudo systemctl daemon-reload
 sudo systemctl start gunicorn
 sudo systemctl enable gunicorn
 
+sudo rm -r /etc/nginx/sites-available/default 
+sudo rm -r /etc/nginx/sites-enabled/default
 #Copiem els arxius pertinents i reiniciem
 sudo cp -p $descarregues/odroid_site /etc/nginx/sites-available/odroid_site
 sudo ln -s /etc/nginx/sites-available/odroid_site /etc/nginx/sites-enabled

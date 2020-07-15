@@ -6,11 +6,14 @@ server {
     server_name 0.0.0.0;
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        root /home/joan/odroid;
+        root /home/odroid/Downloads/TFG/odroid;
+    }
+    location /media/ {
+        root /home/odroid/Downloads/TFG/odroid;
     }
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/joan/odroid/odroid.sock;
+        proxy_pass http://unix:/home/odroid/Downloads/TFG/odroid/odroid.sock;
     }
 }
