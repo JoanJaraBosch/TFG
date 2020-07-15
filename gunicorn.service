@@ -7,7 +7,7 @@ Environment=SECRET_KEY=secret
 User=odroid
 Group=www-data
 WorkingDirectory=/home/odroid/Downloads/TFG/odroid
-ExecStart=/home/odroid/Downloads/TFG/odroid/myprojectenv/bin/gunicorn --workers 3 --bind unix:/home/odroid/Downloads/TFG/odroid/odroid.sock odroid.wsgi:application
+ExecStart=/home/odroid/Downloads/TFG/odroid/odroidenv/bin/gunicorn --workers 3 --bind unix:/home/odroid/Downloads/TFG/odroid/odroid.sock odroid.wsgi:application
 
 [Install]
 WantedBy=multi-user.target

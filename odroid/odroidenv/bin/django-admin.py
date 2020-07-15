@@ -1,4 +1,4 @@
-#!/home/joan/myprojectenv/bin/python
+#!/home/odroid/aux/odroidenv/bin/python
 from django.core import management
 
 if __name__ == "__main__":
