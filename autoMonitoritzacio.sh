@@ -8,9 +8,9 @@
 #Instal·lació dels paquets necessaris
 sudo apt update -y
 #sudo apt upgrade -y
-sudo apt install python3-pip python3 gunicorn nginx python3-django -y
+sudo apt install python3-pip python3 gunicorn nginx python3-django gettext -y
 #Instalarem el virtualenv per a poguer tindre un entorn virtual 
-#i no molestar els altres projectes que puguem tindre en un futur
+#i no molestar els altres projectes que puguem tindre en un futurgettext 
 sudo pip3 install virtualenv 
 
 descarregues=$(pwd)
