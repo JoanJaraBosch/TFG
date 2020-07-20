@@ -1,6 +1,7 @@
 {% extends 'core/base.html' %}
-
-{% block title %}Monitorització{% endblock %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}{% "Monitorització" %}{% endblock %}
 
 {% block background %}{% load static %}{% static 'core/img/monitor-bg.jpg' %}{% endblock %}
 
@@ -9,21 +10,4 @@
 {% endblock %}
 {% block content %}
 
-    What chat room would you like to enter?<br>
-    <input id="room-name-input" type="text" size="100"><br>
-    <input id="room-name-submit" type="button" value="Enter">
-
-    <script>
-        document.querySelector('#room-name-input').focus();
-        document.querySelector('#room-name-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#room-name-submit').click();
-            }
-        };
-
-        document.querySelector('#room-name-submit').onclick = function(e) {
-            var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = '/chat/' + roomName + '/';
-        };
-    </script>
 {% endblock %}

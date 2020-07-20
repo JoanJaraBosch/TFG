@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
+from django.conf.urls import include
 from core import views
 from django.views.static import serve
 from django.conf import settings
@@ -31,4 +32,5 @@ urlpatterns = [
     path('registre/',views.register,name='registre'),
     path('login/',views.user_login,name='login'),
     path('logout/',views.user_logout,name='logout'),
+    path('i18n/', include('django.conf.urls.i18n')),
 ]

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-17 17:45+0200\n"
+"POT-Creation-Date: 2020-07-20 19:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,1133 +18,203 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/templates/core/base.html:36
+#: core/templates/core/about.html:6 core/templates/core/about.html:11
+#: core/templates/core/base.html:38
+msgid "Sobre nosaltres"
+msgstr "About us"
+
+#: core/templates/core/about.html:12
+msgid "Equip"
+msgstr "Team"
+
+#: core/templates/core/about.html:18
+msgid "Estudiants"
+msgstr "Students"
+
+#: core/templates/core/about.html:22
+msgid ""
+"Sóm un grup format per dos estudiants de la Universitat Rovira i Virgili, "
+"actualment cursant lúltim any de la carrera d'Enginyeria Informàtica. A "
+"continuació veureu informació sobre nosaltres, els estudiants."
+msgstr ""
+"We are a group of two students from Rovira i Virgili University. Nowadays, "
+"we are doing the last year of our degree, computer engineering. If you want "
+"to know more about us, you can in the following sections: "
+
+#: core/templates/core/about.html:30
+msgid ""
+"Nascut a reus el 18 de març del 1996. Sóc un dels integrants del grup on la "
+"meva feina ha estat desenvolupar aquesta pàgina web amb Django per tal de "
+"donar informació sobre qui sóm, com fer servir el que hem creat, donar "
+"suport a la descàrrega de codi del meu company i poguer monitoritzar les "
+"plaques odroid."
+msgstr ""
+"Born in Reus on March 18, 1996. I am one of the integers of this team on "
+"which my my task have been developing a webapp in Django with the purpouse "
+"of give information abuot who we are, how to use our project, give support "
+"for downloading my partners scripts to use the Odroid cards and provide a "
+"way to monitor the Odroid system."
+
+#: core/templates/core/about.html:40
+msgid ""
+"Nascut a reus el 20 de setembre del 1993. Sóc un dels integrants del grup on "
+"la meva feina ha estat desenvolupar tot el sistema d'automatització i cues "
+"per a que les plaques odroid puguin treballar en paral·lel. El material per "
+"automatitzar-ho i instal·lar-ho, està a l'apartat de descàrregues de la "
+"plana web. Pots clicar al següent enllaç "
+msgstr ""
+"Born in Reus on September 20, 1993. He is one of the integrants of the group "
+"his task was to provide a way to automate the configuration and the scripts "
+"and a way to communicate the Odroid cards among them in order to achieve "
+"parallelism. If you want to test and use the scripts provided by David, you "
+"can go to Downloads in the navbar or you can click the following link: "
+
+#: core/templates/core/about.html:40
+msgid "enllaç"
+msgstr "link"
+
+#: core/templates/core/about.html:40
+msgid " o navegar-hi desde la barra de navegació."
+msgstr "."
+
+#: core/templates/core/about.html:45
+msgid "Professors"
+msgstr "Teachers"
+
+#: core/templates/core/about.html:46
+msgid ""
+"A continuació, podreu veure informació sobre els professors implicats en el "
+"nostre projecte, tot i què el nostre professor principal ha estat en Carles "
+"Aliagas ja que ens ha fet de tutor del treball de fi de carrera."
+msgstr ""
+"In the following section, you can see information about the implicated "
+"teachers in our final bachelor's project. Although, our principal mentor was "
+"Carles Aliagas ."
+
+#: core/templates/core/about.html:54
+msgid ""
+"Professor de la Universitat Rovira i Virgili desde fa 25 anys, gran "
+"coneixedor del paral·lelisme i sistemes linux. Imparteix classes en una gran "
+"diversitat d'assignatures de la carrera d'Enginyeria Informàtica."
+msgstr ""
+"Teacher of Rovira i Virgili University for 25 years. He is a great "
+"professional and knowler of parallelism and Linux Systems. He give class to "
+"a big diversity of subjects in the computer engineering degree."
+
+#: core/templates/core/about.html:64
+msgid ""
+"Professor de la Universitat Rovira i Virgili, especialitzat en computadors. "
+"Imparteix docència en diverses assignatures de la carrera Enginyeria "
+"Informàtica."
+msgstr ""
+"Teacher of Rovira i Virgili University specialized in computers and their "
+"architecure. He give class to a big diversity of subjects in the computer "
+"engineering degree."
+
+#: core/templates/core/about.html:74
+msgid ""
+"Professor de la Universitat Rovira i Virgili, especialitzat en sistemes "
+"linux, android i computadors. Imparteix docència en diverses assignatures de "
+"la carrera Enginyeria Informàtica."
+msgstr ""
+"Teacher of Rovira i Virgili University specialized in Linux systems. android "
+"systems and computers and their architecure. He give class to a big "
+"diversity of subjects in the computer engineering degree."
+
+#: core/templates/core/base.html:29
+msgid "Menú"
+msgstr "Menu"
+
+#: core/templates/core/base.html:35 core/templates/core/home.html:4
 msgid "Portada"
 msgstr "Home"
 
-#: odroidenv/lib/python3.8/site-packages/django/contrib/messages/apps.py:7
-msgid "Messages"
-msgstr ""
+#: core/templates/core/base.html:41
+msgid "Monitorització"
+msgstr "Monitoring"
 
-#: odroidenv/lib/python3.8/site-packages/django/contrib/sitemaps/apps.py:7
-msgid "Site Maps"
-msgstr ""
+#: core/templates/core/base.html:44
+msgid "Manual"
+msgstr "Manual"
 
-#: odroidenv/lib/python3.8/site-packages/django/contrib/staticfiles/apps.py:9
-msgid "Static Files"
-msgstr ""
+#: core/templates/core/base.html:47
+msgid "Descàrregues"
+msgstr "Downloads"
 
-#: odroidenv/lib/python3.8/site-packages/django/contrib/syndication/apps.py:7
-msgid "Syndication"
-msgstr ""
+#: core/templates/core/base.html:51 core/templates/core/login.html:4
+#: core/templates/core/login.html:14
+msgid "Iniciar Sessió"
+msgstr "Log in"
 
-#: odroidenv/lib/python3.8/site-packages/django/core/paginator.py:45
-msgid "That page number is not an integer"
-msgstr ""
+#: core/templates/core/base.html:54 core/templates/core/registration.html:4
+msgid "Registrar-se"
+msgstr "Register"
 
-#: odroidenv/lib/python3.8/site-packages/django/core/paginator.py:47
-msgid "That page number is less than 1"
-msgstr ""
+#: core/templates/core/base.html:58
+msgid "Tancar Sessió"
+msgstr "Log out"
 
-#: odroidenv/lib/python3.8/site-packages/django/core/paginator.py:52
-msgid "That page contains no results"
-msgstr ""
+#: core/templates/core/base.html:64
+msgid "Idiomes"
+msgstr "Languages"
 
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:32
-msgid "Enter a valid value."
-msgstr ""
+#: core/templates/core/base.html:115
+msgid "i"
+msgstr "and"
 
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:103
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:659
-msgid "Enter a valid URL."
-msgstr ""
+#: core/templates/core/descarrega.html:4
+#, fuzzy
+#| msgid "Descàrregues"
+msgid "Descarrega"
+msgstr "Downloads"
 
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:155
-msgid "Enter a valid integer."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:166
-msgid "Enter a valid email address."
-msgstr ""
-
-#. Translators: "letters" means latin letters: a-z and A-Z.
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:240
+#: core/templates/core/descarrega.html:13
 msgid ""
-"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+"En aquesta plana tens la oportunitat de descarregar els arxius "
+"d'automatització i la mateixa plana web de manera local per executar-la "
+"desde la placa odroid master per tal de fer la monitorització de manera "
+"local i per tant més segura.\n"
 msgstr ""
+"In this page you have the opportunity to download the files "
+"needed in the process of automating and the process of creating the webapp in LAN. "
+"You have to download it in the master Odroid card in order to do it in the correct way"
+".\n"
 
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:247
+#: core/templates/core/descarrega.html:16
+#, fuzzy
+#| msgid "Descàrregues"
+msgid "Descarrega d'arxius"
+msgstr "Downloads"
+
+#: core/templates/core/home.html:13
 msgid ""
-"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
-"hyphens."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:256
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:276
-msgid "Enter a valid IPv4 address."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:261
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:277
-msgid "Enter a valid IPv6 address."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:271
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:275
-msgid "Enter a valid IPv4 or IPv6 address."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:305
-msgid "Enter only digits separated by commas."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:311
-#, python-format
-msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:343
-#, python-format
-msgid "Ensure this value is less than or equal to %(limit_value)s."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:352
-#, python-format
-msgid "Ensure this value is greater than or equal to %(limit_value)s."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:362
-#, python-format
-msgid ""
-"Ensure this value has at least %(limit_value)d character (it has "
-"%(show_value)d)."
-msgid_plural ""
-"Ensure this value has at least %(limit_value)d characters (it has "
-"%(show_value)d)."
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:377
-#, python-format
-msgid ""
-"Ensure this value has at most %(limit_value)d character (it has "
-"%(show_value)d)."
-msgid_plural ""
-"Ensure this value has at most %(limit_value)d characters (it has "
-"%(show_value)d)."
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:396
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:291
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:326
-msgid "Enter a number."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:398
-#, python-format
-msgid "Ensure that there are no more than %(max)s digit in total."
-msgid_plural "Ensure that there are no more than %(max)s digits in total."
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:403
-#, python-format
-msgid "Ensure that there are no more than %(max)s decimal place."
-msgid_plural "Ensure that there are no more than %(max)s decimal places."
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:408
-#, python-format
-msgid ""
-"Ensure that there are no more than %(max)s digit before the decimal point."
-msgid_plural ""
-"Ensure that there are no more than %(max)s digits before the decimal point."
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:470
-#, python-format
-msgid ""
-"File extension “%(extension)s” is not allowed. Allowed extensions are: "
-"%(allowed_extensions)s."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/core/validators.py:522
-msgid "Null characters are not allowed."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/base.py:1181
-#: odroidenv/lib/python3.8/site-packages/django/forms/models.py:759
-msgid "and"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/base.py:1183
-#, python-format
-msgid "%(model_name)s with this %(field_labels)s already exists."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:104
-#, python-format
-msgid "Value %(value)r is not a valid choice."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:105
-msgid "This field cannot be null."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:106
-msgid "This field cannot be blank."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:107
-#, python-format
-msgid "%(model_name)s with this %(field_label)s already exists."
-msgstr ""
-
-#. Translators: The 'lookup_type' is one of 'date', 'year' or 'month'.
-#. Eg: "Title must be unique for pub_date year"
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:111
-#, python-format
-msgid ""
-"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:130
-#, python-format
-msgid "Field of type: %(field_type)s"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:937
-#, python-format
-msgid "“%(value)s” value must be either True or False."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:938
-#, python-format
-msgid "“%(value)s” value must be either True, False, or None."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:940
-msgid "Boolean (Either True or False)"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:981
-#, python-format
-msgid "String (up to %(max_length)s)"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1045
-msgid "Comma-separated integers"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1094
-#, python-format
-msgid ""
-"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
-"format."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1096
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1239
-#, python-format
-msgid ""
-"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
-"date."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1099
-msgid "Date (without time)"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1237
-#, python-format
-msgid ""
-"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[."
-"uuuuuu]][TZ] format."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1241
-#, python-format
-msgid ""
-"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
-"[TZ]) but it is an invalid date/time."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1245
-msgid "Date (with time)"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1393
-#, python-format
-msgid "“%(value)s” value must be a decimal number."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1395
-msgid "Decimal number"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1534
-#, python-format
-msgid ""
-"“%(value)s” value has an invalid format. It must be in [DD] [[HH:]MM:]ss[."
-"uuuuuu] format."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1537
-msgid "Duration"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1587
-msgid "Email address"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1610
-msgid "File path"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1676
-#, python-format
-msgid "“%(value)s” value must be a float."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1678
-msgid "Floating point number"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1716
-#, python-format
-msgid "“%(value)s” value must be an integer."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1718
-msgid "Integer"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1801
-msgid "Big (8 byte) integer"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1817
-msgid "IPv4 address"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1848
-msgid "IP address"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1928
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1929
-#, python-format
-msgid "“%(value)s” value must be either None, True or False."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1931
-msgid "Boolean (Either True, False or None)"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1966
-msgid "Positive integer"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1979
-msgid "Positive small integer"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:1993
-#, python-format
-msgid "Slug (up to %(max_length)s)"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2025
-msgid "Small integer"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2032
-msgid "Text"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2060
-#, python-format
-msgid ""
-"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
-"format."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2062
-#, python-format
-msgid ""
-"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
-"invalid time."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2065
-msgid "Time"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2191
-msgid "URL"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2213
-msgid "Raw binary data"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2278
-#, python-format
-msgid "“%(value)s” is not a valid UUID."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/__init__.py:2280
-msgid "Universally unique identifier"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/files.py:221
-msgid "File"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/files.py:360
-msgid "Image"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/related.py:778
-#, python-format
-msgid "%(model)s instance with %(field)s %(value)r does not exist."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/related.py:780
-msgid "Foreign Key (type determined by related field)"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/related.py:1012
-msgid "One-to-one relationship"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/related.py:1066
-#, python-format
-msgid "%(from)s-%(to)s relationship"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/related.py:1067
-#, python-format
-msgid "%(from)s-%(to)s relationships"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/db/models/fields/related.py:1109
-msgid "Many-to-many relationship"
-msgstr ""
-
-#. Translators: If found as last label character, these punctuation
-#. characters will prevent the default label_suffix to be appended to the label
-#: odroidenv/lib/python3.8/site-packages/django/forms/boundfield.py:149
-msgid ":?.!"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:53
-msgid "This field is required."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:246
-msgid "Enter a whole number."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:397
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:1127
-msgid "Enter a valid date."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:421
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:1128
-msgid "Enter a valid time."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:443
-msgid "Enter a valid date/time."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:472
-msgid "Enter a valid duration."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:473
-#, python-brace-format
-msgid "The number of days must be between {min_days} and {max_days}."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:533
-msgid "No file was submitted. Check the encoding type on the form."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:534
-msgid "No file was submitted."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:535
-msgid "The submitted file is empty."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:537
-#, python-format
-msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
-msgid_plural ""
-"Ensure this filename has at most %(max)d characters (it has %(length)d)."
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:540
-msgid "Please either submit a file or check the clear checkbox, not both."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:601
-msgid ""
-"Upload a valid image. The file you uploaded was either not an image or a "
-"corrupted image."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:763
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:853
-#: odroidenv/lib/python3.8/site-packages/django/forms/models.py:1275
-#, python-format
-msgid "Select a valid choice. %(value)s is not one of the available choices."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:854
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:969
-#: odroidenv/lib/python3.8/site-packages/django/forms/models.py:1274
-msgid "Enter a list of values."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:970
-msgid "Enter a complete value."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/fields.py:1186
-msgid "Enter a valid UUID."
-msgstr ""
-
-#. Translators: This is the default suffix added to form field labels
-#: odroidenv/lib/python3.8/site-packages/django/forms/forms.py:81
-msgid ":"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/forms.py:207
-#, python-format
-msgid "(Hidden field %(name)s) %(error)s"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/formsets.py:93
-msgid "ManagementForm data is missing or has been tampered with"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/formsets.py:345
-#, python-format
-msgid "Please submit %d or fewer forms."
-msgid_plural "Please submit %d or fewer forms."
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/formsets.py:352
-#, python-format
-msgid "Please submit %d or more forms."
-msgid_plural "Please submit %d or more forms."
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/formsets.py:379
-#: odroidenv/lib/python3.8/site-packages/django/forms/formsets.py:386
-msgid "Order"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/formsets.py:391
-msgid "Delete"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/models.py:754
-#, python-format
-msgid "Please correct the duplicate data for %(field)s."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/models.py:758
-#, python-format
-msgid "Please correct the duplicate data for %(field)s, which must be unique."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/models.py:764
-#, python-format
-msgid ""
-"Please correct the duplicate data for %(field_name)s which must be unique "
-"for the %(lookup)s in %(date_field)s."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/models.py:773
-msgid "Please correct the duplicate values below."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/models.py:1094
-msgid "The inline value did not match the parent instance."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/models.py:1161
-msgid "Select a valid choice. That choice is not one of the available choices."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/models.py:1277
-#, python-format
-msgid "“%(pk)s” is not a valid value."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/utils.py:162
-#, python-format
-msgid ""
-"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
-"may be ambiguous or it may not exist."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/widgets.py:395
-msgid "Clear"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/widgets.py:396
-msgid "Currently"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/widgets.py:397
-msgid "Change"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/widgets.py:709
-msgid "Unknown"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/widgets.py:710
-msgid "Yes"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/forms/widgets.py:711
-msgid "No"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/template/defaultfilters.py:788
-msgid "yes,no,maybe"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/template/defaultfilters.py:817
-#: odroidenv/lib/python3.8/site-packages/django/template/defaultfilters.py:834
-#, python-format
-msgid "%(size)d byte"
-msgid_plural "%(size)d bytes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/template/defaultfilters.py:836
-#, python-format
-msgid "%s KB"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/template/defaultfilters.py:838
-#, python-format
-msgid "%s MB"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/template/defaultfilters.py:840
-#, python-format
-msgid "%s GB"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/template/defaultfilters.py:842
-#, python-format
-msgid "%s TB"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/template/defaultfilters.py:844
-#, python-format
-msgid "%s PB"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dateformat.py:62
-msgid "p.m."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dateformat.py:63
-msgid "a.m."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dateformat.py:68
-msgid "PM"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dateformat.py:69
-msgid "AM"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dateformat.py:150
-msgid "midnight"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dateformat.py:152
-msgid "noon"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:6
-msgid "Monday"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:6
-msgid "Tuesday"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:6
-msgid "Wednesday"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:6
-msgid "Thursday"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:6
-msgid "Friday"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:7
-msgid "Saturday"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:7
-msgid "Sunday"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:10
-msgid "Mon"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:10
-msgid "Tue"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:10
-msgid "Wed"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:10
-msgid "Thu"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:10
-msgid "Fri"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:11
-msgid "Sat"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:11
-msgid "Sun"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:14
-msgid "January"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:14
-msgid "February"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:14
-msgid "March"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:14
-msgid "April"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:14
-msgid "May"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:14
-msgid "June"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:15
-msgid "July"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:15
-msgid "August"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:15
-msgid "September"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:15
-msgid "October"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:15
-msgid "November"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:16
-msgid "December"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:19
-msgid "jan"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:19
-msgid "feb"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:19
-msgid "mar"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:19
-msgid "apr"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:19
-msgid "may"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:19
-msgid "jun"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:20
-msgid "jul"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:20
-msgid "aug"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:20
-msgid "sep"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:20
-msgid "oct"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:20
-msgid "nov"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:20
-msgid "dec"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:23
-msgctxt "abbrev. month"
-msgid "Jan."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:24
-msgctxt "abbrev. month"
-msgid "Feb."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:25
-msgctxt "abbrev. month"
-msgid "March"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:26
-msgctxt "abbrev. month"
-msgid "April"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:27
-msgctxt "abbrev. month"
-msgid "May"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:28
-msgctxt "abbrev. month"
-msgid "June"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:29
-msgctxt "abbrev. month"
-msgid "July"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:30
-msgctxt "abbrev. month"
-msgid "Aug."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:31
-msgctxt "abbrev. month"
-msgid "Sept."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:32
-msgctxt "abbrev. month"
-msgid "Oct."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:33
-msgctxt "abbrev. month"
-msgid "Nov."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:34
-msgctxt "abbrev. month"
-msgid "Dec."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:37
-msgctxt "alt. month"
-msgid "January"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:38
-msgctxt "alt. month"
-msgid "February"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:39
-msgctxt "alt. month"
-msgid "March"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:40
-msgctxt "alt. month"
-msgid "April"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:41
-msgctxt "alt. month"
-msgid "May"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:42
-msgctxt "alt. month"
-msgid "June"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:43
-msgctxt "alt. month"
-msgid "July"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:44
-msgctxt "alt. month"
-msgid "August"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:45
-msgctxt "alt. month"
-msgid "September"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:46
-msgctxt "alt. month"
-msgid "October"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:47
-msgctxt "alt. month"
-msgid "November"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/dates.py:48
-msgctxt "alt. month"
-msgid "December"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/ipv6.py:8
-msgid "This is not a valid IPv6 address."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/text.py:69
-#, python-format
-msgctxt "String to return when truncating text"
-msgid "%(truncated_text)s…"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/text.py:235
-msgid "or"
-msgstr ""
-
-#. Translators: This string is used as a separator between list elements
-#: odroidenv/lib/python3.8/site-packages/django/utils/text.py:254
-#: odroidenv/lib/python3.8/site-packages/django/utils/timesince.py:83
-msgid ", "
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/timesince.py:9
-#, python-format
-msgid "%d year"
-msgid_plural "%d years"
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/timesince.py:10
-#, python-format
-msgid "%d month"
-msgid_plural "%d months"
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/timesince.py:11
-#, python-format
-msgid "%d week"
-msgid_plural "%d weeks"
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/timesince.py:12
-#, python-format
-msgid "%d day"
-msgid_plural "%d days"
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/timesince.py:13
-#, python-format
-msgid "%d hour"
-msgid_plural "%d hours"
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/timesince.py:14
-#, python-format
-msgid "%d minute"
-msgid_plural "%d minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: odroidenv/lib/python3.8/site-packages/django/utils/timesince.py:72
-msgid "0 minutes"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/csrf.py:110
-msgid "Forbidden"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/csrf.py:111
-msgid "CSRF verification failed. Request aborted."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/csrf.py:115
-msgid ""
-"You are seeing this message because this HTTPS site requires a “Referer "
-"header” to be sent by your Web browser, but none was sent. This header is "
-"required for security reasons, to ensure that your browser is not being "
-"hijacked by third parties."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/csrf.py:120
-msgid ""
-"If you have configured your browser to disable “Referer” headers, please re-"
-"enable them, at least for this site, or for HTTPS connections, or for “same-"
-"origin” requests."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/csrf.py:124
-msgid ""
-"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
-"including the “Referrer-Policy: no-referrer” header, please remove them. The "
-"CSRF protection requires the “Referer” header to do strict referer checking. "
-"If you’re concerned about privacy, use alternatives like <a rel=\"noreferrer"
-"\" …> for links to third-party sites."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/csrf.py:132
-msgid ""
-"You are seeing this message because this site requires a CSRF cookie when "
-"submitting forms. This cookie is required for security reasons, to ensure "
-"that your browser is not being hijacked by third parties."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/csrf.py:137
-msgid ""
-"If you have configured your browser to disable cookies, please re-enable "
-"them, at least for this site, or for “same-origin” requests."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/csrf.py:142
-msgid "More information is available with DEBUG=True."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/dates.py:41
-msgid "No year specified"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/dates.py:61
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/dates.py:111
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/dates.py:208
-msgid "Date out of range"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/dates.py:90
-msgid "No month specified"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/dates.py:142
-msgid "No day specified"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/dates.py:188
-msgid "No week specified"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/dates.py:338
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/dates.py:367
-#, python-format
-msgid "No %(verbose_name_plural)s available"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/dates.py:589
-#, python-format
-msgid ""
-"Future %(verbose_name_plural)s not available because %(class_name)s."
-"allow_future is False."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/dates.py:623
-#, python-format
-msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/detail.py:54
-#, python-format
-msgid "No %(verbose_name)s found matching the query"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/list.py:67
-msgid "Page is not “last”, nor can it be converted to an int."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/list.py:72
-#, python-format
-msgid "Invalid page (%(page_number)s): %(message)s"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/generic/list.py:154
-#, python-format
-msgid "Empty list and “%(class_name)s.allow_empty” is False."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/static.py:40
-msgid "Directory indexes are not allowed here."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/static.py:42
-#, python-format
-msgid "“%(path)s” does not exist"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/static.py:80
-#, python-format
-msgid "Index of %(directory)s"
-msgstr ""
+"Entra i descobreix el nostre projecte. Un projecte per a fer "
+"paral·lelització de manera fàcil i ràpida amb la opció de monitorització "
+"Online o LAN."
+msgstr ""
+"Come in and discover our project. A project to do parallelism in an easier "
+"and faster way with the option of monitoring your Odroid system via Online "
+"or LAN."
+
+#: core/templates/core/login.html:17
+msgid "Nom d'usuari:"
+msgstr "Username:"
+
+#: core/templates/core/login.html:18
+msgid "Contrasenya:"
+msgstr "Password"
+
+#: core/templates/core/registration.html:15
+#, fuzzy
+#| msgid "Registrar-se"
+msgid "Gràcies per egistrar-se"
+msgstr "Thanks for registering"
+
+#: core/templates/core/registration.html:17
+#, fuzzy
+#| msgid "Registrar-se"
+msgid "Registris a la web"
+msgstr "Register into our web"
 
 #: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:7
 msgid "Django: the Web framework for perfectionists with deadlines."

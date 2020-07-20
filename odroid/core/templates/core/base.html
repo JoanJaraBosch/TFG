@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
   <head>
 
     <meta charset="utf-8">
@@ -25,7 +26,7 @@
       <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">URV-Odroid</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menú
+          {% trans "Menú" %}
           <i class="fa fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -34,38 +35,49 @@
               <a class="nav-link" href="{% url 'home' %}">{% trans "Portada" %}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'nosaltres' %}">Sobre nosaltres</a>
+              <a class="nav-link" href="{% url 'nosaltres' %}">{% trans "Sobre nosaltres" %}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'monitoritzacio' %}">Monitorització</a>
+              <a class="nav-link" href="{% url 'monitoritzacio' %}">{% trans "Monitorització" %}</a>
             </li>
              <li class="nav-item">
-              <a class="nav-link" href="{% url 'manual' %}">Manual</a>
+              <a class="nav-link" href="{% url 'manual' %}">{% trans "Manual" %}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'descarrega' %}">Descàrregues</a>
+              <a class="nav-link" href="{% url 'descarrega' %}">{% trans "Descàrregues" %}</a>
             </li>
             {% if not user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">Iniciar Sessió</a>
+              <a class="nav-link" href="{% url 'login' %}">{% trans "Iniciar Sessió" %}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'registre' %}">Registrar-se</a>
+              <a class="nav-link" href="{% url 'registre' %}">{% trans "Registrar-se" %}</a>
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="/logout">Tancar Sessió</a>
+              <a class="nav-link" href="/logout">{% trans "Tancar Sessió" %}</a>
             </li>
             {% endif %}
             <li class="nav-item">
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Idiomes
+                  {% trans "Idiomes" %}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="">Català </a>
-                  <a class="dropdown-item" href="">Castellà </a>
-                  <a class="dropdown-item" href="">Inglés</a>
+                  <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                    <input name="next" type="hidden" value="{{ redirect_to }}">
+                    <select name="language">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                                {{ language.name_local }} ({{ language.code }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Go">
+                  </form>
                 </div>
               </div>
             </li>
@@ -100,7 +112,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-            <p class="copyright text-muted">Copyright &copy; 2020 · Joan Jara i David Ferrer (URV) </p>
+            <p class="copyright text-muted">Copyright &copy; 2020 · Joan Jara {% trans "i" %} David Ferrer (URV) </p>
           </div>
         </div>
       </div>
