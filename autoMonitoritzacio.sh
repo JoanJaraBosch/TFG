@@ -9,6 +9,7 @@
 sudo apt update -y
 #sudo apt upgrade -y
 sudo apt install python3-pip python3.8 gunicorn nginx python3-django gettext -y
+sudo apt-get install build-essential libssl-dev libffi-dev python-dev python3-dev -y
 #Instalarem el virtualenv per a poguer tindre un entorn virtual 
 #i no molestar els altres projectes que puguem tindre en un futurgettext 
 sudo pip3 install --upgrade setuptools
