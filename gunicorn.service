@@ -5,10 +5,10 @@ After=network-online.target
 
 [Service]
 Environment=SECRET_KEY=secret
-User=joan
+User=odroid
 Group=www-data
-WorkingDirectory=/home/joan/odroid
-ExecStart=/usr/bin/gunicorn --workers 3 --bind unix:/home/joan/odroid/odroid.sock odroid.wsgi:application
+WorkingDirectory=/home/odroid/Downloads/TFG/odroid
+ExecStart=/home/odroid/Downloads/TFG/odroid/odroidenv/bin/gunicorn --workers 3 --bind unix:/home/odroid/Downloads/TFG/odroid/odroid.sock odroid.wsgi:application
 
 [Install]
 WantedBy=multi-user.target

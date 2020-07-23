@@ -8,7 +8,7 @@
 #Instal·lació dels paquets necessaris
 sudo apt update -y
 #sudo apt upgrade -y
-sudo apt install python3-pip python3 gunicorn nginx python3-django gettext -y
+sudo apt install python3-pip python3.8 gunicorn nginx python3-django gettext -y
 #Instalarem el virtualenv per a poguer tindre un entorn virtual 
 #i no molestar els altres projectes que puguem tindre en un futurgettext 
 sudo pip3 install virtualenv 
@@ -25,7 +25,7 @@ source odroidenv/bin/activate
 #Al arxiu RAR, tenim un fitxer anomenat requirements, on tenim tots els 
 #requeriments per al nostre porejecte i que amb la següent comanda, 
 #s'insta·laran
-pip3 install -r $descarregues/requirements.txt 
+pip3 install -r $descarregues/requirements.txt --timeout 60 
 
 # Ara el q farem sera copiar el nostre entorn virtual al nostre projecte 
 #descomprimi
