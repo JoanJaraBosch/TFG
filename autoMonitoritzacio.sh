@@ -41,7 +41,7 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 
 #Agafem els fitxers statics
-python3 manage.py collectstatic
+python3 manage.py collectstatic --noinput
 
 #Copiem els arxius pertinents i reiniciem els dimonis
 sudo cp -p $descarregues/gunicorn.service /etc/systemd/system/gunicorn.service
