@@ -26,6 +26,7 @@ def descarrega(request):
 #This view is the "special view", because we want the user log in to see this view.
 @login_required
 def monitoring(request):
+    #pout,perr = subprocess.Popen(['nmap', '192.168.43.63', '-oX', '-'], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return render(request, "core/monitoring.html")
 
 

@@ -21,15 +21,15 @@ msgstr ""
 #: core/templates/core/about.html:6 core/templates/core/about.html:11
 #: core/templates/core/base.html:38
 msgid "Sobre nosaltres"
-msgstr ""
+msgstr "Sobre nosaltres"
 
 #: core/templates/core/about.html:12
 msgid "Equip"
-msgstr ""
+msgstr "Equip"
 
 #: core/templates/core/about.html:18
 msgid "Estudiants"
-msgstr ""
+msgstr "Estudiants"
 
 #: core/templates/core/about.html:22
 msgid ""
@@ -37,6 +37,9 @@ msgid ""
 "actualment cursant lúltim any de la carrera d'Enginyeria Informàtica. A "
 "continuació veureu informació sobre nosaltres, els estudiants."
 msgstr ""
+"Sóm un grup format per dos estudiants de la Universitat Rovira i Virgili, "
+"actualment cursant lúltim any de la carrera d'Enginyeria Informàtica. A "
+"continuació veureu informació sobre nosaltres, els estudiants."
 
 #: core/templates/core/about.html:30
 msgid ""
@@ -46,6 +49,11 @@ msgid ""
 "suport a la descàrrega de codi del meu company i poguer monitoritzar les "
 "plaques odroid."
 msgstr ""
+"Nascut a reus el 18 de març del 1996. Sóc un dels integrants del grup on la "
+"meva feina ha estat desenvolupar aquesta pàgina web amb Django per tal de "
+"donar informació sobre qui sóm, com fer servir el que hem creat, donar "
+"suport a la descàrrega de codi del meu company i poguer monitoritzar les "
+"plaques odroid."
 
 #: core/templates/core/about.html:40
 msgid ""
@@ -55,18 +63,23 @@ msgid ""
 "automatitzar-ho i instal·lar-ho, està a l'apartat de descàrregues de la "
 "plana web. Pots clicar al següent enllaç "
 msgstr ""
+"Nascut a reus el 20 de setembre del 1993. Sóc un dels integrants del grup on "
+"la meva feina ha estat desenvolupar tot el sistema d'automatització i cues "
+"per a que les plaques odroid puguin treballar en paral·lel. El material per "
+"automatitzar-ho i instal·lar-ho, està a l'apartat de descàrregues de la "
+"plana web. Pots clicar al següent enllaç "
 
 #: core/templates/core/about.html:40
 msgid "enllaç"
-msgstr ""
+msgstr "enllaç"
 
 #: core/templates/core/about.html:40
 msgid " o navegar-hi desde la barra de navegació."
-msgstr ""
+msgstr " o navegar-hi desde la barra de navegació."
 
 #: core/templates/core/about.html:45
 msgid "Professors"
-msgstr ""
+msgstr "Professors"
 
 #: core/templates/core/about.html:46
 msgid ""
@@ -74,6 +87,9 @@ msgid ""
 "nostre projecte, tot i què el nostre professor principal ha estat en Carles "
 "Aliagas ja que ens ha fet de tutor del treball de fi de carrera."
 msgstr ""
+"A continuació, podreu veure informació sobre els professors implicats en el "
+"nostre projecte, tot i què el nostre professor principal ha estat en Carles "
+"Aliagas ja que ens ha fet de tutor del treball de fi de carrera."
 
 #: core/templates/core/about.html:54
 msgid ""
@@ -81,6 +97,9 @@ msgid ""
 "coneixedor del paral·lelisme i sistemes linux. Imparteix classes en una gran "
 "diversitat d'assignatures de la carrera d'Enginyeria Informàtica."
 msgstr ""
+"Professor de la Universitat Rovira i Virgili desde fa 25 anys, gran "
+"coneixedor del paral·lelisme i sistemes linux. Imparteix classes en una gran "
+"diversitat d'assignatures de la carrera d'Enginyeria Informàtica."
 
 #: core/templates/core/about.html:64
 msgid ""
@@ -88,6 +107,9 @@ msgid ""
 "Imparteix docència en diverses assignatures de la carrera Enginyeria "
 "Informàtica."
 msgstr ""
+"Professor de la Universitat Rovira i Virgili, especialitzat en computadors. "
+"Imparteix docència en diverses assignatures de la carrera Enginyeria "
+"Informàtica."
 
 #: core/templates/core/about.html:74
 msgid ""
@@ -95,51 +117,54 @@ msgid ""
 "linux, android i computadors. Imparteix docència en diverses assignatures de "
 "la carrera Enginyeria Informàtica."
 msgstr ""
+"Professor de la Universitat Rovira i Virgili, especialitzat en sistemes "
+"linux, android i computadors. Imparteix docència en diverses assignatures de "
+"la carrera Enginyeria Informàtica."
 
 #: core/templates/core/base.html:29
 msgid "Menú"
-msgstr ""
+msgstr "Menú"
 
 #: core/templates/core/base.html:35 core/templates/core/home.html:4
 msgid "Portada"
-msgstr ""
+msgstr "Portada"
 
 #: core/templates/core/base.html:41
 msgid "Monitorització"
-msgstr ""
+msgstr "Monitorització"
 
 #: core/templates/core/base.html:44
 msgid "Manual"
-msgstr ""
+msgstr "Manual"
 
 #: core/templates/core/base.html:47
 msgid "Descàrregues"
-msgstr ""
+msgstr "Descàrregues"
 
 #: core/templates/core/base.html:51 core/templates/core/login.html:4
 #: core/templates/core/login.html:14
 msgid "Iniciar Sessió"
-msgstr ""
+msgstr "Iniciar Sessió"
 
 #: core/templates/core/base.html:54 core/templates/core/registration.html:4
 msgid "Registrar-se"
-msgstr ""
+msgstr "Registrar-se"
 
 #: core/templates/core/base.html:58
 msgid "Tancar Sessió"
-msgstr ""
+msgstr "Tancar Sessió"
 
 #: core/templates/core/base.html:64
 msgid "Idiomes"
-msgstr ""
+msgstr "Idiomes"
 
 #: core/templates/core/base.html:115
 msgid "i"
-msgstr ""
+msgstr "i"
 
 #: core/templates/core/descarrega.html:4
 msgid "Descarrega"
-msgstr ""
+msgstr "Descarrega"
 
 #: core/templates/core/descarrega.html:13
 msgid ""
@@ -148,10 +173,14 @@ msgid ""
 "desde la placa odroid master per tal de fer la monitorització de manera "
 "local i per tant més segura.\n"
 msgstr ""
+"En aquesta plana tens la oportunitat de descarregar els arxius "
+"d'automatització i la mateixa plana web de manera local per executar-la "
+"desde la placa odroid master per tal de fer la monitorització de manera "
+"local i per tant més segura.\n"
 
 #: core/templates/core/descarrega.html:16
 msgid "Descarrega d'arxius"
-msgstr ""
+msgstr "Descarrega d'arxius"
 
 #: core/templates/core/home.html:13
 msgid ""
@@ -159,22 +188,25 @@ msgid ""
 "paral·lelització de manera fàcil i ràpida amb la opció de monitorització "
 "Online o LAN."
 msgstr ""
+"Entra i descobreix el nostre projecte. Un projecte per a fer "
+"paral·lelització de manera fàcil i ràpida amb la opció de monitorització "
+"Online o LAN."
 
 #: core/templates/core/login.html:17
 msgid "Nom d'usuari:"
-msgstr ""
+msgstr "Nom d'usuari:"
 
 #: core/templates/core/login.html:18
 msgid "Contrasenya:"
-msgstr ""
+msgstr "Contrasenya:"
 
 #: core/templates/core/registration.html:15
 msgid "Gràcies per egistrar-se"
-msgstr ""
+msgstr "Gràcies per egistrar-se"
 
 #: core/templates/core/registration.html:17
 msgid "Registris a la web"
-msgstr ""
+msgstr "Registris a la web"
 
 #: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:7
 msgid "Django: the Web framework for perfectionists with deadlines."
