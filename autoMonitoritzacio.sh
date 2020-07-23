@@ -14,7 +14,7 @@ sudo apt-get install build-essential libssl-dev libffi-dev python-dev python3-de
 #i no molestar els altres projectes que puguem tindre en un futurgettext 
 sudo pip3 install --upgrade setuptools
 sudo pip3 install virtualenv wheel
-sudo apt purge python2.7
+sudo apt purge python2.7 -y
 descarregues=$(pwd)
 #crearem la carpeta al directori home del usuari odroid
 mkdir ~/aux
