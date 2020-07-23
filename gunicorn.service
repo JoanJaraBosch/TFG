@@ -1,13 +1,14 @@
 [Unit]
 Description=gunicorn daemon
-After=network.target
+Wants=network-online.target
+After=network-online.target
 
 [Service]
 Environment=SECRET_KEY=secret
-User=odroid
+User=joan
 Group=www-data
-WorkingDirectory=/home/odroid/Downloads/TFG/odroid
-ExecStart=/home/odroid/.local/bin/gunicorn --workers 3 --bind unix:/home/odroid/Downloads/TFG/odroid/odroid.sock odroid.wsgi:application
+WorkingDirectory=/home/joan/odroid
+ExecStart=/usr/bin/gunicorn --workers 3 --bind unix:/home/joan/odroid/odroid.sock odroid.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
