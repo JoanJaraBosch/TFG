@@ -31,7 +31,7 @@ DEBUG = False
 
 
 #Thanks to socket, we get the master ip and we dont have to change always the ip in allowed hosts.
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', s.getsockname()[0], 'www.urv-odroid.com']
+ALLOWED_HOSTS = ['93.176.167.74' , '0.0.0.0', '127.0.0.1', s.getsockname()[0], 'www.urv-odroid.com']
 s.close()
 
 # Application definition
