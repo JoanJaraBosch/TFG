@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import socket
+from requests import get
+
+ip = get('https://api.ipify.org').text
 #We do the socket request to know the ip of our ordroid master.
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
@@ -31,7 +34,7 @@ DEBUG = False
 
 
 #Thanks to socket, we get the master ip and we dont have to change always the ip in allowed hosts.
-ALLOWED_HOSTS = ['93.176.167.74' , '0.0.0.0', '127.0.0.1', s.getsockname()[0], 'www.urv-odroid.com']
+ALLOWED_HOSTS = [ip, '0.0.0.0', '127.0.0.1', s.getsockname()[0], 'www.urv-odroid.com']
 s.close()
 
 # Application definition
