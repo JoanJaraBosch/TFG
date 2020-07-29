@@ -26,9 +26,13 @@ def descarrega(request):
 @login_required
 def monitoring(request):
     #pout,perr = subprocess.Popen(['nmap', '192.168.43.63', '-oX', '-'], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    file = open(os.path.join(settings.BASE_DIR, "ips"))
-    data = file.read()
-    return render(request, "core/monitoring.html", {"ips": data})
+    try:
+        file = open(os.path.join(settings.BASE_DIR, "ips"))
+        data = file.read()
+        context = {"ips": data}
+    except:
+        context = {"ips": "Error: file not found, you need the file ips, with all ips and names from dhcpmasq. Make a simbolyc link."}
+    return render(request, "core/monitoring.html", context)
 
 
 @login_required
