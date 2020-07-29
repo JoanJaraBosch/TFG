@@ -29,7 +29,7 @@ python3 manage.py migrate
 
 #Agafem els fitxers statics
 python3 manage.py collectstatic --noinput
-
+ln /etc/dnsmasq.d/dnsmasq_hosts.conf $descarregues/odroid/ips
 #Copiem els arxius pertinents i reiniciem els dimonis
 cp -p $descarregues/gunicorn.service /etc/systemd/system/gunicorn.service
 systemctl daemon-reload
