@@ -26,8 +26,9 @@ def descarrega(request):
 @login_required
 def monitoring(request):
     #pout,perr = subprocess.Popen(['nmap', '192.168.43.63', '-oX', '-'], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    file = open(os.path.join(settings.BASE_DIR, filename))
-    return render(request, "core/monitoring.html")
+    file = open(os.path.join(settings.BASE_DIR, "ips"))
+    data = file.read()
+    return render(request, "core/monitoring.html", {"ips": data})
 
 
 @login_required

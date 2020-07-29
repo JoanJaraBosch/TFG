@@ -10,15 +10,5 @@
 <h1>URV-Odroid</h1>
 {% endblock %}
 {% block content %}
-<script>
-setInterval(function readTextFile()
-{
-  fetch('file://static/prova.txt')
-  .then(response => response.text())
-  .then(data => {
-  	// Do something with your data
-  	console.log(data);
-  });
-},10000);
-</script>
+<p>Test: {{ips}}</p>
 {% endblock %}
