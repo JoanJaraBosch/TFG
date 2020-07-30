@@ -5,10 +5,28 @@
 {% block title %}{% trans "Monitorització" %}{% endblock %}
 
 {% block background %}{% load static %}{% static 'core/img/monitor-bg.jpg' %}{% endblock %}
-
 {% block headers %}
+<script type="text/javascript">
+function getting_ips(){
+ var ips = {{ ips|safe }};
+ var capa = document.getElementById("ips");
+ var paso;
+ console.log("s'executa la funcio");
+ for (paso = 0; paso < ips.length-1; paso++) {
+   console.log("entra al bucle");
+   var option = document.createElement("option");
+   var aux = ips[paso].split(",");
+   option.value = aux[1];
+   option.innerHTML = aux[1];
+   capa.appendChild(option);
+ };
+};
+
+window.onload = getting_ips;
+</script>
 <h1>URV-Odroid</h1>
 {% endblock %}
 {% block content %}
-<p>Test: {{ips}}</p>
+<select id ="ips" name="select">
+</select>
 {% endblock %}

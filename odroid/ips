@@ -1,0 +1,2 @@
+dhcp-host=00:1e:06:33:ce:35,odroid1,172.16.0.42
+dhcp-host=00:1e:06:33:4d:fa,odroid2,172.16.0.232

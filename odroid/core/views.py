@@ -29,6 +29,8 @@ def monitoring(request):
     try:
         file = open(os.path.join(settings.BASE_DIR, "ips"))
         data = file.read()
+        data = data.split("\n")
+        data = json.dumps(data)
         context = {"ips": data}
     except:
         context = {"ips": "Error: file not found, you need the file ips, with all ips and names from dhcpmasq. Make a simbolyc link."}
