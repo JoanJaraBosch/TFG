@@ -22,13 +22,25 @@ function getting_ips(){
  };
 };
 
+function monitor_odroid(){
+ var capa = document.getElementById("monitor");
+ var p = document.createElement("p");
+ var select = document.getElementById("ips").value;
+ p.innerHTML = "Comencem a fer la connexió per monitorejar la placa ".concat(select);
+ capa.appendChild(p);
+};
 window.onload = getting_ips;
 </script>
 <h1>URV-Odroid</h1>
 {% endblock %}
 {% block content %}
-
+<form>
 <select id ="ips" name="select">
 <option value="master">master</option>
 </select>
+<input id="clickMe" type="button" value="Monitoritzar" onclick="monitor_odroid();"/>
+</form>
+
+<div id="monitor"></div>
+
 {% endblock %}
