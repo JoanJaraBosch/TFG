@@ -28,10 +28,11 @@ function monitor_odroid(){
  p.innerHTML = "Comencem a fer la connexió per monitorejar la placa ".concat(select);
  capa.appendChild(p);
  if(select==="master"){
-    var ws = new WebSocket("ws://192.168.1.205:3000");
+    var ip_private = "{{ IP_PRIVATE }}";
+    var ws = new WebSocket("ws://"+ip_private+":3000");
  }
  else{
-    var ws = new WebSocket(select.concat(":3000"));
+    var ws = new WebSocket("ws://"+select+":3000");
  }
  
  ws.onopen = function() {

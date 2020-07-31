@@ -31,9 +31,9 @@ def monitoring(request):
         data = file.read()
         data = data.split("\n")
         data = json.dumps(data)
-        context = {"ips": data}
+        context = {"ips": data, "IP_PRIVATE": settings.IP_PRIVATE}
     except:
-        context = {"ips": "Error: file not found, you need the file ips, with all ips and names from dhcpmasq. Make a simbolyc link."}
+        context = {"ips": "Error: file not found, you need the file ips, with all ips and names from dhcpmasq. Make a simbolyc link.", "IP_PRIVATE": settings.IP_PRIVATE}
     return render(request, "core/monitoring.html", context)
 
 

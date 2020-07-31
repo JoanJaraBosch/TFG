@@ -32,9 +32,9 @@ SECRET_KEY = '&!29h(n*064yl=i&l66tn5^#-hfl8skw-q+e!m+gdof%&me-mf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-
+IP_PRIVATE = s.getsockname()[0]
 #Thanks to socket, we get the master ip and we dont have to change always the ip in allowed hosts.
-ALLOWED_HOSTS = [ip, '0.0.0.0', '127.0.0.1', s.getsockname()[0], 'www.urv-odroid.com']
+ALLOWED_HOSTS = [ip, '0.0.0.0', '127.0.0.1', IP_PRIVATE, 'www.urv-odroid.com']
 s.close()
 
 # Application definition
