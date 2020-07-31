@@ -43,6 +43,10 @@ function monitor_odroid(){
  
  reader.onload = function() {
    console.log(reader.result);
+   var capa = document.getElementById("monitor");
+   var p = document.createElement("p");
+   p.innerHTML = reader.result+"% CPU";
+   capa.appendChild(p); 
  }
 
  ws.onmessage = function(e) {
