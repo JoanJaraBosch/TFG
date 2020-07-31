@@ -1,25 +1,44 @@
-// require: Trae la librería express del npm.
-var express = require('express');
+var WebSocketServer = require('websocket').server;
+var http = require('http');
 var os = require('os');
 
-// Se invoca la función (de la variable express) y se almacena en la variable app.
-var app = express();
+const server = http.createServer();
+server.listen(3000);
 
-// Define el home de la página y que función se va a ejecutar.
-// La función tiene como parámetro el request y el response.
-app.get('/', function (req, res) {
-  var paso;
-  for (paso = 0; paso < 5; paso++) {
-  // Se ejecuta 5 veces, con valores desde paso desde 0 hasta 4.
-    res.render	
-    res.send('Free memory espace, '+os.freemem())
-  };  
-})
+const wsServer = new WebSocketServer({
+    httpServer: server
+});
 
-app.get('/cursos', function (req, res) {
-  res.send('Estos son los cursos');
-  console.log("Página de cursos");
-})
+wsServer.on('request', function (request) {
+   const connection = request.accept(null, request.origin);
 
-// Correr el servidor con el puerto 8989.
-app.listen(8989);
+   connection.on('message', function(message){
+      console.log('Received Message:', message.utf8Data);
+      var cpus = os.cpus();
+      if(message.utf8Data === "cpu usage"){
+	 for(var i = 0, len = cpus.length; i < len; i++) {
+          console.log("CPU %s:", i);
+          var cpu = cpus[i], total = 0;
+ 
+          for(var type in cpu.times) {
+             total += cpu.times[type];
+          }
+
+          for(type in cpu.times) {
+               var percentatges = Math.round(100 * cpu.times[type] / total);
+               connection.sendUTF(percentatges.toString());
+          }
+         }
+      }
+      else{
+         connection.sendUTF('HI THIS IS WEBSOCKET DUDES');
+      }
+   });
+
+   connection.on('close', function(reasonCode, description) { 
+      console.log('Client Disconnected');
+   }); 
+ 
+});
+
+console.log('Listening');

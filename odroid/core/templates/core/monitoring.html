@@ -1,4 +1,3 @@
-
 {% extends 'core/base.html' %}
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
@@ -28,6 +27,21 @@ function monitor_odroid(){
  var select = document.getElementById("ips").value;
  p.innerHTML = "Comencem a fer la connexió per monitorejar la placa ".concat(select);
  capa.appendChild(p);
+ if(select==="master"){
+    var ws = new WebSocket("ws://192.168.1.205:3000");
+ }
+ else{
+    var ws = new WebSocket(select.concat(":3000"));
+ }
+ 
+ ws.onopen = function() {
+    console.log("WebSocket Client Connected");
+    ws.send("cpu usage");
+ };
+
+ ws.onmessage = function(e) {
+    console.log("Received: "+e.data);
+ };
 };
 window.onload = getting_ips;
 </script>
