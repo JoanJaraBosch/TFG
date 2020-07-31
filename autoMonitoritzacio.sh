@@ -43,4 +43,11 @@ cp -p $descarregues/odroid_site /etc/nginx/sites-available/odroid_site
 ln -s /etc/nginx/sites-available/odroid_site /etc/nginx/sites-enabled
 systemctl restart nginx
 pip3 install gunicorn
+
+npm install os -g
+npm install http -g
+npm install forever -g
+npm install websocket -g
+npm install child_process -g
+
 echo "Instal·lació completada, si obre un navegador, hauria de poguer veure anant a 0.0.0.0:8000 la nostra pagina web en django per monitoritzar les plaques odroid"
