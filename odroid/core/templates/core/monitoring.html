@@ -39,8 +39,14 @@ function monitor_odroid(){
     ws.send("cpu usage");
  };
 
+ const reader = new FileReader();
+ 
+ reader.onload = function() {
+   console.log(reader.result);
+ }
+
  ws.onmessage = function(e) {
-    console.log("Received: "+e.data);
+   reader.readAsText(e.data); 
  };
 };
 window.onload = getting_ips;

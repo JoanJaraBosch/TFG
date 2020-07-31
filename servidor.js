@@ -1,6 +1,7 @@
 var WebSocketServer = require('websocket').server;
 var http = require('http');
 var os = require('os');
+const procesFill = require('child_process');
 
 const server = http.createServer();
 server.listen(3000);
@@ -14,21 +15,11 @@ wsServer.on('request', function (request) {
 
    connection.on('message', function(message){
       console.log('Received Message:', message.utf8Data);
-      var cpus = os.cpus();
       if(message.utf8Data === "cpu usage"){
-	 for(var i = 0, len = cpus.length; i < len; i++) {
-          console.log("CPU %s:", i);
-          var cpu = cpus[i], total = 0;
- 
-          for(var type in cpu.times) {
-             total += cpu.times[type];
-          }
-
-          for(type in cpu.times) {
-               var percentatges = Math.round(100 * cpu.times[type] / total);
-               connection.sendUTF(percentatges.toString());
-          }
-         }
+          var child = procesFill.spawn('bash', ['./cpu_usage.sh'])
+	  child.stdout.on('data', (data) => {
+             connection.send(data);
+          });
       }
       else{
          connection.sendUTF('HI THIS IS WEBSOCKET DUDES');
