@@ -7,8 +7,9 @@
 {% block headers %}ç
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script type="text/javascript">
-var timer_id; 
+var timer_cpu; 
 var cpu_usage;
+var graf_cpu;
 function start_cpu_chart(){
 
 var dps = []; // dataPoints
@@ -29,22 +30,18 @@ var chart = new CanvasJS.Chart("chartContainer", {
 });
 
 var xVal = 0;
-var yVal = 100; 
+var yVal = 0; 
 var updateInterval = 3000;
 var dataLength = 10; // number of dataPoints visible at any point
 
 var updateChart = function (count) {
 
-	count = count || 1;
-
-	for (var j = 0; j < count; j++) {
-		yVal = cpu_usage;
-		dps.push({
-			x: xVal,
-			y: parseFloat(yVal)
-		});
-		xVal++;
-	}
+        yVal = cpu_usage;
+        dps.push({
+		x: xVal,
+		y: parseFloat(yVal)
+	});
+	xVal++;
 
 	if (dps.length > dataLength) {
 		dps.shift();
@@ -53,8 +50,7 @@ var updateChart = function (count) {
 	chart.render();
 };
 
-updateChart(dataLength);
-setInterval(function(){updateChart()}, updateInterval);
+graf_cpu =setInterval(updateChart, updateInterval, dataLength);
 
 };
 
@@ -112,12 +108,13 @@ function cpuGlobal(ws){
 };
 
 function start(ws){
-  timer_id = setInterval(cpuGlobal, 3000, ws);
+  timer_cpu = setInterval(cpuGlobal, 3000, ws);
 };
 
 function stop(){
-  if(timer_id){
-     clearInterval(timer_id);
+  if(timer_cpu){
+     clearInterval(timer_cpu);
+     clearInterval(graf_cpu);
   }
 };
 window.onload = getting_ips;
