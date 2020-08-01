@@ -4,9 +4,60 @@
 {% block title %}{% trans "Monitorització" %}{% endblock %}
 
 {% block background %}{% load static %}{% static 'core/img/monitor-bg.jpg' %}{% endblock %}
-{% block headers %}
+{% block headers %}ç
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script type="text/javascript">
 var timer_id; 
+var cpu_usage;
+function start_cpu_chart(){
+
+var dps = []; // dataPoints
+var chart = new CanvasJS.Chart("chartContainer", {
+	title :{
+		text: "MONITORING CPU USAGE"
+	},
+        axisY:{
+      	        title: "CPU% usage"
+        },
+        axisX:{
+                title: "Updates"
+        },
+	data: [{
+		type: "line",
+		dataPoints: dps
+	}]
+});
+
+var xVal = 0;
+var yVal = 100; 
+var updateInterval = 3000;
+var dataLength = 10; // number of dataPoints visible at any point
+
+var updateChart = function (count) {
+
+	count = count || 1;
+
+	for (var j = 0; j < count; j++) {
+		yVal = cpu_usage;
+		dps.push({
+			x: xVal,
+			y: parseFloat(yVal)
+		});
+		xVal++;
+	}
+
+	if (dps.length > dataLength) {
+		dps.shift();
+	}
+
+	chart.render();
+};
+
+updateChart(dataLength);
+setInterval(function(){updateChart()}, updateInterval);
+
+};
+
 
 function getting_ips(){
  var ips = {{ ips|safe }};
@@ -37,6 +88,7 @@ function monitor_odroid(){
     var ws = new WebSocket("ws://"+select+":3000");
  }
  start(ws);
+ start_cpu_chart();
 };
 
 function cpuGlobal(ws){
@@ -46,13 +98,11 @@ function cpuGlobal(ws){
 
 
  const reader = new FileReader();
-
  reader.onload = function() {
     console.log(reader.result);
     var capa = document.getElementById("monitor");
     var p = document.createElement("p");
-    p.innerHTML = reader.result+"% CPU";
-    capa.appendChild(p);
+    cpu_usage = reader.result;
   };
 
   ws.onmessage = function(e) {
@@ -83,5 +133,5 @@ window.onload = getting_ips;
 </form>
 <input id="stopMe" type="button" value="StopMonitoritzar" onclick="stop();"/>
 <div id="monitor"></div>
-
+<div id="chartContainer" style="height: 370px; width:100%;"></div>
 {% endblock %}

@@ -49,5 +49,4 @@ npm install http -g
 npm install forever -g
 npm install websocket -g
 npm install child_process -g
-
 echo "Instal·lació completada, si obre un navegador, hauria de poguer veure anant a 0.0.0.0:8000 la nostra pagina web en django per monitoritzar les plaques odroid"
