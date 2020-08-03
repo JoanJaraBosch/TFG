@@ -22,7 +22,12 @@ wsServer.on('request', function (request) {
           });
       }
       else{
-         connection.sendUTF('HI THIS IS WEBSOCKET DUDES');
+          if(message.utf8Data === "mem usage"){
+          	var child = procesFill.spawn('bash', ['./mem_usage.sh'])
+          	child.stdout.on('data', (data) => {
+             		connection.send(data);
+          	});
+      	  }
       }
    });
 
