@@ -4,7 +4,7 @@
 {% block title %}{% trans "Monitorització" %}{% endblock %}
 
 {% block background %}{% load static %}{% static 'core/img/monitor-bg.jpg' %}{% endblock %}
-{% block headers %}ç
+{% block headers %}
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script type="text/javascript">
 var timer_cpu;
@@ -169,8 +169,7 @@ function memoriaGlobal(ws){
     console.log(reader_mem.result);
     mem = reader_mem.result;
     aux = mem.split("-");
-    mem = aux[1]
-    mem = mem.replace("G","");
+    mem = aux[1];
   };
 
   ws.onmessage = function(e) {
