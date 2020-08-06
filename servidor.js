@@ -27,7 +27,19 @@ wsServer.on('request', function (request) {
           	child.stdout.on('data', (data) => {
              		connection.send(data);
           	});
-      	  }
+      	  }else{
+		if(message.utf8Data === "mem avail"){
+			var child = procesFill.spawn('bash', ['./mem_available.sh'])
+	                child.stdout.on('data', (data) => {
+        	                connection.send(data);
+                	});
+
+		}
+		else{
+
+		}
+		
+	  }
       }
    });
 
