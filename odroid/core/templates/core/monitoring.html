@@ -9,11 +9,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
 <script type="text/javascript">
 var timer_cpu;
-var timer_mem; 
+var timer_mem;
+var timer_mem_avail; 
 var cpu_usage;
 var mem;
+var mem_avail;
 var graf_cpu;
 var graf_mem;
+var graf_mem_avail;
+
+
 function start_cpu_chart(){
 var contador = 0;
 var ctx = document.getElementById("chartContainer");
@@ -77,6 +82,46 @@ var updateChart = function (count) {
 graf_cpu =setInterval(updateChart, updateInterval, dataLength);
 
 };
+
+function start_mem_avail_chart(){
+
+var contador_mem = 0;
+var ctx_mem_avail = document.getElementById("chartContainerMemAvail");
+var chartMEMAvail = new Chart(ctx_mem_avail, {
+        type: "doughnut",
+        data: {
+                labels: ['Used', 'Available'],
+                datasets: [{
+                        data: [],
+			backgroundColor: [
+                        	'rgba(110, 114, 20, 1)',
+                        	'rgba(118, 183, 172, 1)'
+                	],
+                }],
+        },
+        options: {
+                responsive: true,
+		title: {
+                        display: true,
+                        text: 'Monitoring disk available'
+                },
+        }
+}); 
+
+var updateInterval_mem_avail = 3000;
+var dataLength_mem = 10; // number of dataPoints visible at any point
+
+var updateChart_mem_avail = function (count) {
+     chartMEMAvail.data.datasets[0].data[0]= parseFloat(mem_avail[0]);
+     chartMEMAvail.data.datasets[0].data[1]= parseFloat(mem_avail[1]);
+     chartMEMAvail.update();
+};
+
+graf_mem_avail =setInterval(updateChart_mem_avail, updateInterval_mem_avail, dataLength_mem);
+
+
+};
+
 
 function start_mem_chart(){
 var contador_mem = 0;
@@ -166,14 +211,17 @@ function monitor_odroid(){
     var ip_private = "{{ IP_PRIVATE }}";
     var ws_cpu = new WebSocket("ws://"+ip_private+":3000");
     var ws_mem = new WebSocket("ws://"+ip_private+":3000");
+    var ws_mem_avail = new WebSocket("ws://"+ip_private+":3000");
  }
  else{
     var ws_cpu = new WebSocket("ws://"+select+":3000");
     var ws_mem = new WebSocket("ws://"+select+":3000");
+    var ws_mem_avail = new WebSocket("ws://"+select+":3000");
  }
- start(ws_cpu, ws_mem);
+ start(ws_cpu, ws_mem, ws_mem_avail);
  start_cpu_chart();
  start_mem_chart();
+ start_mem_avail_chart();
 };
 
 function cpuGlobal(ws){
@@ -196,6 +244,27 @@ function cpuGlobal(ws){
 
 };
 
+function memGlobalAvail(ws){
+ console.log("Entro amb linterval");
+
+ ws.send("mem avail");
+
+
+ const reader3 = new FileReader();
+ reader3.onload = function() {
+    console.log(reader3.result);
+    mem_avail = reader3.result;
+    mem_avail = mem_avail.split("-");
+    mem_avail = mem_avail[1].split(" ");
+  };
+
+  ws.onmessage = function(e) {
+    reader3.readAsText(e.data);
+  };
+
+};
+
+
 function memoriaGlobal(ws){
  console.log("Entro amb linterval");
 
@@ -215,9 +284,10 @@ function memoriaGlobal(ws){
 
 };
 
-function start(ws_cpu, ws_mem){
+function start(ws_cpu, ws_mem, ws_mem_avail){
   timer_cpu = setInterval(cpuGlobal, 3000, ws_cpu);
   timer_mem = setInterval(memoriaGlobal, 3000, ws_mem);
+  timer_mem_avail = setInterval(memGlobalAvail, 3000, ws_mem_avail);
 };
 
 function stop(){
@@ -229,6 +299,11 @@ function stop(){
   if(timer_mem){
      clearInterval(timer_mem);
      clearInterval(graf_mem);
+  }
+
+  if(timer_mem_avail){
+     clearInterval(timer_mem_avail);
+     clearInterval(graf_mem_avail);
   }
 
 };
@@ -247,4 +322,5 @@ window.onload = getting_ips;
 <div id="monitor"></div>
 <canvas id="chartContainer" style="height: 370px; width:100%;"></canvas>
 <canvas id="chartContainerMem" style="height: 370px; width:100%;"></canvas>
+<canvas id="chartContainerMemAvail" style="height: 370px; width:100%;"></canvas>
 {% endblock %}
