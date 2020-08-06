@@ -6,6 +6,7 @@
 {% block background %}{% load static %}{% static 'core/img/monitor-bg.jpg' %}{% endblock %}
 {% block headers %}
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
 <script type="text/javascript">
 var timer_cpu;
 var timer_mem; 
@@ -13,45 +14,64 @@ var cpu_usage;
 var mem;
 var graf_cpu;
 var graf_mem;
-
 function start_cpu_chart(){
-
-var dps = []; // dataPoints
-var chart = new CanvasJS.Chart("chartContainer", {
-	title :{
-		text: "MONITORING CPU USAGE"
+var contador = 0;
+var ctx = document.getElementById("chartContainer");
+var chartCPU = new Chart(ctx, {
+        type: "line",
+	data: {
+        	labels: [],
+        	datasets: [{
+            		label: 'CPU USAGE',
+            		data: [],
+		}],
 	},
-        axisY:{
-      	        title: "CPU% usage"
-        },
-        axisX:{
-                title: "Updates"
-        },
-	data: [{
-		type: "line",
-		dataPoints: dps
-	}]
+        options: {
+                responsive: true,
+        	title: {
+            		display: true,
+           		text: 'Monitoring CPU'
+        	},
+                scales: {
+ 			xAxes: [{
+               			 scaleLabel: {
+                                        display: true,
+                                        labelString: 'Updates'
+                                }
+            		}],
+                        yAxes: [{
+                                ticks: {
+					display: true,
+                                        beginAtZero: true,
+                                },
+				 scaleLabel: {
+                                        display: true,
+                                        labelString: '% cpu'
+                                }
+
+                        }]
+                }
+        }
 });
 
-var xVal = 0;
-var yVal = 0; 
 var updateInterval = 3000;
 var dataLength = 10; // number of dataPoints visible at any point
 
 var updateChart = function (count) {
-
-        yVal = cpu_usage;
-        dps.push({
-		x: xVal,
-		y: parseFloat(yVal)
-	});
-	xVal++;
-
-	if (dps.length > dataLength) {
-		dps.shift();
-	}
-
-	chart.render();
+     if(chartCPU.data.datasets[0].data.length==dataLength){
+         for(var j = 0; j<dataLength-1; j++){
+		chartCPU.data.datasets[0].data[j] = chartCPU.data.datasets[0].data[j+1];
+		chartCPU.data.labels[j] = chartCPU.data.labels[j+1];
+	 }
+        
+    	 chartCPU.data.datasets[0].data[chartCPU.data.datasets[0].data.length-1] = parseFloat(cpu_usage);     
+     	 chartCPU.data.labels[chartCPU.data.datasets[0].data.length-1] = contador;
+     }else{
+         chartCPU.data.datasets[0].data[contador] = parseFloat(cpu_usage);
+         chartCPU.data.labels[contador] = contador;
+     }
+     contador+=1;
+     chartCPU.update();
 };
 
 graf_cpu =setInterval(updateChart, updateInterval, dataLength);
@@ -59,48 +79,65 @@ graf_cpu =setInterval(updateChart, updateInterval, dataLength);
 };
 
 function start_mem_chart(){
-
-var dps = []; // dataPoints
-var chart = new CanvasJS.Chart("chartContainerMem", {
-        title :{
-                text: "MONITORING RAM AVAILABLE"
+var contador_mem = 0;
+var ctx_mem = document.getElementById("chartContainerMem");
+var chartMEM = new Chart(ctx_mem, {
+        type: "line",
+        data: {
+                labels: [],
+                datasets: [{
+                        label: 'MEM RAM USAGE',
+                        data: [],
+                }],
         },
-        axisY:{
-                title: "Memory available"
-        },
-        axisX:{
-                title: "Updates"
-
-
-        },
-        data: [{
-                type: "line",
-                dataPoints: dps
-        }]
+        options: {
+                responsive: true,
+		title: {
+			display: true,
+			text: 'Monitoring RAM'
+		},
+                scales: {
+			xAxes: [{
+				scaleLabel: {
+                                        display: true,
+	                                labelString: 'Updates'
+                                }
+			}],
+                        yAxes: [{
+                                ticks: {
+                                        beginAtZero: true
+                                },
+				scaleLabel: {
+					display: true,
+					labelString: 'Free MB RAM'
+				}
+                        }]
+                }
+        }
 });
 
-var xVal = 0;
-var yVal = 0; 
+
 var updateInterval_mem = 3000;
-var dataLength = 10; // number of dataPoints visible at any point
+var dataLength_mem = 10; // number of dataPoints visible at any point
 
 var updateChart_mem = function (count) {
+      if(chartMEM.data.labels.length<dataLength_mem){
+         chartMEM.data.datasets[0].data[contador_mem] = parseFloat(mem);
+         chartMEM.data.labels[contador_mem] = contador_mem;
+      }else{
 
-        yVal = mem;
-        dps.push({
-                x: xVal,
-                y: parseFloat(yVal)
-        });
-        xVal++;
-
-        if (dps.length > dataLength) {
-                dps.shift();
-        }
-
-        chart.render();
+              for(var i =0; i<dataLength_mem-1 ;i++){
+                chartMEM.data.datasets[0].data[i] = chartMEM.data.datasets[0].data[i+1];
+                chartMEM.data.labels[i] = chartMEM.data.labels[i+1];
+              }
+              chartMEM.data.datasets[0].data[chartMEM.data.datasets[0].data.length-1] = parseFloat(mem);
+              chartMEM.data.labels[chartMEM.data.datasets[0].data.length-1]=contador_mem;
+     }
+     contador_mem = contador_mem+1;
+     chartMEM.update();
 };
 
-graf_mem =setInterval(updateChart_mem, updateInterval_mem, dataLength);
+graf_mem =setInterval(updateChart_mem, updateInterval_mem, dataLength_mem);
 
 };
 
@@ -113,7 +150,7 @@ function getting_ips(){
    console.log("entra al bucle");
    var option = document.createElement("option");
    var aux = ips[paso].split(",");
-   option.value = aux[1];
+   option.value = aux[0];
    option.innerHTML = aux[1];
    capa.appendChild(option);
  };
@@ -123,7 +160,7 @@ function monitor_odroid(){
  var capa = document.getElementById("monitor");
  var p = document.createElement("p");
  var select = document.getElementById("ips").value;
- p.innerHTML = "Comencem a fer la connexió per monitorejar la placa ".concat(select);
+ p.innerHTML = "Comencem a fer la connexió per monitorejar la placa.";
  capa.appendChild(p);
  if(select==="master"){
     var ip_private = "{{ IP_PRIVATE }}";
@@ -208,6 +245,6 @@ window.onload = getting_ips;
 </form>
 <input id="stopMe" type="button" value="StopMonitoritzar" onclick="stop();"/>
 <div id="monitor"></div>
-<div id="chartContainer" style="height: 370px; width:100%;"></div>
-<div id="chartContainerMem" style="height: 370px; width:100%;"></div>
+<canvas id="chartContainer" style="height: 370px; width:100%;"></canvas>
+<canvas id="chartContainerMem" style="height: 370px; width:100%;"></canvas>
 {% endblock %}
