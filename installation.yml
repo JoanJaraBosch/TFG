@@ -4,11 +4,20 @@
   remote_user: odroid
   sudo: yes
   tasks:
-     - name: Transfer the script
+     - name: Transfer the installation script
        copy: src=javascript_install.sh dest=/home/odroid/ mode=0755
 
      - name: Copy javascript server
        copy: src=servidor.js dest=/home/odroid/ mode=0755
+
+     - name: Copy ram script
+       copy: src=mem_usage.sh dest=/home/odroid/ mode=0755
+
+     - name: Copy mem_available script
+       copy: src=mem_available.sh dest=/home/odroid/ mode=0755
+
+     - name: Copy cpu script
+       copy: src=cpu_usage.sh dest=/home/odroid/ mode=0755    
 
      - name: Execute the script 
        command: /home/odroid/javascript_install.sh
