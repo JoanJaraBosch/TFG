@@ -14,7 +14,7 @@ fi
 #Instal·lació dels paquets necessaris
 apt update -y
 #sudo apt upgrade -y
-apt install python3-pip python3 nginx python3-django gettext nload ansible-y
+apt install python3-pip python3 nginx python3-django gettext nload npm -y
 #Instalarem el virtualenv per a poguer tindre un entorn virtual
 #i no molestar els altres projectes que puguem tindre en un futurgettext
 pip3 install --upgrade setuptools
@@ -44,7 +44,11 @@ ln -s /etc/nginx/sites-available/odroid_site /etc/nginx/sites-enabled
 systemctl restart nginx
 pip3 install gunicorn
 
-ansible-playbook installation.yml --extra-vars "ansible_sudo_pass=odroid"
-./javascript_install.sh
+npm install os -g
+npm install websocket -g
+npm install forever -g
+npm install child_process -g
+npm install http -g
 
+forever start servidor.js
 echo "Instal·lació completada, si obre un navegador, hauria de poguer veure anant a 0.0.0.0:8000 la nostra pagina web en django per monitoritzar les plaques odroid"
