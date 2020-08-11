@@ -45,5 +45,6 @@ systemctl restart nginx
 pip3 install gunicorn
 
 ansible-playbook installation.yml --extra-vars "ansible_sudo_pass=odroid"
+./javascript_install.sh
 
 echo "Instal·lació completada, si obre un navegador, hauria de poguer veure anant a 0.0.0.0:8000 la nostra pagina web en django per monitoritzar les plaques odroid"
