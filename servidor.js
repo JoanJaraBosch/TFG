@@ -3,11 +3,7 @@ var http = require('http');
 var os = require('os');
 const procesFill = require('child_process');
 
-const server = http.createServer(function(request,response){
-response.writeHead(200,{'Content-Type':'text/plain'});
-response.end('Im Node.js.!\n');
-console.log('Handled request');
-});
+const server = http.createServer();
 server.listen(3000, '0.0.0.0');
 
 const wsServer = new WebSocketServer({
