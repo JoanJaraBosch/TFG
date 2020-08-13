@@ -10,6 +10,8 @@ const wsServer = new WebSocketServer({
     httpServer: server
 });
 
+var whoami;
+
 wsServer.on('request', function (request) {
    const connection = request.accept(null, request.origin);
 
@@ -23,7 +25,7 @@ wsServer.on('request', function (request) {
       }
       else{
           if(message.utf8Data === "mem usage"){
-          	var child = procesFill.spawn('bash', ['./mem_usage.sh'])
+          	var child = procesFill.spawn('bash', ['./mem_usage.sh', whoami])
           	child.stdout.on('data', (data) => {
              		connection.send(data);
           	});
@@ -36,9 +38,9 @@ wsServer.on('request', function (request) {
 
 		}
 		else{
-
+			whoami=message.utf8Data;
+			console.log(whoami);
 		}
-		
 	  }
       }
    });

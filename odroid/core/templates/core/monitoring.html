@@ -8,6 +8,7 @@
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
 <script type="text/javascript">
+var whoami = 1;
 var timer_cpu;
 var timer_mem;
 var timer_mem_avail; 
@@ -115,9 +116,13 @@ var updateInterval_mem_avail = 3000;
 var dataLength_mem = 10; // number of dataPoints visible at any point
 
 var updateChart_mem_avail = function (count) {
-     chartMEMAvail.data.datasets[0].data[0]= parseFloat(mem_avail[0]);
-     chartMEMAvail.data.datasets[0].data[1]= parseFloat(mem_avail[1]);
-     chartMEMAvail.update();
+     try{
+         chartMEMAvail.data.datasets[0].data[0]= parseFloat(mem_avail[0]);
+         chartMEMAvail.data.datasets[0].data[1]= parseFloat(mem_avail[1]);
+         chartMEMAvail.update();
+     }catch(err){
+   
+     }
 };
 
 graf_mem_avail =setInterval(updateChart_mem_avail, updateInterval_mem_avail, dataLength_mem);
@@ -210,31 +215,26 @@ function monitor_odroid(){
  var select = document.getElementById("ips").value;
  p.innerHTML = "Comencem a fer la connexió per monitorejar la placa.";
  capa.appendChild(p);
- 
- if(select==="master"){
-    var ip_private = "{{ IP_PRIVATE }}";
-    ws_cpu = new WebSocket("ws://"+ip_private+":3000");
-    ws_mem = new WebSocket("ws://"+ip_private+":3000");
-    ws_mem_avail = new WebSocket("ws://"+ip_private+":3000");
- }
- else{
-    ws_cpu = new WebSocket("ws://"+select+":3000");
-    ws_mem = new WebSocket("ws://"+select+":3000");
-    ws_mem_avail = new WebSocket("ws://"+select+":3000");
- }
+ var ip_private = "{{ IP_PRIVATE }}";
+ ws_cpu = new WebSocket("ws://"+ip_private+":3000");
+ ws_mem = new WebSocket("ws://"+ip_private+":3000");
+ ws_mem_avail = new WebSocket("ws://"+ip_private+":3000");
  console.log(ws_cpu);
- start(ws_cpu, ws_mem, ws_mem_avail);
+
+ start(ws_cpu, ws_mem, ws_mem_avail, select);
  start_cpu_chart();
  start_mem_chart();
  start_mem_avail_chart();
 };
 
 var cpu_boolean = 0;
-function cpuGlobal(ws){
+function cpuGlobal(ws, select){
  console.log("Entro amb linterval");
-  
- ws.send("cpu usage");
-
+ 
+ if(whoami==1){
+  ws.send(select);
+  whoami=0;
+ }
  ws.send("cpu usage");
 
  const reader = new FileReader();
@@ -291,8 +291,8 @@ function memoriaGlobal(ws){
 
 };
 
-function start(ws_cpu, ws_mem, ws_mem_avail){
-  timer_cpu = setInterval(cpuGlobal, 3000, ws_cpu);
+function start(ws_cpu, ws_mem, ws_mem_avail, select){
+  timer_cpu = setInterval(cpuGlobal, 3000, ws_cpu, select);
   timer_mem = setInterval(memoriaGlobal, 3000, ws_mem);
   timer_mem_avail = setInterval(memGlobalAvail, 3000, ws_mem_avail);
 };
@@ -316,7 +316,7 @@ function stop(){
   ws_cpu.close();
   ws_mem.close();
   ws_mem_avail.close();
-
+  whoami=1;
 };
 window.onload = getting_ips;
 </script>
