@@ -18,7 +18,7 @@ wsServer.on('request', function (request) {
    connection.on('message', function(message){
       console.log('Received Message:', message.utf8Data);
       if(message.utf8Data === "cpu usage"){
-          var child = procesFill.spawn('bash', ['./cpu_usage.sh'])
+          var child = procesFill.spawn('bash', ['./cpu_usage.sh', whoami])
 	  child.stdout.on('data', (data) => {
              connection.send(data);
           });
@@ -31,7 +31,7 @@ wsServer.on('request', function (request) {
           	});
       	  }else{
 		if(message.utf8Data === "mem avail"){
-			var child = procesFill.spawn('bash', ['./mem_available.sh'])
+			var child = procesFill.spawn('bash', ['./mem_available.sh', whoami])
 	                child.stdout.on('data', (data) => {
         	                connection.send(data);
                 	});
