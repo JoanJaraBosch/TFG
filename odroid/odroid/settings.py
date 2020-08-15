@@ -139,3 +139,4 @@ LOGIN_URL ="/login"
 #ASGI_APPLICATION = "odroid.routing.application"
 # HERE
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
+
