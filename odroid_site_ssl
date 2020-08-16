@@ -1,6 +1,4 @@
 server {
-    listen 80;
-    listen [::]:80;
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
     server_name www.urv-odroid.com;
@@ -17,7 +15,7 @@ server {
     add_header X-XSS-Protection "1; mode=block";
     add_header Content-Security-Policy "default-src 'self' http: https: data: blob: 'unsafe-inline'" always;
     
-    ssl on;
+    ssl off;
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_prefer_server_ciphers on;    
 
@@ -46,15 +44,21 @@ server {
         proxy_pass http://unix:/home/odroid/Downloads/TFG/odroid/odroid.sock;
         limit_except GET HEAD POST { deny all; }
     }
+
 }
 
 server {
-    listen 80;
-    listen [::]:80;
+        listen 80 default_server;
+        server_name 0.0.0.0;
+
+        return 301 https://$host$request_uri;
+}
+
+server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
     server_name www.urv-odroid-pub.com;
-    server_name _;
+    server_name 213.94.63.13;
     
     server_tokens off;
     client_body_buffer_size 1k;
@@ -66,7 +70,7 @@ server {
     add_header X-XSS-Protection "1; mode=block";
     add_header Content-Security-Policy "default-src 'self' http: https: data: blob: 'unsafe-inline'" always;
 
-    ssl on;
+    ssl off;
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_prefer_server_ciphers on;
 
@@ -95,5 +99,4 @@ server {
         proxy_pass http://unix:/home/odroid/Downloads/TFG/odroid/odroid.sock;
         limit_except GET HEAD POST { deny all; }
     }
-
 }
