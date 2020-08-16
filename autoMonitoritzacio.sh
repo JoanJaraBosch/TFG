@@ -41,8 +41,7 @@ rm -r /etc/nginx/sites-enabled/default
 #Copiem els arxius pertinents i reiniciem
 if [ $1 == "security" ]; then
 IP=$(hostname -I | awk '{print $1}')
-IP_PUB=$(dig @ns1-1.akamaitech.net ANY whoami.akamai.net +short)
-./gen-cer.sh $IP $IP_PUB
+./gen-cer.sh $IP
  
 cp -p $descarregues/odroid_site_ssl /etc/nginx/sites-available/odroid_site
 ln -s /etc/nginx/sites-available/odroid_site /etc/nginx/sites-enabled
