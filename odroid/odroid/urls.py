@@ -29,6 +29,7 @@ urlpatterns = [
     path('manual/', views.manual, name='manual'),
     path('nosaltres/', views.about, name='nosaltres'),
     path('monitoritzacio/', views.monitoring, name='monitoritzacio'),
+    path('page', include('pages.urls')),
     path('login/',views.user_login,name='login'),
     path('logout/',views.user_logout,name='logout'),
     path('i18n/', include('django.conf.urls.i18n')),

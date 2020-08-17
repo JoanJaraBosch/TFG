@@ -106,8 +106,13 @@
     
     <!-- Pié de página -->
     <footer>
-      <div class="container">
-        <div class="row">
+      {% load page_extras %}
+      {% get_page_list as page_list %}
+      <div class="container" align="center">
+        <div class="row mx-auto" align="center">
+	  {% for page in page_list %}
+            <a href="{% url 'page' page.id %}" class="link"> {{page.title}}</a> {% if not forloop.last %} . {% endif %}
+	  {%  endfor %}
           <div class="col-lg-8 col-md-10 mx-auto">
             <p class="copyright text-muted">Copyright &copy; 2020 · Joan Jara {% trans "i" %} David Ferrer (URV) </p>
           </div>
