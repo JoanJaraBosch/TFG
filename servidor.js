@@ -1,13 +1,19 @@
 var WebSocketServer = require('websocket').server;
-var http = require('http');
+var https = require('https');
 var os = require('os');
+var fs = require('fs');
 const procesFill = require('child_process');
 
-const server = http.createServer();
+const server = https.createServer({
+  cert: fs.readFileSync('/etc/nginx/ssl/nginx.crt'),
+  key: fs.readFileSync('/etc/nginx/ssl/nginx.key'),
+  passphrase: 'odroid'
+});
+
 server.listen(3000, '0.0.0.0');
 
 const wsServer = new WebSocketServer({
-    httpServer: server
+   httpServer: server
 });
 
 var whoami;
