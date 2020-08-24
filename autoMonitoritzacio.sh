@@ -54,4 +54,14 @@ npm install child_process -g
 npm install http -g
 
 forever start servidor.js
+
+
+wget https://apt.izzysoft.de/izzysoft.asc
+apt-ket add izzysoft.asc
+echo "deb [arch=all] https://apt.izzysoft.de/ubuntu generic universe" | sudo tee -a /etc/apt/sources.list
+apt update -y
+apt-get install monitorix -y
+systemctl enable monitorix
+systemctl start monitorix
+
 echo "Instal·lació completada, si obre un navegador, hauria de poguer veure anant a 0.0.0.0:8000 la nostra pagina web en django per monitoritzar les plaques odroid"
