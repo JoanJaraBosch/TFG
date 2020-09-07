@@ -21,7 +21,7 @@ var graf_mem_avail;
 var ws_cpu;
 var ws_mem;
 var ws_mem_avail;
-
+var started = 1
 
 function start_cpu_chart(){
 var contador = 0;
@@ -210,6 +210,11 @@ function getting_ips(){
 };
 
 function monitor_odroid(){
+ if(started == 0){
+   stop();
+ }else{
+   started = 0;
+ }
  var capa = document.getElementById("monitor");
  var p = document.createElement("p");
  var select = document.getElementById("ips").value;
@@ -220,13 +225,18 @@ function monitor_odroid(){
  ws_mem = new WebSocket("wss://"+ip_private+":3000");
  ws_mem_avail = new WebSocket("wss://"+ip_private+":3000");
  console.log(ws_cpu);
+ ws_cpu.onerror = function(evt) {
+        alert("Hi ha un error amb el servidor node la placa master. Iniceu-lo o reinicieu-lo amb forever start/restart servidor.js");
+ };
 
- start(ws_cpu, ws_mem, ws_mem_avail, select);
- start_cpu_chart();
- start_mem_chart();
- start_mem_avail_chart();
+ ws_cpu.onopen = function() {
+      console.log('connected');
+      start(ws_cpu, ws_mem, ws_mem_avail, select);
+      start_cpu_chart();
+      start_mem_chart();
+      start_mem_avail_chart();
 };
-
+};
 var cpu_boolean = 0;
 function cpuGlobal(ws, select){
  console.log("Entro amb linterval");
