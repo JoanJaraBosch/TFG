@@ -57,7 +57,7 @@ forever start servidor.js
 
 
 wget https://apt.izzysoft.de/izzysoft.asc
-apt-ket add izzysoft.asc
+apt-key add izzysoft.asc
 echo "deb [arch=all] https://apt.izzysoft.de/ubuntu generic universe" | sudo tee -a /etc/apt/sources.list
 apt update -y
 apt-get install monitorix -y
