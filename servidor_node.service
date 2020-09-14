@@ -1,10 +1,21 @@
 [Unit]
-Description=node server daemon
-Wants=network-online.target
-After=network-online.target
+Description=Node.js Example Server
+#Requires=After=mysql.service       # Requires the mysql service to run first
 
 [Service]
-ExecStart=/usr/bin/servidor.sh
-Restart=on-failure
+ExecStart=/usr/bin/node /home/odroid/Downloads/TFG/servidor.js
+# Required on some systems
+#WorkingDirectory=/opt/nodeserver
+Restart=always
+# Restart service after 10 seconds if node service crashes
+RestartSec=10
+# Output to syslog
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=nodejs-example
+#User=<alternate user>
+#Group=<alternate group>
+Environment=NODE_ENV=production PORT=3000
+
 [Install]
 WantedBy=multi-user.target

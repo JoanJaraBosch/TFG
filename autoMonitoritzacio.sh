@@ -49,11 +49,10 @@ systemctl restart nginx
 pip3 install gunicorn
 npm install os -g
 npm install websocket -g
-npm install forever -g
 npm install child_process -g
 npm install http -g
 
-cp servidor.sh /usr/bin/
+
 cp servidor_node.service /etc/systemd/system/
 
 systemctl enable servidor_node.service
