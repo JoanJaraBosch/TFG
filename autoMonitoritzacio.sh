@@ -53,8 +53,11 @@ npm install forever -g
 npm install child_process -g
 npm install http -g
 
-forever start servidor.js
+cp servidor.sh /usr/bin/
+cp servidor_node.service /etc/systemd/system/
 
+systemctl enable servidor_node.service
+systemctl start servidor_node.service
 
 wget https://apt.izzysoft.de/izzysoft.asc
 apt-key add izzysoft.asc

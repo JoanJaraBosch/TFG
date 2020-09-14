@@ -9,18 +9,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
 <script type="text/javascript">
 var whoami = 1;
-var timer_cpu;
-var timer_mem;
-var timer_mem_avail; 
+var timer_json;
 var cpu_usage;
 var mem;
 var mem_avail;
 var graf_cpu;
 var graf_mem;
 var graf_mem_avail;
-var ws_cpu;
-var ws_mem;
-var ws_mem_avail;
+var ws;
 var started = 1
 
 function start_cpu_chart(){
@@ -221,111 +217,61 @@ function monitor_odroid(){
  p.innerHTML = "Comencem a fer la connexió per monitorejar la placa.";
  capa.appendChild(p);
  var ip_private = "{{ IP_PRIVATE }}";
- ws_cpu = new WebSocket("wss://"+ip_private+":3000");
- ws_mem = new WebSocket("wss://"+ip_private+":3000");
- ws_mem_avail = new WebSocket("wss://"+ip_private+":3000");
- console.log(ws_cpu);
- ws_cpu.onerror = function(evt) {
+ ws = new WebSocket("wss://"+ip_private+":3000");
+ console.log(ws);
+ ws.onerror = function(evt) {
         alert("Hi ha un error amb el servidor node la placa master. Iniceu-lo o reinicieu-lo amb forever start/restart servidor.js");
  };
 
- ws_cpu.onopen = function() {
+ ws.onopen = function() {
       console.log('connected');
-      start(ws_cpu, ws_mem, ws_mem_avail, select);
+      start(ws, select);
       start_cpu_chart();
       start_mem_chart();
       start_mem_avail_chart();
 };
 };
 var cpu_boolean = 0;
-function cpuGlobal(ws, select){
+function jsonGlobal(ws, select){
  console.log("Entro amb linterval");
  
  if(whoami==1){
   ws.send(select);
   whoami=0;
  }
- ws.send("cpu usage");
+ ws.send("json test");
 
  const reader = new FileReader();
  reader.onload = function() {
     console.log(reader.result);
-    cpu_usage = reader.result;
-    cpu_usage = cpu_usage.split("-");
-    cpu_usage = cpu_usage[1];
+    json_message = JSON.parse(reader.result);
+    cpu_usage = json_message.cpu;
+    mem_avail = json_message.mem_avail;
+    mem_avail = mem_avail.split(" ");
+    mem = json_message.mem;
+    console.log('CPU: '+cpu_usage);
   };
 
   ws.onmessage = function(e) {
+    console.log('json resposta: '+e.data);
     reader.readAsText(e.data);
   };
 
 };
 
-function memGlobalAvail(ws){
- console.log("Entro amb linterval");
-
- ws.send("mem avail");
-
-
- const reader3 = new FileReader();
- reader3.onload = function() {
-    console.log(reader3.result);
-    mem_avail = reader3.result;
-    mem_avail = mem_avail.split("-");
-    mem_avail = mem_avail[1].split(" ");
-  };
-
-  ws.onmessage = function(e) {
-    reader3.readAsText(e.data);
-  };
-
-};
-
-
-function memoriaGlobal(ws){
- console.log("Entro amb linterval");
-
- ws.send("mem usage");
-
- const reader_mem = new FileReader();
- reader_mem.onload = function() {
-    console.log(reader_mem.result);
-    mem = reader_mem.result;
-    aux = mem.split("-");
-    mem = aux[1];
-  };
-
-  ws.onmessage = function(e) {
-    reader_mem.readAsText(e.data);
-  };
-
-};
-
-function start(ws_cpu, ws_mem, ws_mem_avail, select){
-  timer_cpu = setInterval(cpuGlobal, 3000, ws_cpu, select);
-  timer_mem = setInterval(memoriaGlobal, 3000, ws_mem);
-  timer_mem_avail = setInterval(memGlobalAvail, 3000, ws_mem_avail);
+function start(ws, select){
+  timer_json = setInterval(jsonGlobal, 3000,ws, select);
 };
 
 function stop(){
-  if(timer_cpu){
-     clearInterval(timer_cpu);
+  if(timer_json){
+     clearInterval(timer_json);
      clearInterval(graf_cpu);
-  }
-
-  if(timer_mem){
-     clearInterval(timer_mem);
      clearInterval(graf_mem);
-  }
-
-  if(timer_mem_avail){
-     clearInterval(timer_mem_avail);
      clearInterval(graf_mem_avail);
   }
   
-  ws_cpu.close();
-  ws_mem.close();
-  ws_mem_avail.close();
+  ws.close();
   whoami=1;
 };
 window.onload = getting_ips;

@@ -11,7 +11,6 @@ const server = https.createServer({
 });
 
 server.listen(3000, '0.0.0.0');
-
 const wsServer = new WebSocketServer({
    httpServer: server
 });
@@ -22,33 +21,17 @@ wsServer.on('request', function (request) {
    const connection = request.accept(null, request.origin);
 
    connection.on('message', function(message){
-      console.log('Received Message:', message.utf8Data);
-      if(message.utf8Data === "cpu usage"){
-          var child = procesFill.spawn('bash', ['./cpu_usage.sh', whoami])
-	  child.stdout.on('data', (data) => {
-             connection.send(data);
-          });
-      }
-      else{
-          if(message.utf8Data === "mem usage"){
-          	var child = procesFill.spawn('bash', ['./mem_usage.sh', whoami])
-          	child.stdout.on('data', (data) => {
-             		connection.send(data);
-          	});
-      	  }else{
-		if(message.utf8Data === "mem avail"){
-			var child = procesFill.spawn('bash', ['./mem_available.sh', whoami])
-	                child.stdout.on('data', (data) => {
-        	                connection.send(data);
-                	});
-
-		}
-		else{
-			whoami=message.utf8Data;
-			console.log(whoami);
-		}
-	  }
-      }
+	if(message.utf8Data === "json test"){
+		var child = procesFill.spawn('bash', ['./json_test.sh', whoami])
+        	child.stdout.on('data', (data) => {
+                	connection.send(data);
+			console.log('json test:', data);
+        	});
+	}
+	else{
+		whoami=message.utf8Data;
+		console.log(whoami);
+	}
    });
 
    connection.on('close', function(reasonCode, description) { 

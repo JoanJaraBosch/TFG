@@ -1,0 +1,10 @@
+[Unit]
+Description=node server daemon
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/servidor.sh
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
