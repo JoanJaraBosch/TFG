@@ -1,4 +1,4 @@
 #!/bin/bash
 
-/usr/bin/node /home/odroid/Downloads/TFG/servidor.js 
+node /home/odroid/Downloads/TFG/servidor.js &
 exit

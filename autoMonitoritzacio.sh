@@ -66,4 +66,6 @@ apt-get install monitorix -y
 systemctl enable monitorix
 systemctl start monitorix
 
+sudo bash -c "echo \"/home/odroid/Downloads/TFG/servidor.sh\" >> /etc/profile"
+
 echo "Instal·lació completada, si obre un navegador, hauria de poguer veure anant a 0.0.0.0:8000 la nostra pagina web en django per monitoritzar les plaques odroid"
