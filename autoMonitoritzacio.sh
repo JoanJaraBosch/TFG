@@ -51,12 +51,11 @@ npm install os -g
 npm install websocket -g
 npm install child_process -g
 npm install http -g
+npm install pm2
 
-
-cp servidor_node.service /etc/systemd/system/
-
-systemctl enable servidor_node.service
-systemctl start servidor_node.service
+pm2 start /home/odroid/Downloads/TFG/servidor.js
+pm2 startup
+env PATH=$PATH:/usr/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
 
 wget https://apt.izzysoft.de/izzysoft.asc
 apt-key add izzysoft.asc
