@@ -10,4 +10,4 @@ else
 	mem_avail=$(sshpass -p "odroid" ssh -o StrictHostKeyChecking=no odroid@$1 "df -t ext4 --output=used,avail | head -2 | tail -1")
 fi
 
-echo "$(printf '{"cpu":"%s", "mem":"%s", "mem_avail":"%s"}\n' "$cpu" "$mem" "$mem_avail")"
+echo '{"cpu": "'"$cpu"'", "mem":"'"$mem"'", "mem_avail":"'"$mem_avail"'"}'
