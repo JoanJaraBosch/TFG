@@ -42,3 +42,7 @@ echo
 cat /etc/nginx/ssl/nginx.key
 
 openssl dhparam -out /etc/nginx/ssl/dhparam.pem 4096
+
+
+chown odroid:odroid /etc/nginx/ssl/nginx.key
+chown odroid:odroid /etc/nginx/ssl/nginx.crt

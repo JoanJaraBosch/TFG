@@ -21,23 +21,19 @@ wsServer.on('request', function (request) {
    const connection = request.accept(null, request.origin);
 
    connection.on('message', function(message){
-	if(message.utf8Data === "json test"){
-		var child = procesFill.spawn('bash', ['./json_test.sh', whoami])
+	if(message.utf8Data === "monitor"){
+		var child = procesFill.spawn('bash', ['./monitoring.sh', whoami])
         	child.stdout.on('data', (data) => {
                 	connection.send(data);
-			console.log('json test:', data);
         	});
 	}
 	else{
 		whoami=message.utf8Data;
-		console.log(whoami);
 	}
    });
 
    connection.on('close', function(reasonCode, description) { 
-      console.log('Client Disconnected');
+     
    }); 
  
 });
-
-console.log('Listening');
