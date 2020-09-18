@@ -40,7 +40,7 @@ rm -r /etc/nginx/sites-available/default
 rm -r /etc/nginx/sites-enabled/default
 #Copiem els arxius pertinents i reiniciem
 IP=$(hostname -I | awk '{print $1}')
-./gen-cer.sh $IP
+/home/odroid/Downloads/TFG/gen-cer.sh $IP
  
 cp -p $descarregues/odroid_site_ssl /etc/nginx/sites-available/odroid_site
 ln -s /etc/nginx/sites-available/odroid_site /etc/nginx/sites-enabled
@@ -51,8 +51,8 @@ npm install os -g
 npm install websocket -g
 npm install child_process -g
 npm install http -g
-npm install pm2
-
+npm install pm2 -g
+ 
 pm2 start /home/odroid/Downloads/TFG/servidor.js
 pm2 startup
 env PATH=$PATH:/usr/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
@@ -64,7 +64,5 @@ apt update -y
 apt-get install monitorix -y
 systemctl enable monitorix
 systemctl start monitorix
-
-sudo bash -c "echo \"/home/odroid/Downloads/TFG/servidor.sh\" >> /etc/profile"
 
 echo "Instal·lació completada, si obre un navegador, hauria de poguer veure anant a 0.0.0.0:8000 la nostra pagina web en django per monitoritzar les plaques odroid"
