@@ -25,6 +25,14 @@ npm install child_process -g
 npm install http -g
 npm install pm2 -g
 
+#Change permisions and config of npm for odroid user.
+mkdir /home/odroid/.npm-global
+npm config set prefix '/home/odroid/.npm-global'
+echo "export PATH=/home/odroid/.npm-global/bin:$PATH" >> /home/odroid/.profile
+source /home/odroid/.profile
+chown -R odroid /home/odroid/.pm2/
+chown -R odroid /home/odroid/.npm-global/
+
 #Monitorix instalation and getting keys. Test, monitorix is another way 
 #to monitor our systems.
 if [ -f $descarregues/izzysoft.asc ]; then
@@ -73,11 +81,9 @@ systemctl daemon-reload
 systemctl start gunicorn
 systemctl enable gunicorn
 systemctl restart nginx 
-
 #We make the node server up like a deamon.
-pm2 start /home/odroid/Downloads/TFG/servidor.js
-pm2 startup
+chown odroid:odroid /home/odroid/.pm2/rpc.sock /home/odroid/.pm2/pub.sock
 env PATH=$PATH:/usr/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
 
 #Finally the instalation is completed.
-echo "-----------------------INSTALATION COMPLETED, GO TO YOUR BROWSER AND PUT HTTPS://IP_ODROID_MASTER------------------------------"
+echo "-------------------EXECUTE AS ODROID USER THE FILE PM2.SH------------------------------"
