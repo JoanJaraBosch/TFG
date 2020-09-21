@@ -1,68 +1,83 @@
 #!/bin/bash
 
 #Author: Joan Jara
-#Description: Aquest script te el proposit d'instal·lar els requisits minims
-# per a executar la web en django al master per tal de ferho automaticament
-# i veureu gracies al servidor nginx.
+#Description: Script to download, and put the configuration files for our webapp
+# in django in order to monitor the system made of odroid. This script will download
+# and install all we need and will make up the node server too.
 
 
-#Mirem si som root o sudo sino no executem
+#We need root permissions.
 if [[ $EUID -ne 0 ]]; then
     echo "You must be root or sudo to do this."
     exit
 fi
-#Instal·lació dels paquets necessaris
+
+#Upgrades and instalations needed.
 apt update -y
-#sudo apt upgrade -y
 apt install python3-pip python3 nginx python3-django gettext nload npm -y
-#Instalarem el virtualenv per a poguer tindre un entorn virtual
-#i no molestar els altres projectes que puguem tindre en un futurgettext
 pip3 install --upgrade setuptools
 pip3 install virtualenv wheel
 pip3 install --upgrade django
-pip3 install gunicorn
-descarregues=$(pwd)
-#Fem les migracions pertinents
-cd $descarregues/odroid
-python3 manage.py makemigrations
-python3 manage.py migrate
-
-#Agafem els fitxers statics
-python3 manage.py collectstatic --noinput
-ln /etc/dnsmasq.d/dnsmasq_hosts.conf $descarregues/odroid/ips
-#Copiem els arxius pertinents i reiniciem els dimonis
-cp -p $descarregues/gunicorn.service /etc/systemd/system/gunicorn.service
-systemctl daemon-reload
-systemctl start gunicorn
-systemctl enable gunicorn
-
-rm -r /etc/nginx/sites-available/default 
-rm -r /etc/nginx/sites-enabled/default
-#Copiem els arxius pertinents i reiniciem
-IP=$(hostname -I | awk '{print $1}')
-/home/odroid/Downloads/TFG/gen-cer.sh $IP
- 
-cp -p $descarregues/odroid_site_ssl /etc/nginx/sites-available/odroid_site
-ln -s /etc/nginx/sites-available/odroid_site /etc/nginx/sites-enabled
-systemctl restart nginx
-
 pip3 install gunicorn
 npm install os -g
 npm install websocket -g
 npm install child_process -g
 npm install http -g
 npm install pm2 -g
- 
-pm2 start /home/odroid/Downloads/TFG/servidor.js
-pm2 startup
-env PATH=$PATH:/usr/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
 
-wget https://apt.izzysoft.de/izzysoft.asc
-apt-key add izzysoft.asc
-echo "deb [arch=all] https://apt.izzysoft.de/ubuntu generic universe" | sudo tee -a /etc/apt/sources.list
+#Monitorix instalation and getting keys. Test, monitorix is another way 
+#to monitor our systems.
+if [ -f $descarregues/izzysoft.asc ]; then
+	rm $descarregues/izzysoft.asc
+else
+	wget https://apt.izzysoft.de/izzysoft.asc
+	apt-key add izzysoft.asc
+	echo "deb [arch=all] https://apt.izzysoft.de/ubuntu generic universe" | sudo tee -a /etc/apt/sources.list
+fi
 apt update -y
 apt-get install monitorix -y
 systemctl enable monitorix
 systemctl start monitorix
 
-echo "Instal·lació completada, si obre un navegador, hauria de poguer veure anant a 0.0.0.0:8000 la nostra pagina web en django per monitoritzar les plaques odroid"
+#We made a variable to know where we are.
+descarregues=$(pwd)
+
+#Make migrations.
+python3 $descarregues/odroid/manage.py makemigrations
+python3 $descarregues/odroid/manage.py migrate
+
+#Obtain static files. 
+python3 $descarregues/odroid/manage.py collectstatic --noinput
+
+#If this file/link already exist because of previous test, 
+#we gonna delete it. If not we gonna create the hard link.
+if [ -f $descarregues/odroid/ips ]; then
+	rm $descarregues/odroid/ips
+else
+	ln /etc/dnsmasq.d/dnsmasq_hosts.conf $descarregues/odroid/ips
+fi
+
+#Copy files to their directori to make the deamons.
+cp -p $descarregues/gunicorn.service /etc/systemd/system/gunicorn.service
+cp -p $descarregues/odroid_site_ssl /etc/nginx/sites-available/odroid_site
+rm -r /etc/nginx/sites-available/default 
+rm -r /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/odroid_site /etc/nginx/sites-enabled
+
+#We generate the keys and certificate to make our webapp lan more secure.
+IP=$(hostname -I | awk '{print $1}')
+$descarregues/gen-cer.sh $IP
+
+#We reload, enable and start the deamons
+systemctl daemon-reload
+systemctl start gunicorn
+systemctl enable gunicorn
+systemctl restart nginx 
+
+#We make the node server up like a deamon.
+pm2 start /home/odroid/Downloads/TFG/servidor.js
+pm2 startup
+env PATH=$PATH:/usr/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
+
+#Finally the instalation is completed.
+echo "-----------------------INSTALATION COMPLETED, GO TO YOUR BROWSER AND PUT HTTPS://IP_ODROID_MASTER------------------------------"
