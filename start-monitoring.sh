@@ -14,11 +14,12 @@ fi
 
 #Upgrades and instalations needed.
 apt update -y
-apt install python3-pip python3 nginx python3-django gettext nload npm -y
+apt install python3-pip python3 gunicorn nginx python3-django gettext nload npm -y
+apt install libjpeg8-dev zlib1g-dev -y
 pip3 install --upgrade setuptools
 pip3 install virtualenv wheel
 pip3 install --upgrade django
-pip3 install gunicorn
+pip3 install gunicorn requests pillow
 npm install os -g
 npm install websocket -g
 npm install child_process -g
@@ -26,8 +27,8 @@ npm install http -g
 npm install pm2 -g
 
 #Change permisions and config of npm for odroid user.
-mkdir /home/odroid/.npm-global
-mkdir /home/odroid/.django-monitor
+mkdir -p /home/odroid/.npm-global/
+mkdir -p /home/odroid/.django-monitor/
 npm config set prefix '/home/odroid/.npm-global'
 echo "export PATH=/home/odroid/.npm-global/bin:$PATH" >> /home/odroid/.profile
 source /home/odroid/.profile
@@ -36,8 +37,8 @@ chown -R odroid:odroid /home/odroid/.npm-global/
 chown -R odroid:odroid /home/odroid/.django-monitor/
 
 #Copy scripts and webapp to the default folder
-cp -rp $descarregues/odroid/ /home/odroid/.django-monitor/
-cp -rp $descarregues/servidor.js /home/odroid/.django-monitor/ 
+cp -rp odroid/ /home/odroid/.django-monitor/
+cp -rp servidor.js /home/odroid/.django-monitor/ 
 
 #Monitorix instalation and getting keys. Test, monitorix is another way 
 #to monitor our systems.
@@ -46,7 +47,9 @@ if [ -f $descarregues/izzysoft.asc ]; then
 else
 	wget https://apt.izzysoft.de/izzysoft.asc
 	apt-key add izzysoft.asc
-	echo "deb [arch=all] https://apt.izzysoft.de/ubuntu generic universe" | sudo tee -a /etc/apt/sources.list
+        if [ $(cat /etc/apt/sources.list | grep "deb \[arch=all\] https://apt.izzysoft.de/ubuntu generic universe" | wc -l) -eq 0 ]; then
+		echo "deb [arch=all] https://apt.izzysoft.de/ubuntu generic universe" | sudo tee -a /etc/apt/sources.list
+	fi
 fi
 apt update -y
 apt-get install monitorix -y
