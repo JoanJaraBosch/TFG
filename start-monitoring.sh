@@ -27,11 +27,17 @@ npm install pm2 -g
 
 #Change permisions and config of npm for odroid user.
 mkdir /home/odroid/.npm-global
+mkdir /home/odroid/.django-monitor
 npm config set prefix '/home/odroid/.npm-global'
 echo "export PATH=/home/odroid/.npm-global/bin:$PATH" >> /home/odroid/.profile
 source /home/odroid/.profile
-chown -R odroid /home/odroid/.pm2/
-chown -R odroid /home/odroid/.npm-global/
+chown -R odroid:odroid /home/odroid/.pm2/
+chown -R odroid:odroid /home/odroid/.npm-global/
+chown -R odroid:odroid /home/odroid/.django-monitor/
+
+#Copy scripts and webapp to the default folder
+cp -rp $descarregues/odroid/ /home/odroid/.django-monitor/
+cp -rp $descarregues/servidor.js /home/odroid/.django-monitor/ 
 
 #Monitorix instalation and getting keys. Test, monitorix is another way 
 #to monitor our systems.
@@ -51,11 +57,11 @@ systemctl start monitorix
 descarregues=$(pwd)
 
 #Make migrations.
-python3 $descarregues/odroid/manage.py makemigrations
-python3 $descarregues/odroid/manage.py migrate
+python3 /home/odroid/.django-monitor/odroid/manage.py makemigrations
+python3 /home/odroid/.django-monitor/odroid/manage.py migrate
 
 #Obtain static files. 
-python3 $descarregues/odroid/manage.py collectstatic --noinput
+python3 /home/odroid/.django-monitor/odroid/manage.py collectstatic --noinput
 
 #If this file/link already exist because of previous test, 
 #we gonna delete it. If not we gonna create the hard link.
@@ -87,3 +93,5 @@ env PATH=$PATH:/usr/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd 
 
 #Finally the instalation is completed.
 echo "-------------------EXECUTE AS ODROID USER THE FILE PM2.SH------------------------------"
+
+

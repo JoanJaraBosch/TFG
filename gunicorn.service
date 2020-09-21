@@ -7,8 +7,8 @@ After=network-online.target
 Environment=SECRET_KEY=secret
 User=odroid
 Group=www-data
-WorkingDirectory=/home/odroid/Downloads/TFG/odroid
-ExecStart=/usr/local/bin/gunicorn --workers 3 --bind unix:/home/odroid/Downloads/TFG/odroid/odroid.sock --bind unix:/home/odroid/Downloads/TFG/odroid/odroid_pub.sock odroid.wsgi:application
+WorkingDirectory=/home/odroid/.django-monitor/odroid
+ExecStart=/usr/local/bin/gunicorn --workers 3 --bind unix:/home/odroid/.django-monitor/odroid/odroid.sock --bind unix:/home/odroid/.django-monitor/odroid/odroid_pub.sock odroid.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
