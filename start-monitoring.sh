@@ -19,12 +19,7 @@ apt install libjpeg8-dev zlib1g-dev -y
 pip3 install --upgrade setuptools
 pip3 install virtualenv wheel
 pip3 install --upgrade django
-pip3 install gunicorn requests pillow
-npm install os -g
-npm install websocket -g
-npm install child_process -g
-npm install http -g
-npm install pm2 -g
+pip3 install gunicorn requests pillow 
 
 #Change permisions and config of npm for odroid user.
 mkdir -p /home/odroid/.npm-global/
@@ -89,7 +84,8 @@ $descarregues/gen-cer.sh $IP
 systemctl daemon-reload
 systemctl start gunicorn
 systemctl enable gunicorn
-systemctl restart nginx 
+systemctl enable nginx
+systemctl start nginx 
 #We make the node server up like a deamon.
 chown odroid:odroid /home/odroid/.pm2/rpc.sock /home/odroid/.pm2/pub.sock
 env PATH=$PATH:/usr/bin /home/odroid/.npm-global/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
@@ -97,4 +93,12 @@ env PATH=$PATH:/usr/bin /home/odroid/.npm-global/lib/node_modules/pm2/bin/pm2 st
 #Finally the instalation is completed.
 echo "-------------------EXECUTE AS ODROID USER THE FILE PM2.SH------------------------------"
 
+#Installing npm modules for my project
+cd /home/odroid/.django-monitor
+npm install os 
+npm install websocket 
+npm install child_process 
+npm install http 
+npm install pm2 
 
+export NODE_PATH=/home/odroid/.django-monitor/node_modules
