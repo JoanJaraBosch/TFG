@@ -13,9 +13,11 @@ var timer_json;
 var cpu_usage;
 var mem;
 var mem_avail;
+var temp;
 var graf_cpu;
 var graf_mem;
 var graf_mem_avail;
+var graf_temp;
 var ws;
 var started = 1
 
@@ -123,9 +125,50 @@ var updateChart_mem_avail = function (count) {
 
 graf_mem_avail =setInterval(updateChart_mem_avail, updateInterval_mem_avail, dataLength_mem);
 
-
 };
 
+function start_temp_chart(){
+
+var contador_temp = 0;
+var ctx_temp = document.getElementById("chartContainerTemp");
+var chartTemp = new Chart(ctx_temp, {
+        type: "doughnut",
+        data: {
+                labels: ['Current temperature', 'Critic temperature'],
+                datasets: [{
+                        data: [],
+                        backgroundColor: [
+                               'rgba(240,52, 52, 1)',
+				'rgba(11,156 ,49, 1)'
+                        ],
+                }],
+        },
+        options: {
+                responsive: true,
+                title: {
+                        display: true,
+                        text: 'Monitoring Temperature'
+                },
+        }
+});
+
+var updateInterval_temp = 3000;
+var dataLength_temp = 10; // number of dataPoints visible at any point
+
+var updateChart_temp = function (count) {
+     try{
+         chartTemp.data.datasets[0].data[0]= parseFloat(temp[0]);
+         chartTemp.data.datasets[0].data[1]= parseFloat(temp[1]);
+         chartTemp.update();
+     }catch(err){
+
+     }
+};
+
+graf_temp =setInterval(updateChart_temp, updateInterval_temp, dataLength_temp);
+
+
+};
 
 function start_mem_chart(){
 var contador_mem = 0;
@@ -210,12 +253,12 @@ function monitor_odroid(){
    stop();
  }else{
    started = 0;
+   var capa = document.getElementById("monitor");
+   var p = document.createElement("p");
+   p.innerHTML = "Comencem a fer la connexió per monitorejar la placa.";
+   capa.appendChild(p);
  }
- var capa = document.getElementById("monitor");
- var p = document.createElement("p");
  var select = document.getElementById("ips").value;
- p.innerHTML = "Comencem a fer la connexió per monitorejar la placa.";
- capa.appendChild(p);
  var ip_private = "{{ IP_PRIVATE }}";
  ws = new WebSocket("wss://"+ip_private+":3000");
  console.log(ws);
@@ -229,6 +272,7 @@ function monitor_odroid(){
       start_cpu_chart();
       start_mem_chart();
       start_mem_avail_chart();
+      start_temp_chart();
 };
 };
 var cpu_boolean = 0;
@@ -249,6 +293,8 @@ function jsonGlobal(ws, select){
     mem_avail = json_message.mem_avail;
     mem_avail = mem_avail.split(" ");
     mem = json_message.mem;
+    temp = json_message.temp
+    temp = temp.split(" ");
     console.log('CPU: '+cpu_usage);
   };
 
@@ -269,6 +315,7 @@ function stop(){
      clearInterval(graf_cpu);
      clearInterval(graf_mem);
      clearInterval(graf_mem_avail);
+     clearInterval(graf_temp);
   }
   
   ws.close();
@@ -290,4 +337,5 @@ window.onload = getting_ips;
 <canvas id="chartContainer" style="height: 370px; width:100%;"></canvas>
 <canvas id="chartContainerMem" style="height: 370px; width:100%;"></canvas>
 <canvas id="chartContainerMemAvail" style="height: 370px; width:100%;"></canvas>
+<canvas id="chartContainerTemp" style="height: 370px; width:100%;"></canvas>
 {% endblock %}
