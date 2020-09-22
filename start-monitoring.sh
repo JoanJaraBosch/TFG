@@ -34,6 +34,7 @@ chown -R odroid:odroid /home/odroid/.django-monitor/
 #Copy scripts and webapp to the default folder
 cp -rp odroid/ /home/odroid/.django-monitor/
 cp -rp servidor.js /home/odroid/.django-monitor/ 
+cp -rp monitoring.sh /home/odroid/.django-monitor/
 
 #Monitorix instalation and getting keys. Test, monitorix is another way 
 #to monitor our systems.
