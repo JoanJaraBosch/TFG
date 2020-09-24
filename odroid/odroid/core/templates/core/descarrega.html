@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}{% trans "Descàrregues" %}{% endblock %}
+
+{% block background %}{% load static %}{% static 'core/img/download-bg.jpg' %}{% endblock %}
+
+{% block headers %}
+<h1>URV-Odroid</h1>
+{% endblock %}
+{% block content %}
+<p align="justify">
+{% blocktrans %}En aquesta plana tens la oportunitat de descarregar els arxius d'automatització i la mateixa plana web de manera local per executar-la desde la placa odroid master per tal de fer la monitorització de manera local i per tant més segura.
+{% endblocktrans %}
+</p>
+<a href="https://github.com/JoanJaraBosch/TFG/archive/master.zip">{% trans "Descàrregues" %}</a>
+{% endblock %}
