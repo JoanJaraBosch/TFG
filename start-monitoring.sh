@@ -16,6 +16,7 @@ fi
 apt update -y
 apt install python3-pip python3 gunicorn nginx python3-django gettext nload npm -y
 apt install libjpeg8-dev zlib1g-dev -y
+apt install vnstat -y
 pip3 install --upgrade setuptools
 pip3 install virtualenv wheel
 pip3 install --upgrade django
