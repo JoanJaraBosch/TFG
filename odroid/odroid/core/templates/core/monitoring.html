@@ -14,12 +14,18 @@ var cpu_usage;
 var mem;
 var mem_avail;
 var temp;
+var up_time;
+var load;
+
 var graf_cpu;
 var graf_mem;
 var graf_mem_avail;
 var graf_temp;
+var graf_up;
+var graf_load;
+
 var ws;
-var started = 1
+var started = 1;
 
 function start_cpu_chart(){
 var contador = 0;
@@ -233,6 +239,66 @@ graf_mem =setInterval(updateChart_mem, updateInterval_mem, dataLength_mem);
 
 };
 
+function start_uptime_chart(){
+var contador_up = 0;
+var ctx_up = document.getElementById("chartContainerUptime");
+var chartUP = new Chart(ctx_up, {
+        type: "bar",
+        data: {
+                labels: ['years', 'months', 'days', 'hours', 'minutes'],
+                datasets: [{
+                        label: 'Up Time',
+                        data: [0, 0, 0, 0, 0],
+			backgroundColor: [
+                               'rgba(240,52, 52, 1)',
+                                'rgba(215, 215, 215, 1)',
+				'rgba(118, 183, 172, 1)',
+				'rgba(237, 170, 124, 1)',
+				'rgba(248, 243, 53, 1)'
+                        ],
+                }],
+        },
+        options: {
+                responsive: true,
+                title: {
+                        display: true,
+                        text: 'Monitoring RAM'
+                },
+                scales: {
+                        xAxes: [{
+                                scaleLabel: {
+                                        display: true,
+                                        labelString: 'Time Up'
+                                }
+                        }],
+                        yAxes: [{
+                                ticks: {
+                                        beginAtZero: true
+				 },
+                                scaleLabel: {
+					display: true,
+                                        labelString: ''
+                                }
+                        }]
+                }
+        }
+});
+
+
+var updateInterval_up = 3000;
+var dataLength_up = 10; // number of dataPoints visible at any point
+
+var updateChart_up = function (count) {
+      for(var i = 0; i<up_time.length; i++){
+      	chartUP.data.datasets[0].data[i+(chartUP.data.labels.length-up_time.length)] = parseFloat(up_time[i]);
+      }
+      chartUP.update();
+};
+
+graf_up =setInterval(updateChart_up, updateInterval_up, dataLength_up);
+
+};
+
 function getting_ips(){
  var ips = {{ ips|safe }};
  var capa = document.getElementById("ips");
@@ -273,6 +339,7 @@ function monitor_odroid(){
       start_mem_chart();
       start_mem_avail_chart();
       start_temp_chart();
+      start_uptime_chart();
 };
 };
 var cpu_boolean = 0;
@@ -295,7 +362,10 @@ function jsonGlobal(ws, select){
     mem = json_message.mem;
     temp = json_message.temp
     temp = temp.split(" ");
+    up_time = json_message.up
+    up_time = up_time.split("-");
     console.log('CPU: '+cpu_usage);
+    console.log('Uptime: '+up_time.length)
   };
 
   ws.onmessage = function(e) {
@@ -316,6 +386,7 @@ function stop(){
      clearInterval(graf_mem);
      clearInterval(graf_mem_avail);
      clearInterval(graf_temp);
+     clearInterval(graf_up);	
   }
   
   ws.close();
@@ -323,6 +394,24 @@ function stop(){
 };
 window.onload = getting_ips;
 </script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
 <h1>URV-Odroid</h1>
 {% endblock %}
 {% block content %}
@@ -334,8 +423,29 @@ window.onload = getting_ips;
 </form>
 <input id="stopMe" type="button" value="StopMonitoritzar" onclick="stop();"/>
 <div id="monitor"></div>
-<canvas id="chartContainer" style="height: 370px; width:100%;"></canvas>
-<canvas id="chartContainerMem" style="height: 370px; width:100%;"></canvas>
-<canvas id="chartContainerMemAvail" style="height: 370px; width:100%;"></canvas>
-<canvas id="chartContainerTemp" style="height: 370px; width:100%;"></canvas>
+<div class="row">
+<div  class="column">
+<canvas id="chartContainer" style="height: 500px; width:100%;"></canvas>
+</div>
+<div  class="column">
+<canvas id="chartContainerMem" style="height: 500px; width:100%;"></canvas>
+</div>
+</div>
+<div  class="row">
+<div  class="column">
+<canvas id="chartContainerMemAvail" style="height: 500px; width:100%;"></canvas>
+</div>
+<div  class="column">
+<canvas id="chartContainerTemp" style="height: 500px; width:100%;"></canvas>
+</div>
+</div>
+<div  class="row">
+<div  class="column">
+<canvas id="chartContainerUptime" style="height: 500px; width:100%;"></canvas>
+</div>
+<div  class="column">
+<canvas id="chartContainerLoad" style="height: 500px; width:100%;"></canvas>
+</div>
+</div>
+
 {% endblock %}
