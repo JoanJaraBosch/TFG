@@ -16,6 +16,8 @@ var mem_avail;
 var temp;
 var up_time;
 var load;
+var entropy;
+var bandwidth;
 
 var graf_cpu;
 var graf_mem;
@@ -23,6 +25,8 @@ var graf_mem_avail;
 var graf_temp;
 var graf_up;
 var graf_load;
+var graf_entropy;
+var graf_bandwidth;
 
 var ws;
 var started = 1;
@@ -37,6 +41,7 @@ var chartCPU = new Chart(ctx, {
         	datasets: [{
             		label: 'CPU USAGE',
             		data: [],
+
 		}],
 	},
         options: {
@@ -88,6 +93,71 @@ var updateChart = function (count) {
 };
 
 graf_cpu =setInterval(updateChart, updateInterval, dataLength);
+
+};
+
+function start_entropy_chart(){
+var contador = 0;
+var ctx_entropy = document.getElementById("chartContainerEntropy");
+var chartEntropy = new Chart(ctx_entropy, {
+        type: "line",
+        data: {
+                labels: [],
+                datasets: [{
+                        label: 'System Entropy',
+                        data: [],
+
+                }],
+        },
+        options: {
+                responsive: true,
+                title: {
+                        display: true,
+                        text: 'Monitoring Entropy'
+                },
+                scales: {
+                        xAxes: [{
+                                 scaleLabel: {
+                                        display: true,
+                                        labelString: 'Updates'
+                                }
+                        }],
+                        yAxes: [{
+                                ticks: {
+                                        display: true,
+                                        beginAtZero: true,
+                                },
+                                 scaleLabel: {
+                                        display: true,
+                                        labelString: 'Random numbers available'
+                                }
+
+                        }]
+                }
+        }
+});
+
+var updateIntervalEntropy = 3000;
+var dataLengthEntropy = 10; // number of dataPoints visible at any point
+
+var updateChartEntropy = function (count) {
+     if(chartEntropy.data.datasets[0].data.length==dataLengthEntropy){
+         for(var j = 0; j<dataLengthEntropy-1; j++){
+                chartEntropy.data.datasets[0].data[j] = chartEntropy.data.datasets[0].data[j+1];
+                chartEntropy.data.labels[j] = chartEntropy.data.labels[j+1];
+         }
+
+         chartEntropy.data.datasets[0].data[chartEntropy.data.datasets[0].data.length-1] = parseFloat(entropy);
+         chartEntropy.data.labels[chartEntropy.data.datasets[0].data.length-1] = contador;
+     }else{
+         chartEntropy.data.datasets[0].data[contador] = parseFloat(entropy);
+         chartEntropy.data.labels[contador] = contador;
+     }
+     contador+=1;
+     chartEntropy.update();
+};
+
+graf_entropy =setInterval(updateChartEntropy, updateIntervalEntropy, dataLengthEntropy);
 
 };
 
@@ -262,7 +332,7 @@ var chartUP = new Chart(ctx_up, {
                 responsive: true,
                 title: {
                         display: true,
-                        text: 'Monitoring RAM'
+                        text: 'Monitoring System Uptime'
                 },
                 scales: {
                         xAxes: [{
@@ -296,6 +366,71 @@ var updateChart_up = function (count) {
 };
 
 graf_up =setInterval(updateChart_up, updateInterval_up, dataLength_up);
+
+};
+
+function start_load_chart(){
+var contador_load = 0;
+var ctx_load = document.getElementById("chartContainerLoad");
+var chartLoad = new Chart(ctx_load, {
+        type: "bar",
+        data: {
+                labels: ['1 min', '5 min', '15 min', '1 min critic', '5 min critic', '15 min critic'],
+                datasets: [{
+                        label: 'System Load',
+                        data: [0, 0, 0, 0, 0, 0,],
+                        backgroundColor: [
+                               'rgba(240,52, 52, 1)',
+                                'rgba(215, 215, 215, 1)',
+                                'rgba(118, 183, 172, 1)',
+                                'rgba(237, 170, 124, 1)',
+			 	'rgba(193, 64, 64, 1)',
+				'rgba(120, 170, 124, 1)'
+                        ],
+                }],
+        },
+        options: {
+                responsive: true,
+                title: {
+                        display: true,
+                        text: 'Monitoring System Load'
+                },
+                scales: {
+                        xAxes: [{
+                                scaleLabel: {
+                                        display: true,
+                                        labelString: 'Load'
+                                }
+                        }],
+                        yAxes: [{
+                                ticks: {
+                                        beginAtZero: true
+                                 },
+                                scaleLabel: {
+                                        display: true,
+                                        labelString: ''
+                                }
+                        }]
+                }
+        }
+});
+
+var updateInterval_load = 3000;
+var dataLength_load = 10; // number of dataPoints visible at any point
+
+var updateChart_load = function (count) {
+      for(var i = 0; i<load.length+load.length-2; i++){
+	if(i<load.length-1){
+        	chartLoad.data.datasets[0].data[i] = parseFloat(load[i]);
+        }
+	else{
+		chartLoad.data.datasets[0].data[i] = parseFloat(load[load.length-1]-load[i-load.length+1]);
+	}
+      }
+      chartLoad.update();
+};
+
+graf_load =setInterval(updateChart_load, updateInterval_load, dataLength_load);
 
 };
 
@@ -340,6 +475,8 @@ function monitor_odroid(){
       start_mem_avail_chart();
       start_temp_chart();
       start_uptime_chart();
+      start_load_chart();
+      start_entropy_chart();
 };
 };
 var cpu_boolean = 0;
@@ -364,8 +501,9 @@ function jsonGlobal(ws, select){
     temp = temp.split(" ");
     up_time = json_message.up
     up_time = up_time.split("-");
-    console.log('CPU: '+cpu_usage);
-    console.log('Uptime: '+up_time.length)
+    load = json_message.load
+    load = load.split(" ");
+    entropy = json_message.entropy
   };
 
   ws.onmessage = function(e) {
@@ -386,7 +524,9 @@ function stop(){
      clearInterval(graf_mem);
      clearInterval(graf_mem_avail);
      clearInterval(graf_temp);
-     clearInterval(graf_up);	
+     clearInterval(graf_up);
+     clearInterval(graf_load);	
+     clearInterval(graf_entropy);
   }
   
   ws.close();
@@ -447,5 +587,12 @@ window.onload = getting_ips;
 <canvas id="chartContainerLoad" style="height: 500px; width:100%;"></canvas>
 </div>
 </div>
-
+<div  class="row">
+<div  class="column">
+<canvas id="chartContainerEntropy" style="height: 500px; width:100%;"></canvas>
+</div>
+<div  class="column">
+<canvas id="chartContainerBandwidth" style="height: 500px; width:100%;"></canvas>
+</div>
+</div>
 {% endblock %}
