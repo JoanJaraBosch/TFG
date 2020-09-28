@@ -315,7 +315,7 @@ var ctx_up = document.getElementById("chartContainerUptime");
 var chartUP = new Chart(ctx_up, {
         type: "bar",
         data: {
-                labels: ['years', 'months', 'days', 'hours', 'minutes'],
+                labels: ['days', 'hours', 'minutes'],
                 datasets: [{
                         label: 'Up Time',
                         data: [0, 0, 0, 0, 0],
@@ -323,8 +323,6 @@ var chartUP = new Chart(ctx_up, {
                                'rgba(240,52, 52, 1)',
                                 'rgba(215, 215, 215, 1)',
 				'rgba(118, 183, 172, 1)',
-				'rgba(237, 170, 124, 1)',
-				'rgba(248, 243, 53, 1)'
                         ],
                 }],
         },
@@ -360,7 +358,7 @@ var dataLength_up = 10; // number of dataPoints visible at any point
 
 var updateChart_up = function (count) {
       for(var i = 0; i<up_time.length; i++){
-      	chartUP.data.datasets[0].data[i+(chartUP.data.labels.length-up_time.length)] = parseFloat(up_time[i]);
+      	chartUP.data.datasets[0].data[i] = parseFloat(up_time[i]);
       }
       chartUP.update();
 };
