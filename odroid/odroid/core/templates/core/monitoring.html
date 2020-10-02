@@ -35,6 +35,76 @@ var graf_network;
 var ws;
 var started = 1;
 
+function start_network_chart(noms){
+var contador = 0;
+var ctx_net = document.getElementById("chartContainerBandwidth");
+var init_graf = [];
+
+for(var z=0; z < noms.length; z++){
+	init_graf.push({label: noms[z], data: [],});	
+} 
+
+var chartNET = new Chart(ctx_net, {
+        type: "line",
+        data: {
+		labels: [],
+		datasets: init_graf,
+        },
+        options: {
+                responsive: true,
+                title: {
+                        display: true,
+                        text: 'Monitoring Bandwith'
+                },
+                scales: {
+                        xAxes: [{
+                                 scaleLabel: {
+                                        display: true,
+                                        labelString: 'Updates'
+                                }
+                        }],
+                        yAxes: [{
+                                ticks: {
+                                        display: true,
+                                        beginAtZero: true,
+                                },
+                                 scaleLabel: {
+                                        display: true,
+                                        labelString: 'Bytes'
+                                }
+
+                        }]
+                }
+        }
+});
+
+var updateInterval = 3000;
+var dataLength = 10; // number of dataPoints visible at any point
+
+var updateChartNet = function (count) {
+     for(var t=0; t < chartNET.data.datasets.length; t++){
+     	if(chartNET.data.datasets[t].data.length==dataLength){
+         	for(var j = 0; j<dataLength-1; j++){
+                	chartNET.data.datasets[t].data[j] = chartNET.data.datasets[t].data[j+1];
+                	chartNET.data.labels[j] = chartNET.data.labels[j+1];
+         	}
+
+         	chartNET.data.datasets[t].data[chartNET.data.datasets[t].data.length-1] = parseFloat(net_info_2[t]-net_info[t]);
+		net_info[t]=net_info_2[t];
+        	chartNET.data.labels[chartNET.data.datasets[t].data.length-1] = contador;
+    	 }else{
+         	chartNET.data.datasets[t].data[contador] = parseFloat(net_info_2[t]-net_info[t]);
+        	chartNET.data.labels[contador] = contador;
+     	}
+     }
+     contador+=1;
+     chartNET.update();
+};
+
+graf_network =setInterval(updateChartNet, updateInterval, dataLength);
+
+};
+
 function start_cpu_chart(){
 var contador = 0;
 var ctx = document.getElementById("chartContainer");
@@ -481,6 +551,7 @@ function monitor_odroid(){
       start_entropy_chart();
 };
 };
+
 var cpu_boolean = 0;
 function jsonGlobal(ws, select){
  console.log("Entro amb linterval");
@@ -499,30 +570,32 @@ function jsonGlobal(ws, select){
     mem_avail = json_message.mem_avail;
     mem_avail = mem_avail.split(" ");
     mem = json_message.mem;
-    temp = json_message.temp
+    temp = json_message.temp;
     temp = temp.split(" ");
-    up_time = json_message.up
+    up_time = json_message.up;
     up_time = up_time.split("-");
-    load = json_message.load
+    load = json_message.load;
     load = load.split(" ");
-    entropy = json_message.entropy
-    network = json_message.net
+    entropy = json_message.entropy;
+    network = json_message.net;
     if(net==1){
-      //start_network_chart();
       network = network.split("_");
       for(var i=1; i<network.length;i++){
           interficies.push(network[i].split(" ")[0].replace(":", "").concat("_recieved"));
 	  interficies.push(network[i].split(" ")[0].replace(":", "").concat("_send"));
 	  net_info.push(network[i].split(" ")[1]);
 	  net_info.push(network[i].split(" ")[2]);
-      }else{
-          net_info_2.push(network[i].split(" ")[1]);
-	  net_info_2.push(network[i].split(" ")[2]);
-      }      
+      }
       console.log(interficies);
       console.log(net_info);
       net=0;
-    }
+      start_network_chart(interficies);
+     }else {
+	for(var i=1; i<network.length;i++){
+          net_info_2.push(network[i].split(" ")[1]);
+	  net_info_2.push(network[i].split(" ")[2]);
+	}
+     }      
   };
 
   ws.onmessage = function(e) {
@@ -546,7 +619,12 @@ function stop(){
      clearInterval(graf_up);
      clearInterval(graf_load);	
      clearInterval(graf_entropy);
+     clearInterval(graf_network);
   }
+
+  interficies = [];
+  net_info = [];
+  net_info_2 = [];
   
   net=1;  
   ws.close();
