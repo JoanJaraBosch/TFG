@@ -36,13 +36,7 @@ chown -R odroid:odroid /home/odroid/.django-monitor/
 cp -rp odroid/ /home/odroid/.django-monitor/
 cp -rp servidor.js /home/odroid/.django-monitor/ 
 cp -rp monitoring.sh /home/odroid/.django-monitor/
-cp -rp network.sh /home/odroid/.django-monitor/
-
-#Creating the directory for the other machines
-for i in $(cat /etc/dnsmasq.d/dnsmasq_hosts.conf); do host=$(echo $i | tr "," " " | cut -d " " -f 2); ssh -o StrictHostKeyChecking=no $host "mkdir -p /home/odroid/.django-monitor"; done
-
-#Copying the scripor all the machines 
-for i in $(cat /etc/dnsmasq.d/dnsmasq_hosts.conf); do host=$(echo $i | tr "," " " | cut -d " " -f 2); scp network.sh  $host:/home/odroid/.django-monitor/json-server.sh; done
+cp -rp json-server.sh /home/odroid/.django-monitor/
 
 #Monitorix instalation and getting keys. Test, monitorix is another way 
 #to monitor our systems.
