@@ -12,7 +12,7 @@ min=$(echo "($(awk '{print $1}' /proc/uptime) %86400) /3600" | bc)
 sec=$(echo "(($(awk '{print $1}' /proc/uptime) %86400)%3600)/60" | bc)
 
 
-for i in /sys/class/net/*; do RX=$(cat $i/statistics/tx_bytes); TX=$(cat $i/statistics/rx_bytes); network=$(echo $(basename $i)": "$RX" "$TX" "$network) ; done
+for i in /sys/class/net/*; do RX=$(cat $i/statistics/tx_bytes); TX=$(cat $i/statistics/rx_bytes); network=$(echo "_"$(basename $i)": "$RX" "$TX" "$network) ; done
 
 
 temp=$(echo "${temp//[+,),C,°]/}")

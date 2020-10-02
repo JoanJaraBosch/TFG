@@ -9,6 +9,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
 <script type="text/javascript">
 var whoami = 1;
+var net = 1;
+var network;
 var timer_json;
 var cpu_usage;
 var mem;
@@ -17,7 +19,9 @@ var temp;
 var up_time;
 var load;
 var entropy;
-var bandwidth;
+var interficies = [];
+var net_info = [];
+var net_info_2 = [];
 
 var graf_cpu;
 var graf_mem;
@@ -26,7 +30,7 @@ var graf_temp;
 var graf_up;
 var graf_load;
 var graf_entropy;
-var graf_bandwidth;
+var graf_network;
 
 var ws;
 var started = 1;
@@ -502,6 +506,23 @@ function jsonGlobal(ws, select){
     load = json_message.load
     load = load.split(" ");
     entropy = json_message.entropy
+    network = json_message.net
+    if(net==1){
+      //start_network_chart();
+      network = network.split("_");
+      for(var i=1; i<network.length;i++){
+          interficies.push(network[i].split(" ")[0].replace(":", "").concat("_recieved"));
+	  interficies.push(network[i].split(" ")[0].replace(":", "").concat("_send"));
+	  net_info.push(network[i].split(" ")[1]);
+	  net_info.push(network[i].split(" ")[2]);
+      }else{
+          net_info_2.push(network[i].split(" ")[1]);
+	  net_info_2.push(network[i].split(" ")[2]);
+      }      
+      console.log(interficies);
+      console.log(net_info);
+      net=0;
+    }
   };
 
   ws.onmessage = function(e) {
@@ -527,6 +548,7 @@ function stop(){
      clearInterval(graf_entropy);
   }
   
+  net=1;  
   ws.close();
   whoami=1;
 };
