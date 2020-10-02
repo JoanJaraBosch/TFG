@@ -42,7 +42,7 @@ cp -rp network.sh /home/odroid/.django-monitor/
 for i in $(cat /etc/dnsmasq.d/dnsmasq_hosts.conf); do host=$(echo $i | tr "," " " | cut -d " " -f 2); ssh -o StrictHostKeyChecking=no $host "mkdir -p /home/odroid/.django-monitor"; done
 
 #Copying the scripor all the machines 
-for i in $(cat /etc/dnsmasq.d/dnsmasq_hosts.conf); do host=$(echo $i | tr "," " " | cut -d " " -f 2); scp network.sh  $host:/home/odroid/.django-monitor/network.sh; done
+for i in $(cat /etc/dnsmasq.d/dnsmasq_hosts.conf); do host=$(echo $i | tr "," " " | cut -d " " -f 2); scp network.sh  $host:/home/odroid/.django-monitor/json-server.sh; done
 
 #Monitorix instalation and getting keys. Test, monitorix is another way 
 #to monitor our systems.
