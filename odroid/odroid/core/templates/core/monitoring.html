@@ -58,7 +58,11 @@ var chartNET = new Chart(ctx_net, {
                 },
                 scales: {
                         xAxes: [{
-                                 scaleLabel: {
+				ticks: {
+					display: true,
+					beginAtZero: true,
+                                },
+				 scaleLabel: {
                                         display: true,
                                         labelString: 'Updates'
                                 }
@@ -86,17 +90,22 @@ var updateChartNet = function (count) {
      	if(chartNET.data.datasets[t].data.length==dataLength){
          	for(var j = 0; j<dataLength-1; j++){
                 	chartNET.data.datasets[t].data[j] = chartNET.data.datasets[t].data[j+1];
-                	chartNET.data.labels[j] = chartNET.data.labels[j+1];
          	}
-
-         	chartNET.data.datasets[t].data[chartNET.data.datasets[t].data.length-1] = parseFloat(net_info_2[t]-net_info[t]);
-		net_info[t]=net_info_2[t];
-        	chartNET.data.labels[chartNET.data.datasets[t].data.length-1] = contador;
-    	 }else{
-         	chartNET.data.datasets[t].data[contador] = parseFloat(net_info_2[t]-net_info[t]);
+         	chartNET.data.datasets[t].data[chartNET.data.datasets[t].data.length-1] = parseFloat(net_info_2[t])-parseFloat(net_info[t]);	
+	}else{
+		chartNET.data.datasets[t].data[contador] = parseFloat(net_info_2[t])-parseFloat(net_info[t]);
         	chartNET.data.labels[contador] = contador;
      	}
+	net_info[t]=net_info_2[t];
      }
+     
+     if(chartNET.data.labels.length==dataLength){
+        for(var j = 0; j<dataLength-1; j++){
+                chartNET.data.labels[j] = chartNET.data.labels[j+1];
+        }
+        chartNET.data.labels[dataLength-1] = contador;
+     }
+
      contador+=1;
      chartNET.update();
 };
@@ -427,7 +436,7 @@ var chartUP = new Chart(ctx_up, {
 });
 
 
-var updateInterval_up = 3000;
+var updateInterval_up = 4000;
 var dataLength_up = 10; // number of dataPoints visible at any point
 
 var updateChart_up = function (count) {
@@ -487,7 +496,7 @@ var chartLoad = new Chart(ctx_load, {
         }
 });
 
-var updateInterval_load = 3000;
+var updateInterval_load = 4000;
 var dataLength_load = 10; // number of dataPoints visible at any point
 
 var updateChart_load = function (count) {
@@ -578,8 +587,8 @@ function jsonGlobal(ws, select){
     load = load.split(" ");
     entropy = json_message.entropy;
     network = json_message.net;
+    network = network.split("_");
     if(net==1){
-      network = network.split("_");
       for(var i=1; i<network.length;i++){
           interficies.push(network[i].split(" ")[0].replace(":", "").concat("_recieved"));
 	  interficies.push(network[i].split(" ")[0].replace(":", "").concat("_send"));
@@ -591,6 +600,7 @@ function jsonGlobal(ws, select){
       net=0;
       start_network_chart(interficies);
      }else {
+	net_info_2 = [];
 	for(var i=1; i<network.length;i++){
           net_info_2.push(network[i].split(" ")[1]);
 	  net_info_2.push(network[i].split(" ")[2]);
