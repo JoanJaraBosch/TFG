@@ -33,4 +33,5 @@ urlpatterns = [
     path('login/',views.user_login,name='login'),
     path('logout/',views.user_logout,name='logout'),
     path('i18n/', include('django.conf.urls.i18n')),
+    path('manteniment', views.manteniment ,name='manteniment'),
 ]

@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}{% trans "Manteniment" %}{% endblock %}
+
+{% block background %}{% load static %}{% static 'core/img/home-bg.jpg' %}{% endblock %}
+
+{% block headers %}
+<script type="text/javascript">
+function getting_ips(){
+ var ips = {{ ips|safe }};
+ var capa = document.getElementById("ips");
+ var paso;
+ console.log("s'executa la funcio");
+ for (paso = 0; paso < ips.length-1; paso++) {
+   console.log("entra al bucle");
+   var option = document.createElement("option");
+   var aux = ips[paso].split(",");
+   option.value = aux[1];
+   option.innerHTML = aux[1];
+   capa.appendChild(option);
+ };
+};
+
+function start_manteniment(text){
+ document.getElementById("terminal").value= text;
+};
+
+window.onload = getting_ips;
+</script>
+<h1>URV-Odroid</h1>
+{% endblock %}
+{% block content %}
+<p align="justify">
+	{% trans "En aquesta secció, pots dedicar-te a mantenir els sistemes odroid sempre i quan no hi hagi problemes amb el ssh. En cas contrari hauras de conectar un hdmi a la placa master odroid cap a un monitor i desde alla arreglar-ho." %}
+</p>
+<select id ="ips" name="select">
+<option value="master">master</option>
+</select>
+<div id="terminal-input">
+	<textarea placeholder=">" id="terminal" class="main-description-text"></textarea>
+	<input id="clickMe" type="button" value="Send Command" onclick="start_manteniment();"/>
+</div>
+{% endblock %}
+
