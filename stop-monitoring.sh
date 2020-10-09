@@ -1,8 +1,8 @@
 #!/bin/bash
-
 #Author: Joan Jara
 #Description: Script to delete and stop and delete all the monitoring.
-
+#Version: 1
+#Date: 10/7/2020
 
 #We need root permissions.
 if [[ $EUID -ne 0 ]]; then

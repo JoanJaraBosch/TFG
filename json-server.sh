@@ -1,4 +1,8 @@
 #!/bin/bash
+#Author: Joan Jara Bosch
+#Description: Script that retunrs a json with the information needed to make the graphics in javascript. We put this script in a general place in order to achieve the json for all the odroid cards.
+#Version: 1
+#Date: 26/9/2020
 
 cpu=$(ps -A -o pcpu | tail -n+2 | paste -sd+ | bc)
 mem=$(free -m | awk '{print $7}' | head -2 | tail -1)

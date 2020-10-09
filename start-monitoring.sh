@@ -1,10 +1,10 @@
 #!/bin/bash
-
 #Author: Joan Jara
 #Description: Script to download, and put the configuration files for our webapp
 # in django in order to monitor the system made of odroid. This script will download
 # and install all we need and will make up the node server too.
-
+#Version: 1
+#Date: 10/7/2020
 
 #We need root permissions.
 if [[ $EUID -ne 0 ]]; then

@@ -1,4 +1,6 @@
+#We need gunicorn because django uses WSGI (a standar). So in order to have a server with django, we need something that can handle the WSGI and this is the purpouse of gunicorn.
 [Unit]
+#We want that the deamon works always when we have network. 
 Description=gunicorn daemon
 Wants=network-online.target
 After=network-online.target
