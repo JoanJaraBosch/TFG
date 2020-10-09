@@ -35,8 +35,13 @@ wsServer.on('request', function (request) {
 	else{
 		//if we want to send commands to make manteniment
 		if(message.utf8Data.includes("manteniment")){
-			var child = procesFill.spawn('bash', [message.utf8Data.substring(11, message.utf8Data.length)])
+			console.log(message.utf8Data);
+			text = message.utf8Data.substring(12, message.utf8Data.length);
+			console.log(text);
+                        text= text.split(" ");
+			var child = procesFill.spawn('bash', ['./maintenance.sh', text]);
 	                child.stdout.on('data', (data) => {
+				console.log(`stdout: ${data}`);
         	                connection.send(data);
                 	});
 		}else{
