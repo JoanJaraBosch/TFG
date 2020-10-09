@@ -25,6 +25,7 @@ wsServer.on('request', function (request) {
    const connection = request.accept(null, request.origin);
    //responds it
    connection.on('message', function(message){
+	//if we want the json for monitoring
 	if(message.utf8Data === "monitor"){
 		var child = procesFill.spawn('bash', ['./monitoring.sh', whoami])
         	child.stdout.on('data', (data) => {
@@ -32,7 +33,16 @@ wsServer.on('request', function (request) {
         	});
 	}
 	else{
-		whoami=message.utf8Data;
+		//if we want to send commands to make manteniment
+		if(message.utf8Data.includes("manteniment")){
+			var child = procesFill.spawn('bash', [message.utf8Data.substring(11, message.utf8Data.length)])
+	                child.stdout.on('data', (data) => {
+        	                connection.send(data);
+                	});
+		}else{
+			//or our first message to tell who we are
+			whoami=message.utf8Data;
+		}
 	}
    });
    //close the connection
