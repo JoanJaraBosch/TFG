@@ -4,11 +4,13 @@
 #Version: 1
 #Date: 9/10/2020
 
-commanda=$1
-commanda=$(echo $commanda | tr "," " ")
+aux=""
 
-echo $commanda
+for val in $@; do
+	aux=$(echo "$aux$val ")
+	echo "lol"
+done
 
-output=$($commanda) 
+$aux
 
 exit 0

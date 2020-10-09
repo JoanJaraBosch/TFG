@@ -38,12 +38,25 @@ wsServer.on('request', function (request) {
 			console.log(message.utf8Data);
 			text = message.utf8Data.substring(12, message.utf8Data.length);
 			console.log(text);
-                        text= text.split(" ");
-			var child = procesFill.spawn('bash', ['./maintenance.sh', text]);
-	                child.stdout.on('data', (data) => {
-				console.log(`stdout: ${data}`);
-        	                connection.send(data);
-                	});
+			text= text.split(" ");
+			try{
+				var child = procesFill.spawn('./maintenance.sh', text);
+				child.stdout.on('data', (data) => {
+					console.log('stdout: '+data.toString());
+        		                connection.send(data);
+                		});
+
+  				child.stderr.on('data', (data) => {
+   					console.log('stderr: ' + data.toString());
+  				});
+
+  				child.on('exit', (code) => {
+    					console.log('child process exited with code ' + code.toString());
+  				});
+			}
+			catch(error){
+				connection.send(" ");
+			}
 		}else{
 			//or our first message to tell who we are
 			whoami=message.utf8Data;
