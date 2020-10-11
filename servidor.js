@@ -41,14 +41,23 @@ wsServer.on('request', function (request) {
 			text= text.split(" ");
 			try{
 				var child = procesFill.spawn('./maintenance.sh', text);
+
 				child.stdout.on('data', (data) => {
 					console.log('stdout: '+data.toString());
-        		                connection.send(data);
+					var myblob = new Blob(['stdout: '+data.toString()], {
+    						type: 'text/plain'
+					});
+        		                connection.send(myblob);
                 		});
 
   				child.stderr.on('data', (data) => {
    					console.log('stderr: ' + data.toString());
-  				});
+  					 var myblob = new Blob(['stderr: '+data.toString()], {
+                                                type: 'text/plain'
+                                        });
+                                        connection.send(myblob);
+
+				});
 
   				child.on('exit', (code) => {
     					console.log('child process exited with code ' + code.toString());

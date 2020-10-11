@@ -8,7 +8,6 @@ aux=""
 
 for val in $@; do
 	aux=$(echo "$aux$val ")
-	echo "lol"
 done
 
 $aux
