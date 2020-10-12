@@ -6,10 +6,15 @@
 
 aux=""
 
-for val in $@; do
+for val in "${@:1:$#-1}"; do
 	aux=$(echo "$aux$val ")
 done
 
-$aux
+if [ "${@: -1}" == "master" ]; then
+	$aux
+else
+	aux=$(echo "ssh -o StrictHostKeyChecking=no ${@: -1} "$aux"")
+	$aux
+fi
 
 exit 0

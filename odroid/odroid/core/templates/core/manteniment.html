@@ -11,7 +11,7 @@ var ws;
 
 function close_connection(){ 
   ws.close();
-  document.getElementById("terminal").disabled = true;
+  document.getElementById("inputterminal").disabled = true;
   document.getElementById("clickMe").disabled = true;
   document.getElementById("clickMe2").style ="visibility:visible;";
   document.getElementById("clickMe3").style = "visibility:hidden;";
@@ -33,15 +33,20 @@ function getting_ips(){
 };
 
 function start_manteniment(){
- message = "manteniment "+document.getElementById("terminal").value;
- console.log("Sending: "+message)
+
+ message = "manteniment "+document.getElementById("inputterminal").value+" "+document.getElementById("ips").value;
+ console.log("Sending: "+message);
+ var li = document.createElement("li");
+ li.appendChild(document.createTextNode("> ".concat(document.getElementById("inputterminal").value)));
+ var ul = document.getElementById("terminal");
+ ul.appendChild(li);
+ document.getElementById("inputterminal").value = ""; 
  ws.send(message);
 };
 
 function manteniment_odroid(){
  var select = document.getElementById("ips").value;
- var ip_private = "{{ IP_PRIVATE }}";
- const reader = new FileReader(); 
+ var ip_private = "{{ IP_PRIVATE }}"; 
  ws = new WebSocket("wss://"+ip_private+":3000");
  console.log(ws);
  ws.onerror = function(evt) {
@@ -51,20 +56,29 @@ function manteniment_odroid(){
  ws.onopen = function() {
       console.log('connected');
       ws.send(select);
-      document.getElementById("terminal").disabled = false;
       document.getElementById("clickMe").disabled = false;
+      document.getElementById("inputterminal").disabled = false;
       document.getElementById("clickMe2").style ="visibility:hidden;";
       document.getElementById("clickMe3").style = "visibility:visible;";
  };
  
  ws.onmessage = function(e) {
     console.log('resposta output: '+e.data);
-    reader.result=e.data;
+    var reader = e.data;
+
+    if(reader.includes("stdout:")){
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode("> ".concat(reader)));
+        var ul = document.getElementById("terminal2");
+        ul.appendChild(li);
+    }else{
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode("> ".concat(reader)));
+        var ul = document.getElementById("terminal3");
+        ul.appendChild(li);
+    };
+
  };  
- 
- reader.onload = function() {
-   console.log(reader.result);
- };
 
 };
 
@@ -76,8 +90,18 @@ window.onload = getting_ips;
   box-sizing: border-box;
 }
 
+ul{
+  list-style: none;
+  max-height:400px;
+  margin:0;
+  overflow:auto;
+  padding:0;
+  text-indent:10px;
+}
+
 .column {
   float: left;
+  border:1px solid black;
   width: 33%;
   padding: 5px;
 }
@@ -103,19 +127,23 @@ window.onload = getting_ips;
 <input id="clickMe2" type="button" value="Connect" onclick="manteniment_odroid();"/>
 <input id="clickMe3" type="button" value="Close" onclick="close_connection();" style="visibility:hidden;"/>
 <div  class="row">
-<div  class="column">
-	<p>INPUT TERMINAL: </p> 
-	<textarea placeholder=">" id="terminal" class="main-description-text" style="height: 500px; width:100%;" disabled=true></textarea>
+<div  class="column"> 
+	<ul id="terminal" class="main-description-text" style="height: 500px; width:100%;">
+		<li>INPUT TERMINAL: </li>
+	</ul>
 </div>
 <div  class="column">	
-	<p>OUTPUT TERMINAL: </p>
-	<textarea placeholder=">" id="terminal2" class="main-description-text" style="height: 500px; width:100%;" disabled=true></textarea>
+	<ul id="terminal2" class="main-description-text" style="height: 500px; width:100%;">
+		<li>OUTPUT TERMINAL: </li>
+	</ul>
 </div>
 <div  class="column">
-	<p>OUTPUT ERROR TERMINAL: </p>
-	<textarea placeholder=">" id="terminal3" class="main-description-text" style="height: 500px; width:100%;" disabled=true></textarea>
+	<ul id="terminal3" class="main-description-text" style="height: 500px; width:100%;">
+		<li>OUTPUT ERROR TERMINAL: </li>
+	</ul>
 </div>
 </div>
+<input type="text" id="inputterminal" style="width:33%;" disabled=true></text>
 <input id="clickMe" type="button" value="Send Command" disabled=true onclick="start_manteniment();"/>
 {% endblock %}
 
