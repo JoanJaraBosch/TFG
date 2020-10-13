@@ -38,22 +38,6 @@ cp -rp servidor.js /home/odroid/.django-monitor/
 cp -rp monitoring.sh /home/odroid/.django-monitor/
 cp -rp json-server.sh /home/odroid/.django-monitor/
 
-#Monitorix instalation and getting keys. Test, monitorix is another way 
-#to monitor our systems.
-if [ -f $descarregues/izzysoft.asc ]; then
-	rm $descarregues/izzysoft.asc
-else
-	wget https://apt.izzysoft.de/izzysoft.asc
-	apt-key add izzysoft.asc
-        if [ $(cat /etc/apt/sources.list | grep "deb \[arch=all\] https://apt.izzysoft.de/ubuntu generic universe" | wc -l) -eq 0 ]; then
-		echo "deb [arch=all] https://apt.izzysoft.de/ubuntu generic universe" | sudo tee -a /etc/apt/sources.list
-	fi
-fi
-apt update -y
-apt-get install monitorix -y
-systemctl enable monitorix
-systemctl start monitorix
-
 #We made a variable to know where we are.
 descarregues=$(pwd)
 
@@ -66,11 +50,12 @@ python3 /home/odroid/.django-monitor/odroid/manage.py collectstatic --noinput
 
 #If this file/link already exist because of previous test, 
 #we gonna delete it. If not we gonna create the hard link.
-if [ -f $descarregues/odroid/ips ]; then
-	rm $descarregues/odroid/ips
-else
-	ln /etc/dnsmasq.d/dnsmasq_hosts.conf $descarregues/odroid/ips
+if [ -f /home/odroid/.django-monitor/odroid/ips ]; then
+	rm /home/odroid/.django-monitor/odroid/ips
 fi
+
+ln -s /etc/dnsmasq.d/dnsmasq_hosts.conf /home/odroid/.django-monitor/odroid/ips
+
 
 #Copy files to their directori to make the deamons.
 cp -p $descarregues/gunicorn.service /etc/systemd/system/gunicorn.service
@@ -106,4 +91,4 @@ npm install pm2
 
 export NODE_PATH=/home/odroid/.django-monitor/node_modules
 
-su odroid -c "./pm2.sh"
+su odroid -c "bash pm2.sh"
