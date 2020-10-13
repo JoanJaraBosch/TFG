@@ -105,3 +105,5 @@ npm install http
 npm install pm2 
 
 export NODE_PATH=/home/odroid/.django-monitor/node_modules
+
+su odroid -c "./pm2.sh"
