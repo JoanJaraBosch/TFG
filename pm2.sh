@@ -4,6 +4,15 @@
 #Version: 1
 #Date: 14/9/2020
 
+
+#Installing npm modules for my project
+cd /home/odroid/.django-monitor
+npm install os -g
+npm install websocket -g
+npm install child_process -g
+npm install http -g
+npm install pm2 -g
+
 pm2 start /home/odroid/.django-monitor/servidor.js
 pm2 startup
 pm2 save
