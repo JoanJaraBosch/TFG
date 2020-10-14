@@ -6,8 +6,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from teachers.models import Teacher
-from students.models import Student
+from teacher.models import Teacher
+from student.models import Student
 import json, os, requests
 
 #Views part of the core App. We can see all the functions to redirect to our pages.
