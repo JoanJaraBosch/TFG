@@ -81,9 +81,8 @@ env PATH=$PATH:/usr/bin /home/odroid/.npm-global/lib/node_modules/pm2/bin/pm2 st
 #Finally the instalation is completed.
 echo "-------------------EXECUTE AS ODROID USER THE FILE PM2.SH------------------------------"
 
-export NODE_PATH=/home/odroid/.django-monitor/node_modules
-
 su odroid -c "bash pm2.sh"
 
 env PATH=$PATH:/usr/bin /home/odroid/.npm-global/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
+export NODE_PATH=/home/odroid/.npm-global/lib/node_modules/
 
