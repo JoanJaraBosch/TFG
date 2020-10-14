@@ -38,6 +38,20 @@ def monitoring(request):
 
 
 @login_required
+def manteniment(request):
+    #pout,perr = subprocess.Popen(['nmap', '192.168.43.63', '-oX', '-'], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    try:
+        file = open(os.path.join(settings.BASE_DIR, "ips"))
+        data = file.read()
+        data = data.split("\n")
+        data = json.dumps(data)
+        context = {"ips": data, "IP_PRIVATE": settings.IP_PRIVATE}
+    except:
+        context = {"ips": "Error: file not found, you need the file ips, with all ips and names from dhcpmasq. Make a simbolyc link.", "IP_PRIVATE": settings.IP_PRIVATE}
+    return render(request, "core/manteniment.html", context)
+
+
+@login_required
 def special(request):
     return HttpResponse("Has iniciat sessió correctament !")
 
