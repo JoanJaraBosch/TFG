@@ -21,57 +21,32 @@
 <p align="justify">
 {% blocktrans %}Sóm un grup format per dos estudiants de la Universitat Rovira i Virgili, actualment cursant lúltim any de la carrera d'Enginyeria Informàtica. A continuació veureu informació sobre nosaltres, els estudiants.{% endblocktrans %}
 </p>
-<div class="row"> 
+{% for student in students %}
+<br></br>
+<div class="row">
     <div class="col-lg-3 col-md-4 offset-lg-1">
-        <img class="img-fluid avatar" src="{% static 'core/img/avatar-1.jpg' %}" alt="">
+        <img class="img-fluid avatar" src="/static/{{student.image}}" alt="">
     </div>
     <div class="col-lg-7 col-md-8">
-        <h2 class="section-heading">Joan Jara</h2>   
-        <p align="justify">{% blocktrans %}Nascut a reus el 18 de març del 1996. Sóc un dels integrants del grup on la meva feina ha estat desenvolupar aquesta pàgina web amb Django per tal de donar informació sobre qui sóm, com fer servir el que hem creat, donar suport a la descàrrega de codi del meu company i poguer monitoritzar les plaques odroid.{% endblocktrans %}</p>
+        <h2 class="section-heading">{{student.name}}</h2>
+        <p align="justify">{% translate student.description %}</p>
     </div>
 </div>
-<br></br>
-<div class="row"> 
-    <div class="col-lg-3 col-md-4 offset-lg-1">
-        <img class="img-fluid avatar" src="{% static 'core/img/avatar-2.jpg' %}" alt="">
-    </div>
-    <div class="col-lg-7 col-md-8">
-        <h2 class="section-heading">David Ferrer</h2>   
-       <p align="justify">{% blocktrans %}Nascut a reus el 20 de setembre del 1993. Sóc un dels integrants del grup on la meva feina ha estat desenvolupar tot el sistema d'automatització i cues per a que les plaques odroid puguin treballar en paral·lel. El material per automatitzar-ho i instal·lar-ho, està a l'apartat de descàrregues de la plana web. Pots clicar al següent enllaç {% endblocktrans%}<a href="{% url 'descarrega' %}">{% trans "enllaç" %}</a>{% blocktrans %} o navegar-hi desde la barra de navegació.{% endblocktrans %}</p>
-    </div>
-</div>
-<br></br>
+{%  endfor %}
+
 <br></br>
 <i><h1>{% trans "Professors" %}</h1></i>
 {% blocktrans %}A continuació, podreu veure informació sobre els professors implicats en el nostre projecte, tot i què el nostre professor principal ha estat en Carles Aliagas ja que ens ha fet de tutor del treball de fi de carrera.{% endblocktrans %}
+{% for teacher in teachers %}
 <br></br>
-<div class="row"> 
+<div class="row">
     <div class="col-lg-3 col-md-4 offset-lg-1">
-        <img class="img-fluid avatar" src="{% static 'core/img/avatar-3.jpg' %}" alt="">
+        <img class="img-fluid avatar" src="/static/{{teacher.image}}" alt="">
     </div>
     <div class="col-lg-7 col-md-8">
-        <h2 class="section-heading">Carles Aliagas</h2>   
-        <p align="justify">{% blocktrans %}Professor de la Universitat Rovira i Virgili desde fa 25 anys, gran coneixedor del paral·lelisme i sistemes linux. Imparteix classes en una gran diversitat d'assignatures de la carrera d'Enginyeria Informàtica.{% endblocktrans %}</p>
+        <h2 class="section-heading">{{teacher.name}}</h2>
+        <p align="justify">{% translate teacher.description %}</p>
     </div>
 </div>
-<br></br>
-<div class="row"> 
-	<div class="col-lg-3 col-md-4 offset-lg-1">
-        <img class="img-fluid avatar" src="{% static 'core/img/avatar-4.jpg' %}" alt="">
-    </div>
-    <div class="col-lg-7 col-md-8">
-        <h2 class="section-heading">Carlos Molina</h2>   
-        <p align="justify">{% blocktrans %}Professor de la Universitat Rovira i Virgili, especialitzat en computadors. Imparteix docència en diverses assignatures de la carrera Enginyeria Informàtica.{% endblocktrans %}</p>
-    </div>
-</div>
-<br></br>
-<div class="row"> 
-   	<div class="col-lg-3 col-md-4 offset-lg-1">
-        <img class="img-fluid avatar" src="{% static 'core/img/avatar-5.jpg' %}" alt="">
-    </div>
-    <div class="col-lg-7 col-md-8">
-        <h2 class="section-heading">Pere Millan</h2>   
-       	<p align="justify">{% blocktrans %}Professor de la Universitat Rovira i Virgili, especialitzat en sistemes linux, android i computadors. Imparteix docència en diverses assignatures de la carrera Enginyeria Informàtica.{% endblocktrans %}</p>
-    </div>
-</div>
+{%  endfor %}
 {% endblock %}
