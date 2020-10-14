@@ -44,18 +44,12 @@ wsServer.on('request', function (request) {
 
 				child.stdout.on('data', (data) => {
 					console.log('stdout: '+data.toString());
-					var myblob = new Blob(['stdout: '+data.toString()], {
-    						type: 'text/plain'
-					});
-        		                connection.send(myblob);
+        		                connection.send("stdout: "+data.toString());
                 		});
 
   				child.stderr.on('data', (data) => {
    					console.log('stderr: ' + data.toString());
-  					 var myblob = new Blob(['stderr: '+data.toString()], {
-                                                type: 'text/plain'
-                                        });
-                                        connection.send(myblob);
+					connection.send("stderr: "+data.toString());
 
 				});
 
