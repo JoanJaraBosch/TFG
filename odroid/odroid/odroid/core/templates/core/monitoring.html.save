@@ -1,0 +1,50 @@
+
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}{% trans "Monitorització" %}{% endblock %}
+
+{% block background %}{% load static %}{% static 'core/img/monitor-bg.jpg' %}{% endblock %}
+{% block headers %}
+<script type="text/javascript">
+function getting_ips(){
+ var ips = {{ ips|safe }};
+ var capa = document.getElementById("ips");
+ var paso;
+ console.log("s'executa la funcio");
+ for (paso = 0; paso < ips.length-1; paso++) {
+   console.log("entra al bucle");
+   var option = document.createElement("option");
+   var aux = ips[paso].split(",");
+   option.value = aux[1];
+   option.innerHTML = aux[1];
+   capa.appendChild(option);
+ };
+};
+
+function monitor_odroid(){
+ var capa = document.getElementById("monitor");
+ var p = document.createElement("p");
+ var select = document.getElementById("ips").value;
+ p.innerHTML = "Comencem a fer la connexió per monitorejar la placa ".concat(select);
+ capa.appendChild(p);
+ var io = require('socket.io-client');
+ mysocket = io.connect(select.concat(":3000"));
+ mysocket.on('connect', function(){
+ mysocket.emit('deviceevent', { param1: "update", param2: "0", param3: "1" });
+};
+window.onload = getting_ips;
+</script>
+<h1>URV-Odroid</h1>
+{% endblock %}
+{% block content %}
+<form>
+<select id ="ips" name="select">
+<option value="master">master</option>
+</select>
+<input id="clickMe" type="button" value="Monitoritzar" onclick="monitor_odroid();"/>
+</form>
+
+<div id="monitor"></div>
+
+{% endblock %}

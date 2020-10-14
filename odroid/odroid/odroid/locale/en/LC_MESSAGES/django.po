@@ -1,0 +1,265 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-20 19:26+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core/templates/core/about.html:6 core/templates/core/about.html:11
+#: core/templates/core/base.html:38
+msgid "Sobre nosaltres"
+msgstr "About us"
+
+#: core/templates/core/about.html:12
+msgid "Equip"
+msgstr "Team"
+
+#: core/templates/core/about.html:18
+msgid "Estudiants"
+msgstr "Students"
+
+#: core/templates/core/about.html:22
+msgid ""
+"Sóm un grup format per dos estudiants de la Universitat Rovira i Virgili, "
+"actualment cursant lúltim any de la carrera d'Enginyeria Informàtica. A "
+"continuació veureu informació sobre nosaltres, els estudiants."
+msgstr ""
+"We are a group of two students from Rovira i Virgili University. Nowadays, "
+"we are doing the last year of our degree, computer engineering. If you want "
+"to know more about us, you can in the following sections: "
+
+#: core/templates/core/about.html:30
+msgid ""
+"Nascut a reus el 18 de març del 1996. Sóc un dels integrants del grup on la "
+"meva feina ha estat desenvolupar aquesta pàgina web amb Django per tal de "
+"donar informació sobre qui sóm, com fer servir el que hem creat, donar "
+"suport a la descàrrega de codi del meu company i poguer monitoritzar les "
+"plaques odroid."
+msgstr ""
+"Born in Reus on March 18, 1996. I am one of the integers of this team on "
+"which my my task have been developing a webapp in Django with the purpouse "
+"of give information abuot who we are, how to use our project, give support "
+"for downloading my partners scripts to use the Odroid cards and provide a "
+"way to monitor the Odroid system."
+
+#: core/templates/core/about.html:40
+msgid ""
+"Nascut a reus el 20 de setembre del 1993. Sóc un dels integrants del grup on "
+"la meva feina ha estat desenvolupar tot el sistema d'automatització i cues "
+"per a que les plaques odroid puguin treballar en paral·lel. El material per "
+"automatitzar-ho i instal·lar-ho, està a l'apartat de descàrregues de la "
+"plana web. Pots clicar al següent enllaç "
+msgstr ""
+"Born in Reus on September 20, 1993. He is one of the integrants of the group "
+"his task was to provide a way to automate the configuration and the scripts "
+"and a way to communicate the Odroid cards among them in order to achieve "
+"parallelism. If you want to test and use the scripts provided by David, you "
+"can go to Downloads in the navbar or you can click the following link: "
+
+#: core/templates/core/about.html:40
+msgid "enllaç"
+msgstr "link"
+
+#: core/templates/core/about.html:40
+msgid " o navegar-hi desde la barra de navegació."
+msgstr "."
+
+#: core/templates/core/about.html:45
+msgid "Professors"
+msgstr "Teachers"
+
+#: core/templates/core/about.html:46
+msgid ""
+"A continuació, podreu veure informació sobre els professors implicats en el "
+"nostre projecte, tot i què el nostre professor principal ha estat en Carles "
+"Aliagas ja que ens ha fet de tutor del treball de fi de carrera."
+msgstr ""
+"In the following section, you can see information about the implicated "
+"teachers in our final bachelor's project. Although, our principal mentor was "
+"Carles Aliagas ."
+
+#: core/templates/core/about.html:54
+msgid ""
+"Professor de la Universitat Rovira i Virgili desde fa 25 anys, gran "
+"coneixedor del paral·lelisme i sistemes linux. Imparteix classes en una gran "
+"diversitat d'assignatures de la carrera d'Enginyeria Informàtica."
+msgstr ""
+"Teacher of Rovira i Virgili University for 25 years. He is a great "
+"professional and knowler of parallelism and Linux Systems. He give class to "
+"a big diversity of subjects in the computer engineering degree."
+
+#: core/templates/core/about.html:64
+msgid ""
+"Professor de la Universitat Rovira i Virgili, especialitzat en computadors. "
+"Imparteix docència en diverses assignatures de la carrera Enginyeria "
+"Informàtica."
+msgstr ""
+"Teacher of Rovira i Virgili University specialized in computers and their "
+"architecure. He give class to a big diversity of subjects in the computer "
+"engineering degree."
+
+#: core/templates/core/about.html:74
+msgid ""
+"Professor de la Universitat Rovira i Virgili, especialitzat en sistemes "
+"linux, android i computadors. Imparteix docència en diverses assignatures de "
+"la carrera Enginyeria Informàtica."
+msgstr ""
+"Teacher of Rovira i Virgili University specialized in Linux systems. android "
+"systems and computers and their architecure. He give class to a big "
+"diversity of subjects in the computer engineering degree."
+
+#: core/templates/core/base.html:29
+msgid "Menú"
+msgstr "Menu"
+
+#: core/templates/core/base.html:35 core/templates/core/home.html:4
+msgid "Portada"
+msgstr "Home"
+
+#: core/templates/core/base.html:41
+msgid "Monitorització"
+msgstr "Monitoring"
+
+#: core/templates/core/base.html:44
+msgid "Manual"
+msgstr "Manual"
+
+#: core/templates/core/base.html:47
+msgid "Descàrregues"
+msgstr "Downloads"
+
+#: core/templates/core/base.html:51 core/templates/core/login.html:4
+#: core/templates/core/login.html:14
+msgid "Iniciar Sessió"
+msgstr "Log in"
+
+#: core/templates/core/base.html:54 core/templates/core/registration.html:4
+msgid "Registrar-se"
+msgstr "Register"
+
+#: core/templates/core/base.html:58
+msgid "Tancar Sessió"
+msgstr "Log out"
+
+#: core/templates/core/base.html:64
+msgid "Idiomes"
+msgstr "Languages"
+
+#: core/templates/core/base.html:115
+msgid "i"
+msgstr "and"
+
+#: core/templates/core/descarrega.html:4
+#, fuzzy
+#| msgid "Descàrregues"
+msgid "Descarrega"
+msgstr "Downloads"
+
+#: core/templates/core/descarrega.html:13
+msgid ""
+"En aquesta plana tens la oportunitat de descarregar els arxius "
+"d'automatització i la mateixa plana web de manera local per executar-la "
+"desde la placa odroid master per tal de fer la monitorització de manera "
+"local i per tant més segura.\n"
+msgstr ""
+"In this page you have the opportunity to download the files "
+"needed in the process of automating and the process of creating the webapp in LAN. "
+"You have to download it in the master Odroid card in order to do it in the correct way"
+".\n"
+
+#: core/templates/core/descarrega.html:16
+#, fuzzy
+#| msgid "Descàrregues"
+msgid "Descarrega d'arxius"
+msgstr "Downloads"
+
+#: core/templates/core/home.html:13
+msgid ""
+"Entra i descobreix el nostre projecte. Un projecte per a fer "
+"paral·lelització de manera fàcil i ràpida amb la opció de monitorització "
+"Online o LAN."
+msgstr ""
+"Come in and discover our project. A project to do parallelism in an easier "
+"and faster way with the option of monitoring your Odroid system via Online "
+"or LAN."
+
+#: core/templates/core/login.html:17
+msgid "Nom d'usuari:"
+msgstr "Username:"
+
+#: core/templates/core/login.html:18
+msgid "Contrasenya:"
+msgstr "Password"
+
+#: core/templates/core/registration.html:15
+#, fuzzy
+#| msgid "Registrar-se"
+msgid "Gràcies per egistrar-se"
+msgstr "Thanks for registering"
+
+#: core/templates/core/registration.html:17
+#, fuzzy
+#| msgid "Registrar-se"
+msgid "Registris a la web"
+msgstr "Register into our web"
+
+#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:7
+msgid "Django: the Web framework for perfectionists with deadlines."
+msgstr ""
+
+#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:346
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:368
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:369
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" rel=\"noopener"
+"\">DEBUG=True</a> is in your settings file and you have not configured any "
+"URLs."
+msgstr ""
+
+#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:384
+msgid "Django Documentation"
+msgstr ""
+
+#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:385
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:396
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:397
+msgid "Get started with Django"
+msgstr ""
+
+#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:408
+msgid "Django Community"
+msgstr ""
+
+#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:409
+msgid "Connect, get help, or contribute"
+msgstr ""

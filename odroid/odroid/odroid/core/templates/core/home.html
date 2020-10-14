@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}{% trans "Portada" %}{% endblock %}
+
+{% block background %}{% load static %}{% static 'core/img/home-bg.jpg' %}{% endblock %}
+
+{% block headers %}
+<h1>URV-Odroid</h1>
+{% endblock %}
+{% block content %}
+<p align="justify">
+	{% trans "Entra i descobreix el nostre projecte. Un projecte per a fer paral·lelització de manera fàcil i ràpida amb la opció de monitorització Online o LAN." %}
+</p>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}Manual{% endblock %}
+
+{% block background %}{% load static %}{% static 'core/img/manual-bg.jpg' %}{% endblock %}
+
+{% block headers %}
+<h1>URV-Odroid</h1>
+{% endblock %}
