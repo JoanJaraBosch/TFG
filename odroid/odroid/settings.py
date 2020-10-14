@@ -42,6 +42,8 @@ s.close()
 INSTALLED_APPS = [
     'core',
     'pages',
+    'teacher',
+    'student',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
