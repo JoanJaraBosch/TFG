@@ -25,6 +25,7 @@ pip3 install gunicorn requests pillow
 #Change permisions and config of npm for odroid user.
 mkdir -p /home/odroid/.npm-global/
 mkdir -p /home/odroid/.django-monitor/
+mkdir -p /home/odroid/.pm2/
 npm config set prefix '/home/odroid/.npm-global'
 echo "export PATH=/home/odroid/.npm-global/bin:$PATH" >> /home/odroid/.profile
 source /home/odroid/.profile
