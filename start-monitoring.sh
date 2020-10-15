@@ -76,13 +76,15 @@ systemctl start gunicorn
 systemctl enable gunicorn
 systemctl enable nginx
 systemctl start nginx 
-#We make the node server up like a deamon.
-chown odroid:odroid /home/odroid/.pm2/rpc.sock /home/odroid/.pm2/pub.sock
-env PATH=$PATH:/usr/bin /home/odroid/.npm-global/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
 
 #Finally the instalation is completed.
 echo "-------------------EXECUTE AS ODROID USER THE FILE PM2.SH------------------------------"
 
 su odroid -c "bash pm2.sh"
 
-env PATH=$PATH:/usr/bin /home/odroid/.django-monitor/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
+#We make the node server up like a deamon.
+chown odroid:odroid /home/odroid/.pm2/rpc.sock /home/odroid/.pm2/pub.sock
+env PATH=$PATH:/usr/bin /home/odroid/.npm-global/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
+
+systemctl restart nginx
+systemctl restart gunicorn
