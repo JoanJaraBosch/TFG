@@ -95,7 +95,9 @@ export NODE_PATH=/home/odroid/.npm-global/lib/node_modules
 pm2 start /home/odroid/.django-monitor/servidor.js
 pm2 startup
 pm2 save
+
 echo "-------------------INSTALATION FINISHED ENJOY-------------------"
+chown -R odroid:odroid /home/odroid/.django-monitor/*
 
 systemctl restart nginx
 systemctl restart gunicorn
