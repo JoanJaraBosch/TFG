@@ -559,10 +559,14 @@ function monitor_odroid(){
    p.innerHTML = "Comencem a fer la connexió per monitorejar la placa.";
    capa.appendChild(p);
  }
+ try{
  var select = document.getElementById("ips").value;
  var ip_private = "{{ IP_PRIVATE }}";
  ws = new WebSocket("wss://"+ip_private+":3000");
  console.log(ws);
+ }catch(error){
+   console.log("falta el dnsmasq, o no estava el fitxer quan tocava, fes el simbolic link a odroid/ips");
+ }
  ws.onerror = function(evt) {
         alert("Hi ha un error amb el servidor node la placa master. Iniceu-lo o reinicieu-lo amb pm2 start/restart servidor.js");
  };

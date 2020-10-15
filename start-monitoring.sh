@@ -98,6 +98,6 @@ pm2 save
 
 echo "-------------------INSTALATION FINISHED ENJOY-------------------"
 chown -R odroid:odroid /home/odroid/.django-monitor/*
-
+chown odroid:odroid /home/odroid/.pm2/rpc.sock /home/odroid/.pm2/pub.sock
 systemctl restart nginx
 systemctl restart gunicorn
