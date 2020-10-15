@@ -7,11 +7,11 @@
 
 #Installing npm modules for my project
 cd /home/odroid/.django-monitor
-npm install os
-npm install websocket
-npm install child_process
-npm install http
-npm install pm2
+npm install os -g 
+npm install websocket -g 
+npm install child_process -g 
+npm install http -g 
+npm install pm2 -g 
 
 export NODE_PATH=/home/odroid/.django-monitor/node_modules/
 
