@@ -1,0 +1,725 @@
+{% extends 'core/base.html' %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block title %}{% trans "Monitorització" %}{% endblock %}
+
+{% block background %}{% load static %}{% static 'core/img/monitor-bg.jpg' %}{% endblock %}
+{% block headers %}
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+<script type="text/javascript">
+var whoami = 1;
+var net = 1;
+
+var chartLoad;
+var chartUP;
+var chartNET;
+var chartCPU;
+var chartEntropy;
+var chartMEM;
+var chartMEMAvail;
+var chartTemp;
+
+var network;
+var timer_json;
+var cpu_usage;
+var mem;
+var mem_avail;
+var temp;
+var up_time;
+var load;
+var entropy;
+var interficies = [];
+var net_info = [];
+var net_info_2 = [];
+
+var graf_cpu;
+var graf_mem;
+var graf_mem_avail;
+var graf_temp;
+var graf_up;
+var graf_load;
+var graf_entropy;
+var graf_network;
+
+var ws;
+var started = 1;
+
+function start_network_chart(noms){
+var contador = 0;
+var ctx_net = document.getElementById("chartContainerBandwidth");
+var init_graf = [];
+
+for(var z=0; z < noms.length; z++){
+	init_graf.push({label: noms[z], data: [],});	
+} 
+
+chartNET = new Chart(ctx_net, {
+        type: "line",
+        data: {
+		labels: [],
+		datasets: init_graf,
+        },
+        options: {
+                responsive: true,
+                title: {
+                        display: true,
+                        text: 'Monitoring Bandwith'
+                },
+                scales: {
+                        xAxes: [{
+				ticks: {
+					display: true,
+					beginAtZero: true,
+                                },
+				 scaleLabel: {
+                                        display: true,
+                                        labelString: 'Updates'
+                                }
+                        }],
+                        yAxes: [{
+                                ticks: {
+                                        display: true,
+                                        beginAtZero: true,
+                                },
+                                 scaleLabel: {
+                                        display: true,
+                                        labelString: 'Bytes'
+                                }
+
+                        }]
+                }
+        }
+});
+
+var updateInterval = 3000;
+var dataLength = 10; // number of dataPoints visible at any point
+
+var updateChartNet = function (count) {
+     for(var t=0; t < chartNET.data.datasets.length; t++){
+     	if(chartNET.data.datasets[t].data.length==dataLength){
+         	for(var j = 0; j<dataLength-1; j++){
+                	chartNET.data.datasets[t].data[j] = chartNET.data.datasets[t].data[j+1];
+         	}
+         	chartNET.data.datasets[t].data[chartNET.data.datasets[t].data.length-1] = parseFloat(net_info_2[t])-parseFloat(net_info[t]);	
+	}else{
+		chartNET.data.datasets[t].data[contador] = parseFloat(net_info_2[t])-parseFloat(net_info[t]);
+        	chartNET.data.labels[contador] = contador;
+     	}
+	net_info[t]=net_info_2[t];
+     }
+     
+     if(chartNET.data.labels.length==dataLength){
+        for(var j = 0; j<dataLength-1; j++){
+                chartNET.data.labels[j] = chartNET.data.labels[j+1];
+        }
+        chartNET.data.labels[dataLength-1] = contador;
+     }
+
+     contador+=1;
+     chartNET.update();
+};
+
+graf_network =setInterval(updateChartNet, updateInterval, dataLength);
+
+};
+
+function start_cpu_chart(){
+var contador = 0;
+var ctx = document.getElementById("chartContainer");
+chartCPU = new Chart(ctx, {
+        type: "line",
+	data: {
+        	labels: [],
+        	datasets: [{
+            		label: 'CPU USAGE',
+            		data: [],
+
+		}],
+	},
+        options: {
+                responsive: true,
+        	title: {
+            		display: true,
+           		text: 'Monitoring CPU'
+        	},
+                scales: {
+ 			xAxes: [{
+               			 scaleLabel: {
+                                        display: true,
+                                        labelString: 'Updates'
+                                }
+            		}],
+                        yAxes: [{
+                                ticks: {
+					display: true,
+                                        beginAtZero: true,
+                                },
+				 scaleLabel: {
+                                        display: true,
+                                        labelString: '% cpu'
+                                }
+
+                        }]
+                }
+        }
+});
+
+var updateInterval = 3000;
+var dataLength = 10; // number of dataPoints visible at any point
+
+var updateChart = function (count) {
+     if(chartCPU.data.datasets[0].data.length==dataLength){
+         for(var j = 0; j<dataLength-1; j++){
+		chartCPU.data.datasets[0].data[j] = chartCPU.data.datasets[0].data[j+1];
+		chartCPU.data.labels[j] = chartCPU.data.labels[j+1];
+	 }
+        
+    	 chartCPU.data.datasets[0].data[chartCPU.data.datasets[0].data.length-1] = parseFloat(cpu_usage);     
+     	 chartCPU.data.labels[chartCPU.data.datasets[0].data.length-1] = contador;
+     }else{
+         chartCPU.data.datasets[0].data[contador] = parseFloat(cpu_usage);
+         chartCPU.data.labels[contador] = contador;
+     }
+     contador+=1;
+     chartCPU.update();
+};
+
+graf_cpu =setInterval(updateChart, updateInterval, dataLength);
+
+};
+
+function start_entropy_chart(){
+var contador = 0;
+var ctx_entropy = document.getElementById("chartContainerEntropy");
+chartEntropy = new Chart(ctx_entropy, {
+        type: "line",
+        data: {
+                labels: [],
+                datasets: [{
+                        label: 'System Entropy',
+                        data: [],
+
+                }],
+        },
+        options: {
+                responsive: true,
+                title: {
+                        display: true,
+                        text: 'Monitoring Entropy'
+                },
+                scales: {
+                        xAxes: [{
+                                 scaleLabel: {
+                                        display: true,
+                                        labelString: 'Updates'
+                                }
+                        }],
+                        yAxes: [{
+                                ticks: {
+                                        display: true,
+                                        beginAtZero: true,
+                                },
+                                 scaleLabel: {
+                                        display: true,
+                                        labelString: 'Random numbers available'
+                                }
+
+                        }]
+                }
+        }
+});
+
+var updateIntervalEntropy = 3000;
+var dataLengthEntropy = 10; // number of dataPoints visible at any point
+
+var updateChartEntropy = function (count) {
+     if(chartEntropy.data.datasets[0].data.length==dataLengthEntropy){
+         for(var j = 0; j<dataLengthEntropy-1; j++){
+                chartEntropy.data.datasets[0].data[j] = chartEntropy.data.datasets[0].data[j+1];
+                chartEntropy.data.labels[j] = chartEntropy.data.labels[j+1];
+         }
+
+         chartEntropy.data.datasets[0].data[chartEntropy.data.datasets[0].data.length-1] = parseFloat(entropy);
+         chartEntropy.data.labels[chartEntropy.data.datasets[0].data.length-1] = contador;
+     }else{
+         chartEntropy.data.datasets[0].data[contador] = parseFloat(entropy);
+         chartEntropy.data.labels[contador] = contador;
+     }
+     contador+=1;
+     chartEntropy.update();
+};
+
+graf_entropy =setInterval(updateChartEntropy, updateIntervalEntropy, dataLengthEntropy);
+
+};
+
+function start_mem_avail_chart(){
+
+var contador_mem = 0;
+var ctx_mem_avail = document.getElementById("chartContainerMemAvail");
+chartMEMAvail = new Chart(ctx_mem_avail, {
+        type: "doughnut",
+        data: {
+                labels: ['Used', 'Available'],
+                datasets: [{
+                        data: [],
+			backgroundColor: [
+                        	'rgba(110, 114, 20, 1)',
+                        	'rgba(118, 183, 172, 1)'
+                	],
+                }],
+        },
+        options: {
+                responsive: true,
+		title: {
+                        display: true,
+                        text: 'Monitoring disk available'
+                },
+        }
+}); 
+
+var updateInterval_mem_avail = 3000;
+var dataLength_mem = 10; // number of dataPoints visible at any point
+
+var updateChart_mem_avail = function (count) {
+     try{
+         chartMEMAvail.data.datasets[0].data[0]= parseFloat(mem_avail[0]);
+         chartMEMAvail.data.datasets[0].data[1]= parseFloat(mem_avail[1]);
+         chartMEMAvail.update();
+     }catch(err){
+   
+     }
+};
+
+graf_mem_avail =setInterval(updateChart_mem_avail, updateInterval_mem_avail, dataLength_mem);
+
+};
+
+function start_temp_chart(){
+
+var contador_temp = 0;
+var ctx_temp = document.getElementById("chartContainerTemp");
+chartTemp = new Chart(ctx_temp, {
+        type: "doughnut",
+        data: {
+                labels: ['Current temperature', 'Critic temperature'],
+                datasets: [{
+                        data: [],
+                        backgroundColor: [
+                               'rgba(240,52, 52, 1)',
+				'rgba(215, 215, 215, 1)'
+                        ],
+                }],
+        },
+        options: {
+                responsive: true,
+                title: {
+                        display: true,
+                        text: 'Monitoring Temperature'
+                },
+        }
+});
+
+var updateInterval_temp = 3000;
+var dataLength_temp = 10; // number of dataPoints visible at any point
+
+var updateChart_temp = function (count) {
+     try{
+         chartTemp.data.datasets[0].data[0]= parseFloat(temp[0]);
+         chartTemp.data.datasets[0].data[1]= parseFloat(temp[1]) -parseFloat(temp[0]);
+         chartTemp.update();
+     }catch(err){
+
+     }
+};
+
+graf_temp =setInterval(updateChart_temp, updateInterval_temp, dataLength_temp);
+
+
+};
+
+function start_mem_chart(){
+var contador_mem = 0;
+var ctx_mem = document.getElementById("chartContainerMem");
+chartMEM = new Chart(ctx_mem, {
+        type: "line",
+        data: {
+                labels: [],
+                datasets: [{
+                        label: 'MEM RAM USAGE',
+                        data: [],
+                }],
+        },
+        options: {
+                responsive: true,
+		title: {
+			display: true,
+			text: 'Monitoring RAM'
+		},
+                scales: {
+			xAxes: [{
+				scaleLabel: {
+                                        display: true,
+	                                labelString: 'Updates'
+                                }
+			}],
+                        yAxes: [{
+                                ticks: {
+                                        beginAtZero: true
+                                },
+				scaleLabel: {
+					display: true,
+					labelString: 'Free MB RAM'
+				}
+                        }]
+                }
+        }
+});
+
+
+var updateInterval_mem = 3000;
+var dataLength_mem = 10; // number of dataPoints visible at any point
+
+var updateChart_mem = function (count) {
+      if(chartMEM.data.labels.length<dataLength_mem){
+         chartMEM.data.datasets[0].data[contador_mem] = parseFloat(mem);
+         chartMEM.data.labels[contador_mem] = contador_mem;
+      }else{
+
+              for(var i =0; i<dataLength_mem-1 ;i++){
+                chartMEM.data.datasets[0].data[i] = chartMEM.data.datasets[0].data[i+1];
+                chartMEM.data.labels[i] = chartMEM.data.labels[i+1];
+              }
+              chartMEM.data.datasets[0].data[chartMEM.data.datasets[0].data.length-1] = parseFloat(mem);
+              chartMEM.data.labels[chartMEM.data.datasets[0].data.length-1]=contador_mem;
+     }
+     contador_mem = contador_mem+1;
+     chartMEM.update();
+};
+
+graf_mem =setInterval(updateChart_mem, updateInterval_mem, dataLength_mem);
+
+};
+
+function start_uptime_chart(){
+var contador_up = 0;
+var ctx_up = document.getElementById("chartContainerUptime");
+chartUP = new Chart(ctx_up, {
+        type: "bar",
+        data: {
+                labels: ['days', 'hours', 'minutes'],
+                datasets: [{
+                        label: 'Up Time',
+                        data: [0, 0, 0, 0, 0],
+			backgroundColor: [
+                               'rgba(240,52, 52, 1)',
+                                'rgba(215, 215, 215, 1)',
+				'rgba(118, 183, 172, 1)',
+                        ],
+                }],
+        },
+        options: {
+                responsive: true,
+                title: {
+                        display: true,
+                        text: 'Monitoring System Uptime'
+                },
+                scales: {
+                        xAxes: [{
+                                scaleLabel: {
+                                        display: true,
+                                        labelString: 'Time Up'
+                                }
+                        }],
+                        yAxes: [{
+                                ticks: {
+                                        beginAtZero: true
+				 },
+                                scaleLabel: {
+					display: true,
+                                        labelString: ''
+                                }
+                        }]
+                }
+        }
+});
+
+
+var updateInterval_up = 4000;
+var dataLength_up = 10; // number of dataPoints visible at any point
+
+var updateChart_up = function (count) {
+      for(var i = 0; i<up_time.length; i++){
+      	chartUP.data.datasets[0].data[i] = parseFloat(up_time[i]);
+      }
+      chartUP.update();
+};
+
+graf_up =setInterval(updateChart_up, updateInterval_up, dataLength_up);
+
+};
+
+function start_load_chart(){
+var contador_load = 0;
+var ctx_load = document.getElementById("chartContainerLoad");
+chartLoad = new Chart(ctx_load, {
+        type: "bar",
+        data: {
+                labels: ['1 min', '5 min', '15 min', '1 min critic', '5 min critic', '15 min critic'],
+                datasets: [{
+                        label: 'System Load',
+                        data: [0, 0, 0, 0, 0, 0,],
+                        backgroundColor: [
+                               'rgba(240,52, 52, 1)',
+                                'rgba(215, 215, 215, 1)',
+                                'rgba(118, 183, 172, 1)',
+                                'rgba(237, 170, 124, 1)',
+			 	'rgba(193, 64, 64, 1)',
+				'rgba(120, 170, 124, 1)'
+                        ],
+                }],
+        },
+        options: {
+                responsive: true,
+                title: {
+                        display: true,
+                        text: 'Monitoring System Load'
+                },
+                scales: {
+                        xAxes: [{
+                                scaleLabel: {
+                                        display: true,
+                                        labelString: 'Load'
+                                }
+                        }],
+                        yAxes: [{
+                                ticks: {
+                                        beginAtZero: true
+                                 },
+                                scaleLabel: {
+                                        display: true,
+                                        labelString: ''
+                                }
+                        }]
+                }
+        }
+});
+
+var updateInterval_load = 4000;
+var dataLength_load = 10; // number of dataPoints visible at any point
+
+var updateChart_load = function (count) {
+      for(var i = 0; i<load.length+load.length-2; i++){
+	if(i<load.length-1){
+        	chartLoad.data.datasets[0].data[i] = parseFloat(load[i]);
+        }
+	else{
+		chartLoad.data.datasets[0].data[i] = parseFloat(load[load.length-1]-load[i-load.length+1]);
+	}
+      }
+      chartLoad.update();
+};
+
+graf_load =setInterval(updateChart_load, updateInterval_load, dataLength_load);
+
+};
+
+function getting_ips(){
+ var ips = {{ ips|safe }};
+ var capa = document.getElementById("ips");
+ var paso;
+ console.log("s'executa la funcio");
+ for (paso = 0; paso < ips.length-1; paso++) {
+   console.log("entra al bucle");
+   var option = document.createElement("option");
+   var aux = ips[paso].split(",");
+   option.value = aux[1];
+   option.innerHTML = aux[1];
+   capa.appendChild(option);
+ };
+};
+
+function monitor_odroid(){
+ if(started == 0){
+   stop();
+   chartLoad.destroy();
+   chartUP.destroy();
+   chartNET.destroy();
+   chartCPU.destroy();
+   chartEntropy.destroy();
+   chartMEM.destroy();
+   chartMEMAvail.destroy();
+   chartTemp.destroy();
+
+ }else{
+   started = 0;
+   var capa = document.getElementById("monitor");
+   var p = document.createElement("p");
+   p.innerHTML = "Comencem a fer la connexió per monitorejar la placa.";
+   capa.appendChild(p);
+ }
+ var select = document.getElementById("ips").value;
+ var ip_private = "{{ IP_PRIVATE }}";
+ ws = new WebSocket("wss://"+ip_private+":3000");
+ console.log(ws);
+ ws.onerror = function(evt) {
+        alert("Hi ha un error amb el servidor node la placa master. Iniceu-lo o reinicieu-lo amb pm2 start/restart servidor.js");
+ };
+
+ ws.onopen = function() {
+      console.log('connected');
+      start(ws, select);
+      start_cpu_chart();
+      start_mem_chart();
+      start_mem_avail_chart();
+      start_temp_chart();
+      start_uptime_chart();
+      start_load_chart();
+      start_entropy_chart();
+};
+};
+
+var cpu_boolean = 0;
+function jsonGlobal(ws, select){
+ console.log("Entro amb linterval");
+ 
+ if(whoami==1){
+  ws.send(select);
+  whoami=0;
+ }
+ ws.send("monitor");
+
+ const reader = new FileReader();
+ reader.onload = function() {
+    console.log(reader.result);
+    json_message = JSON.parse(reader.result);
+    cpu_usage = json_message.cpu;
+    mem_avail = json_message.mem_avail;
+    mem_avail = mem_avail.split(" ");
+    mem = json_message.mem;
+    temp = json_message.temp;
+    temp = temp.split(" ");
+    up_time = json_message.up;
+    up_time = up_time.split("-");
+    load = json_message.load;
+    load = load.split(" ");
+    entropy = json_message.entropy;
+    network = json_message.net;
+    network = network.split("_");
+    if(net==1){
+      for(var i=1; i<network.length;i++){
+          interficies.push(network[i].split(" ")[0].replace(":", "").concat("_recieved"));
+	  interficies.push(network[i].split(" ")[0].replace(":", "").concat("_send"));
+	  net_info.push(network[i].split(" ")[1]);
+	  net_info.push(network[i].split(" ")[2]);
+      }
+      console.log(interficies);
+      console.log(net_info);
+      net=0;
+      start_network_chart(interficies);
+     }else {
+	net_info_2 = [];
+	for(var i=1; i<network.length;i++){
+          net_info_2.push(network[i].split(" ")[1]);
+	  net_info_2.push(network[i].split(" ")[2]);
+	}
+     }      
+  };
+
+  ws.onmessage = function(e) {
+    console.log('json resposta: '+e.data);
+    reader.readAsText(e.data);
+  };
+
+};
+
+function start(ws, select){
+  timer_json = setInterval(jsonGlobal, 3000,ws, select);
+};
+
+function stop(){
+  if(timer_json){
+     clearInterval(timer_json);
+     clearInterval(graf_cpu);
+     clearInterval(graf_mem);
+     clearInterval(graf_mem_avail);
+     clearInterval(graf_temp);
+     clearInterval(graf_up);
+     clearInterval(graf_load);	
+     clearInterval(graf_entropy);
+     clearInterval(graf_network);
+  }
+
+  interficies = [];
+  net_info = [];
+  net_info_2 = [];
+  
+  net=1;  
+  ws.close();
+  whoami=1;
+};
+window.onload = getting_ips;
+</script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+<h1>URV-Odroid</h1>
+{% endblock %}
+{% block content %}
+<form>
+<select id ="ips" name="select">
+<option value="master">master</option>
+</select>
+<input id="clickMe" type="button" value="Monitoritzar" onclick="monitor_odroid();"/>
+</form>
+<input id="stopMe" type="button" value="StopMonitoritzar" onclick="stop();"/>
+<div id="monitor"></div>
+<div class="row">
+<div  class="column">
+<canvas id="chartContainer" style="height: 500px; width:100%;"></canvas>
+</div>
+<div  class="column">
+<canvas id="chartContainerMem" style="height: 500px; width:100%;"></canvas>
+</div>
+</div>
+<div  class="row">
+<div  class="column">
+<canvas id="chartContainerMemAvail" style="height: 500px; width:100%;"></canvas>
+</div>
+<div  class="column">
+<canvas id="chartContainerTemp" style="height: 500px; width:100%;"></canvas>
+</div>
+</div>
+<div  class="row">
+<div  class="column">
+<canvas id="chartContainerUptime" style="height: 500px; width:100%;"></canvas>
+</div>
+<div  class="column">
+<canvas id="chartContainerLoad" style="height: 500px; width:100%;"></canvas>
+</div>
+</div>
+<div  class="row">
+<div  class="column">
+<canvas id="chartContainerEntropy" style="height: 500px; width:100%;"></canvas>
+</div>
+<div  class="column">
+<canvas id="chartContainerBandwidth" style="height: 500px; width:100%;"></canvas>
+</div>
+</div>
+{% endblock %}
