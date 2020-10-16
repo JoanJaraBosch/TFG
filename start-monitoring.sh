@@ -85,7 +85,7 @@ cd /home/odroid/.django-monitor
 
 runuser -l odroid -c 'npm install os -g' 
 runuser -l odroid -c 'npm install utf-8-validate -g'
-runuser .l odroid -c 'npm install bufferutil -g'
+runuser -l odroid -c 'npm install bufferutil -g'
 runuser -l odroid -c 'npm install websocket -g'
 runuser -l odroid -c 'npm install child_process -g' 
 runuser -l odroid -c 'npm install http -g' 
@@ -93,12 +93,12 @@ runuser -l odroid -c 'npm install pm2 -g'
 
 #We make the node server up like a deamon.
 chown -R odroid:odroid /home/odroid/.django-monitor/*
+runuser -l odroid -c 'pm2 list'
 chown -R odroid:odroid /home/odroid/.pm2/*
 runuser -l odroid -c 'rm -rf ~/.pm2'
-env PATH=$PATH:/usr/bin /home/odroid/.npm-global/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
 runuser -l odroid -c 'pm2 start /home/odroid/.django-monitor/servidor.js'
 runuser -l odroid -c 'pm2 startup'
-runuser -l odroid -c 'pm2 save'
+env PATH=$PATH:/usr/bin /home/odroid/.npm-global/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
 
 
 echo "-------------------INSTALATION FINISHED ENJOY-------------------"
