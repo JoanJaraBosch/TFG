@@ -83,16 +83,17 @@ echo "-------------------EXECUTE AS ODROID USER THE FILE PM2.SH-----------------
 
 cd /home/odroid/.django-monitor
 
-runuser -l odroid -c 'npm install os -g' 
-runuser -l odroid -c 'npm install utf-8-validate -g'
-runuser -l odroid -c 'npm install bufferutil -g'
-runuser -l odroid -c 'npm install websocket -g'
-runuser -l odroid -c 'npm install child_process -g' 
-runuser -l odroid -c 'npm install http -g' 
-runuser -l odroid -c 'npm install pm2 -g'
+npm install os -g
+npm install utf-8-validate -g
+npm install bufferutil -g
+npm install websocket -g
+npm install child_process -g
+npm install http -g
+npm install pm2 -g
 
 #We make the node server up like a deamon.
 chown -R odroid:odroid /home/odroid/.django-monitor/*
+chown -R odroid:odroid /home/odroid/.npm-global/*
 runuser -l odroid -c 'pm2 list'
 chown -R odroid:odroid /home/odroid/.pm2/*
 runuser -l odroid -c 'rm -rf ~/.pm2'
