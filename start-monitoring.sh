@@ -28,7 +28,7 @@ mkdir -p /home/odroid/.django-monitor/
 mkdir -p /home/odroid/.pm2/
 npm config set prefix '/home/odroid/.npm-global'
 echo "export NODE_PATH=/home/odroid/.npm-global/lib/node_modules" >> /home/odroid/.profile
-echo "export PATH=/home/odroid/.npm-global/bin:$PATH" >> /home/odroid/.profile
+echo "export PATH=/home/odroid/.npm-global/bin:\$PATH" >> /home/odroid/.profile
 source /home/odroid/.profile
 chown -R odroid:odroid /home/odroid/.pm2/
 chown -R odroid:odroid /home/odroid/.npm-global/
