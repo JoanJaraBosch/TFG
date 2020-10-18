@@ -79,7 +79,7 @@ systemctl enable nginx
 systemctl start nginx 
 
 #Installing node 
-runuser -l odroid -c "./pm2"
+runuser -l odroid -c "./pm2.sh"
 
 #Finally the instalation is completed.
 env PATH=$PATH:/usr/bin /home/odroid/.npm-global/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
