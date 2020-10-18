@@ -14,7 +14,7 @@ entropy=$(cat /proc/sys/kernel/random/entropy_avail)
 days=$(echo "$(awk '{print $1}' /proc/uptime) /86400" | bc)
 min=$(echo "($(awk '{print $1}' /proc/uptime) %86400) /3600" | bc)
 sec=$(echo "(($(awk '{print $1}' /proc/uptime) %86400)%3600)/60" | bc)
-
+write_read=$(iostat | tail -n +7 | head -n -2 | awk '{r+=$6}{w+=$7}END{print w" "r}')
 
 for i in /sys/class/net/*; do RX=$(cat $i/statistics/tx_bytes); TX=$(cat $i/statistics/rx_bytes); network=$(echo "_"$(basename $i)": "$RX" "$TX" "$network) ; done
 
@@ -23,4 +23,4 @@ temp=$(echo "${temp//[+,),C,°]/}")
 load=$(echo $load" "$cpunum)
 up=$(echo $days"-"$min"-"$sec)
 
-echo '{"cpu": "'"$cpu"'", "mem":"'"$mem"'", "mem_avail":"'"$mem_avail"'", "temp": "'"$temp"'", "load": "'"$load"'", "entropy": "'"$entropy"'", "up": "'"$up"'", "net": "'"$network"'"}'
+echo '{"cpu": "'"$cpu"'", "mem":"'"$mem"'", "mem_avail":"'"$mem_avail"'", "temp": "'"$temp"'", "load": "'"$load"'", "entropy": "'"$entropy"'", "up": "'"$up"'", "net": "'"$network"'". "write_read": "'"$write_read"'"}'
