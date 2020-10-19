@@ -37,7 +37,7 @@ def monitoring(request):
         data = json.dumps(data)
         context = {"ips": data, "IP_PRIVATE": settings.IP_PRIVATE}
     except:
-        context = {"ips": "Error: file not found, you need the file ips, with all ips and names from dhcpmasq. Make a simbolyc link.", "IP_PRIVATE": settings.IP_PRIVATE}
+        context = {"ips": "", "IP_PRIVATE": settings.IP_PRIVATE}
     return render(request, "core/monitoring.html", context)
 
 
@@ -51,7 +51,7 @@ def manteniment(request):
         data = json.dumps(data)
         context = {"ips": data, "IP_PRIVATE": settings.IP_PRIVATE}
     except:
-        context = {"ips": "Error: file not found, you need the file ips, with all ips and names from dhcpmasq. Make a simbolyc link.", "IP_PRIVATE": settings.IP_PRIVATE}
+	context = {"ips": "", "IP_PRIVATE": settings.IP_PRIVATE}
     return render(request, "core/manteniment.html", context)
 
 
