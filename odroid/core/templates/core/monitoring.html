@@ -529,15 +529,23 @@ function getting_ips(){
  var ips = {{ ips|safe }};
  var capa = document.getElementById("ips");
  var paso;
- console.log("s'executa la funcio");
- for (paso = 0; paso < ips.length-1; paso++) {
-   console.log("entra al bucle");
+ if(ips.length > 0 ){
    var option = document.createElement("option");
-   var aux = ips[paso].split(",");
-   option.value = aux[1];
-   option.innerHTML = aux[1];
+   option.value = "odroids";
+   option.innerHTML = "odroids";
    capa.appendChild(option);
- };
+
+   for (paso = 0; paso < ips.length-1; paso++) {
+     console.log("entra al bucle");
+     var option = document.createElement("option");
+     var aux = ips[paso].split(",");
+     option.value = aux[1];
+     option.innerHTML = aux[1];
+     capa.appendChild(option);
+   };
+  }else{
+     alert("If you have nodes, your dnsmaq is not working or there was an error. Restart or repair dnsmasq. If you don't have nodes, don't worry, all is working fine.");
+  }
 };
 
 function monitor_odroid(){
