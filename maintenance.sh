@@ -13,8 +13,18 @@ done
 if [ "${@: -1}" == "master" ]; then
 	$aux
 else
-	aux=$(echo "ssh -o StrictHostKeyChecking=no ${@: -1} "$aux"")
-	$aux
+	if [ "${@: -1}" == "odroids" ]; then
+                if [ -f /home/odroid/.django-monitor/odroid/ips ]; then
+                        for odroid in $(cat /home/odroid/.django-monitor/odroid/ips ); do
+                                val=$(echo $odroid | tr "," " " | awk '{print $2}')
+                                aux2=$(ssh -o StrictHostKeyChecking=no $val "$aux")
+                                echo $val"->"$aux2
+                        done
+                fi
+        else
+                aux=$(echo "ssh -o StrictHostKeyChecking=no ${@: -1} "$aux"")
+                $aux
+        fi
 fi
 
 exit 0
