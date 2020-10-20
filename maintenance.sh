@@ -15,6 +15,9 @@ if [ "${@: -1}" == "master" ]; then
 else
 	if [ "${@: -1}" == "odroids" ]; then
                 if [ -f /home/odroid/.django-monitor/odroid/ips ]; then
+			aux2=$($aux)
+			echo "master->"$aux2
+
                         for odroid in $(cat /home/odroid/.django-monitor/odroid/ips ); do
                                 val=$(echo $odroid | tr "," " " | awk '{print $2}')
                                 aux2=$(ssh -o StrictHostKeyChecking=no $val "$aux")
