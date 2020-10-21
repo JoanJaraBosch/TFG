@@ -8,8 +8,14 @@
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
 <script type="text/javascript">
+const reader = new FileReader();
+
+var stopGraf = 0;
 var whoami = 1;
 var net = 1;
+var reset = 0;
+var count = 0;
+var dataLength = 10;
 
 var chartLoad;
 var chartUP;
@@ -19,12 +25,14 @@ var chartEntropy;
 var chartMEM;
 var chartMEMAvail;
 var chartTemp;
+var chartMemIO;
 
 var network;
 var timer_json;
 var cpu_usage;
 var mem;
 var mem_avail;
+var mem_io;
 var temp;
 var up_time;
 var load;
@@ -33,20 +41,78 @@ var interficies = [];
 var net_info = [];
 var net_info_2 = [];
 
-var graf_cpu;
-var graf_mem;
-var graf_mem_avail;
-var graf_temp;
-var graf_up;
-var graf_load;
-var graf_entropy;
-var graf_network;
-
-var ws;
+var ip_private = "{{ IP_PRIVATE }}";
+var ws = new WebSocket("wss://"+ip_private+":3000");
 var started = 1;
 
+function start_memio_chart(){
+   var ctx = document.getElementById("chartContainerMemIO");
+   chartMemIO = new Chart(ctx, {
+        type: "line",
+        data: {
+                labels: [],
+                datasets: [{
+			label: "Input", 
+			data: []
+		},
+		{
+			label: "Output", 
+			data: []
+		}],
+        },
+        options: {
+                responsive: true,
+                title: {
+                        display: true,
+                        text: 'Monitoring Memory I/O'
+                },
+                scales: {
+                        xAxes: [{
+                                ticks: {
+                                        display: true,
+                                        beginAtZero: true,
+                                },
+                                 scaleLabel: {
+                                        display: true,
+                                        labelString: 'Updates'
+                                }
+                        }],
+                        yAxes: [{
+                                ticks: {
+                                        display: true,
+                                        beginAtZero: true,
+                                },
+                                 scaleLabel: {
+                                        display: true,
+                                        labelString: 'Bytes'
+                                }
+
+                        }]
+                }
+        }
+});
+};
+
+function updateChartMemIO(contador, dataLength){
+	if(chartMemIO.data.datasets[0].data.length==dataLength){
+         for(var j = 0; j<dataLength-1; j++){
+                chartMemIO.data.datasets[0].data[j] = chartMemIO.data.datasets[0].data[j+1];
+                chartMemIO.data.datasets[1].data[j] = chartMemIO.data.datasets[1].data[j+1];
+		chartMemIO.data.labels[j] = chartMemIO.data.labels[j+1];
+         }
+
+         chartMemIO.data.datasets[0].data[chartMemIO.data.datasets[0].data.length-1] = parseFloat(mem_io[0]);
+         chartMemIO.data.datasets[1].data[chartMemIO.data.datasets[1].data.length-1] = parseFloat(mem_io[1]);
+         chartMemIO.data.labels[chartMemIO.data.datasets[0].data.length-1] = contador;
+     }else{
+         chartMemIO.data.datasets[0].data[contador] = parseFloat(mem_io[0]);
+         chartMemIO.data.datasets[1].data[contador] = parseFloat(mem_io[1]);
+	 chartMemIO.data.labels[contador] = contador;
+     }
+     chartMemIO.update();
+};
+
 function start_network_chart(noms){
-var contador = 0;
 var ctx_net = document.getElementById("chartContainerBandwidth");
 var init_graf = [];
 
@@ -92,23 +158,22 @@ chartNET = new Chart(ctx_net, {
         }
 });
 
-var updateInterval = 3000;
-var dataLength = 10; // number of dataPoints visible at any point
+};
 
-var updateChartNet = function (count) {
+function updateCartNet(contador, dataLength) {
      for(var t=0; t < chartNET.data.datasets.length; t++){
-     	if(chartNET.data.datasets[t].data.length==dataLength){
-         	for(var j = 0; j<dataLength-1; j++){
-                	chartNET.data.datasets[t].data[j] = chartNET.data.datasets[t].data[j+1];
-         	}
-         	chartNET.data.datasets[t].data[chartNET.data.datasets[t].data.length-1] = parseFloat(net_info_2[t])-parseFloat(net_info[t]);	
-	}else{
-		chartNET.data.datasets[t].data[contador] = parseFloat(net_info_2[t])-parseFloat(net_info[t]);
-        	chartNET.data.labels[contador] = contador;
-     	}
-	net_info[t]=net_info_2[t];
+        if(chartNET.data.datasets[t].data.length==dataLength){
+                for(var j = 0; j<dataLength-1; j++){
+                        chartNET.data.datasets[t].data[j] = chartNET.data.datasets[t].data[j+1];
+                }
+                chartNET.data.datasets[t].data[chartNET.data.datasets[t].data.length-1] = parseFloat(net_info_2[t])-parseFloat(net_info[t]);
+        }else{
+                chartNET.data.datasets[t].data[contador] = parseFloat(net_info_2[t])-parseFloat(net_info[t]);
+                chartNET.data.labels[contador] = contador;
+        }
+        net_info[t]=net_info_2[t];
      }
-     
+
      if(chartNET.data.labels.length==dataLength){
         for(var j = 0; j<dataLength-1; j++){
                 chartNET.data.labels[j] = chartNET.data.labels[j+1];
@@ -116,16 +181,11 @@ var updateChartNet = function (count) {
         chartNET.data.labels[dataLength-1] = contador;
      }
 
-     contador+=1;
      chartNET.update();
 };
 
-graf_network =setInterval(updateChartNet, updateInterval, dataLength);
-
-};
 
 function start_cpu_chart(){
-var contador = 0;
 var ctx = document.getElementById("chartContainer");
 chartCPU = new Chart(ctx, {
         type: "line",
@@ -165,10 +225,9 @@ chartCPU = new Chart(ctx, {
         }
 });
 
-var updateInterval = 3000;
-var dataLength = 10; // number of dataPoints visible at any point
+};
 
-var updateChart = function (count) {
+function updateChartCpu(contador, dataLength) {
      if(chartCPU.data.datasets[0].data.length==dataLength){
          for(var j = 0; j<dataLength-1; j++){
 		chartCPU.data.datasets[0].data[j] = chartCPU.data.datasets[0].data[j+1];
@@ -181,16 +240,10 @@ var updateChart = function (count) {
          chartCPU.data.datasets[0].data[contador] = parseFloat(cpu_usage);
          chartCPU.data.labels[contador] = contador;
      }
-     contador+=1;
      chartCPU.update();
 };
 
-graf_cpu =setInterval(updateChart, updateInterval, dataLength);
-
-};
-
 function start_entropy_chart(){
-var contador = 0;
 var ctx_entropy = document.getElementById("chartContainerEntropy");
 chartEntropy = new Chart(ctx_entropy, {
         type: "line",
@@ -230,10 +283,9 @@ chartEntropy = new Chart(ctx_entropy, {
         }
 });
 
-var updateIntervalEntropy = 3000;
-var dataLengthEntropy = 10; // number of dataPoints visible at any point
+};
 
-var updateChartEntropy = function (count) {
+function updateChartEntropy(contador, dataLengthEntropy) {
      if(chartEntropy.data.datasets[0].data.length==dataLengthEntropy){
          for(var j = 0; j<dataLengthEntropy-1; j++){
                 chartEntropy.data.datasets[0].data[j] = chartEntropy.data.datasets[0].data[j+1];
@@ -246,17 +298,12 @@ var updateChartEntropy = function (count) {
          chartEntropy.data.datasets[0].data[contador] = parseFloat(entropy);
          chartEntropy.data.labels[contador] = contador;
      }
-     contador+=1;
+
      chartEntropy.update();
-};
-
-graf_entropy =setInterval(updateChartEntropy, updateIntervalEntropy, dataLengthEntropy);
-
 };
 
 function start_mem_avail_chart(){
 
-var contador_mem = 0;
 var ctx_mem_avail = document.getElementById("chartContainerMemAvail");
 chartMEMAvail = new Chart(ctx_mem_avail, {
         type: "doughnut",
@@ -279,10 +326,9 @@ chartMEMAvail = new Chart(ctx_mem_avail, {
         }
 }); 
 
-var updateInterval_mem_avail = 3000;
-var dataLength_mem = 10; // number of dataPoints visible at any point
+};
 
-var updateChart_mem_avail = function (count) {
+function updateChartDisk() {
      try{
          chartMEMAvail.data.datasets[0].data[0]= parseFloat(mem_avail[0]);
          chartMEMAvail.data.datasets[0].data[1]= parseFloat(mem_avail[1]);
@@ -292,13 +338,8 @@ var updateChart_mem_avail = function (count) {
      }
 };
 
-graf_mem_avail =setInterval(updateChart_mem_avail, updateInterval_mem_avail, dataLength_mem);
-
-};
 
 function start_temp_chart(){
-
-var contador_temp = 0;
 var ctx_temp = document.getElementById("chartContainerTemp");
 chartTemp = new Chart(ctx_temp, {
         type: "doughnut",
@@ -320,11 +361,9 @@ chartTemp = new Chart(ctx_temp, {
                 },
         }
 });
+};
 
-var updateInterval_temp = 3000;
-var dataLength_temp = 10; // number of dataPoints visible at any point
-
-var updateChart_temp = function (count) {
+function updateChartTemp() {
      try{
          chartTemp.data.datasets[0].data[0]= parseFloat(temp[0]);
          chartTemp.data.datasets[0].data[1]= parseFloat(temp[1]) -parseFloat(temp[0]);
@@ -332,11 +371,6 @@ var updateChart_temp = function (count) {
      }catch(err){
 
      }
-};
-
-graf_temp =setInterval(updateChart_temp, updateInterval_temp, dataLength_temp);
-
-
 };
 
 function start_mem_chart(){
@@ -377,11 +411,9 @@ chartMEM = new Chart(ctx_mem, {
         }
 });
 
+};
 
-var updateInterval_mem = 3000;
-var dataLength_mem = 10; // number of dataPoints visible at any point
-
-var updateChart_mem = function (count) {
+function updateChartRam(contador_mem ,dataLength_mem) {
       if(chartMEM.data.labels.length<dataLength_mem){
          chartMEM.data.datasets[0].data[contador_mem] = parseFloat(mem);
          chartMEM.data.labels[contador_mem] = contador_mem;
@@ -394,16 +426,10 @@ var updateChart_mem = function (count) {
               chartMEM.data.datasets[0].data[chartMEM.data.datasets[0].data.length-1] = parseFloat(mem);
               chartMEM.data.labels[chartMEM.data.datasets[0].data.length-1]=contador_mem;
      }
-     contador_mem = contador_mem+1;
      chartMEM.update();
 };
 
-graf_mem =setInterval(updateChart_mem, updateInterval_mem, dataLength_mem);
-
-};
-
 function start_uptime_chart(){
-var contador_up = 0;
 var ctx_up = document.getElementById("chartContainerUptime");
 chartUP = new Chart(ctx_up, {
         type: "bar",
@@ -445,23 +471,16 @@ chartUP = new Chart(ctx_up, {
         }
 });
 
+};
 
-var updateInterval_up = 4000;
-var dataLength_up = 10; // number of dataPoints visible at any point
-
-var updateChart_up = function (count) {
+function updateChartUp() {
       for(var i = 0; i<up_time.length; i++){
       	chartUP.data.datasets[0].data[i] = parseFloat(up_time[i]);
       }
       chartUP.update();
 };
 
-graf_up =setInterval(updateChart_up, updateInterval_up, dataLength_up);
-
-};
-
 function start_load_chart(){
-var contador_load = 0;
 var ctx_load = document.getElementById("chartContainerLoad");
 chartLoad = new Chart(ctx_load, {
         type: "bar",
@@ -506,10 +525,9 @@ chartLoad = new Chart(ctx_load, {
         }
 });
 
-var updateInterval_load = 4000;
-var dataLength_load = 10; // number of dataPoints visible at any point
+};
 
-var updateChart_load = function (count) {
+function updateChartLoad() {
       for(var i = 0; i<load.length+load.length-2; i++){
 	if(i<load.length-1){
         	chartLoad.data.datasets[0].data[i] = parseFloat(load[i]);
@@ -521,31 +539,19 @@ var updateChart_load = function (count) {
       chartLoad.update();
 };
 
-graf_load =setInterval(updateChart_load, updateInterval_load, dataLength_load);
-
-};
-
 function getting_ips(){
  var ips = {{ ips|safe }};
  var capa = document.getElementById("ips");
  var paso;
- if(ips.length > 0 ){
+ console.log("s'executa la funcio");
+ for (paso = 0; paso < ips.length-1; paso++) {
+   console.log("entra al bucle");
    var option = document.createElement("option");
-   option.value = "odroids";
-   option.innerHTML = "odroids";
+   var aux = ips[paso].split(",");
+   option.value = aux[1];
+   option.innerHTML = aux[1];
    capa.appendChild(option);
-
-   for (paso = 0; paso < ips.length-1; paso++) {
-     console.log("entra al bucle");
-     var option = document.createElement("option");
-     var aux = ips[paso].split(",");
-     option.value = aux[1];
-     option.innerHTML = aux[1];
-     capa.appendChild(option);
-   };
-  }else{
-     alert("If you have nodes, your dnsmaq is not working or there was an error. Restart or repair dnsmasq. If you don't have nodes, don't worry, all is working fine.");
-  }
+ };
 };
 
 function monitor_odroid(){
@@ -559,7 +565,7 @@ function monitor_odroid(){
    chartMEM.destroy();
    chartMEMAvail.destroy();
    chartTemp.destroy();
-
+   chartMemIO.destroy(); 
  }else{
    started = 0;
    var capa = document.getElementById("monitor");
@@ -567,10 +573,9 @@ function monitor_odroid(){
    p.innerHTML = "Comencem a fer la connexió per monitorejar la placa.";
    capa.appendChild(p);
  }
+
  try{
  var select = document.getElementById("ips").value;
- var ip_private = "{{ IP_PRIVATE }}";
- ws = new WebSocket("wss://"+ip_private+":3000");
  console.log(ws);
  }catch(error){
    console.log("falta el dnsmasq, o no estava el fitxer quan tocava, fes el simbolic link a odroid/ips");
@@ -579,30 +584,15 @@ function monitor_odroid(){
         alert("Hi ha un error amb el servidor node la placa master. Iniceu-lo o reinicieu-lo amb pm2 start/restart servidor.js");
  };
 
- ws.onopen = function() {
-      console.log('connected');
-      start(ws, select);
-      start_cpu_chart();
-      start_mem_chart();
-      start_mem_avail_chart();
-      start_temp_chart();
-      start_uptime_chart();
-      start_load_chart();
-      start_entropy_chart();
-};
+ start(select);
 };
 
 var cpu_boolean = 0;
-function jsonGlobal(ws, select){
+
+function jsonGLobal(){
  console.log("Entro amb linterval");
- 
- if(whoami==1){
-  ws.send(select);
-  whoami=0;
- }
  ws.send("monitor");
 
- const reader = new FileReader();
  reader.onload = function() {
     console.log(reader.result);
     json_message = JSON.parse(reader.result);
@@ -617,6 +607,8 @@ function jsonGlobal(ws, select){
     load = json_message.load;
     load = load.split(" ");
     entropy = json_message.entropy;
+    mem_io = json_message.write_read
+    mem_io = mem_io.split(" ");
     network = json_message.net;
     network = network.split("_");
     if(net==1){
@@ -639,30 +631,74 @@ function jsonGlobal(ws, select){
      }      
   };
 
-  ws.onmessage = function(e) {
-    console.log('json resposta: '+e.data);
-    reader.readAsText(e.data);
-  };
-
+  updateChartRam(count, dataLength);
+  updateChartUp();
+  updateChartLoad();
+  updateChartEntropy(count, dataLength);
+  updateCartNet(count, dataLength);
+  updateChartCpu(count, dataLength); 
+  updateChartTemp();
+  updateChartDisk();
+  updateChartMemIO(count, dataLength);
+  count = count +1;
 };
 
-function start(ws, select){
-  timer_json = setInterval(jsonGlobal, 3000,ws, select);
+ws.onopen = function() {
+      console.log('connected');
+      start_cpu_chart();
+      start_mem_chart();
+      start_mem_avail_chart();
+      start_temp_chart();
+      start_uptime_chart();
+      start_load_chart();
+      start_entropy_chart();
+      start_memio_chart();
+};
+
+function pause(){
+	stopGraf=1;
+};
+
+function continueGraf(){
+	stopGraf=0;
+        ws.send("monitor");
+};
+
+ws.onmessage = function(e) {
+   if(stopGraf==0){
+   	console.log('json resposta: '+e.data);
+   	reader.readAsText(e.data);
+   	jsonGLobal();
+   }
+};
+
+
+function start(select){
+  if( reset == 1 ){
+    console.log("Faig reseteig");
+    ws = new WebSocket("wss://"+ip_private+":3000");
+
+    ws.onopen = function() {
+      console.log('connected');
+      start_cpu_chart();
+      start_mem_chart();
+      start_mem_avail_chart();
+      start_temp_chart();
+      start_uptime_chart();
+      start_load_chart();
+      start_entropy_chart();
+      start_memio_chart();
+      ws.send(select);
+      ws.send("monitor");
+    };
+  }else{
+  	reset = 1
+  	ws.send(select);
+  	ws.send("monitor");
+  }
 };
 
 function stop(){
-  if(timer_json){
-     clearInterval(timer_json);
-     clearInterval(graf_cpu);
-     clearInterval(graf_mem);
-     clearInterval(graf_mem_avail);
-     clearInterval(graf_temp);
-     clearInterval(graf_up);
-     clearInterval(graf_load);	
-     clearInterval(graf_entropy);
-     clearInterval(graf_network);
-  }
-
   interficies = [];
   net_info = [];
   net_info_2 = [];
@@ -700,6 +736,8 @@ window.onload = getting_ips;
 </select>
 <input id="clickMe" type="button" value="Monitoritzar" onclick="monitor_odroid();"/>
 </form>
+<input id="continueMe" type="button" value="ContinueMonitoritzar" onclick="continueGraf();"/>
+<input id="pauseMe" type="button" value="PauseMonitoritzar" onclick="pause();"/>
 <input id="stopMe" type="button" value="StopMonitoritzar" onclick="stop();"/>
 <div id="monitor"></div>
 <div class="row">
@@ -734,4 +772,11 @@ window.onload = getting_ips;
 <canvas id="chartContainerBandwidth" style="height: 500px; width:100%;"></canvas>
 </div>
 </div>
+</div>
+<div  class="row">
+<div  class="column">
+<canvas id="chartContainerMemIO" style="height: 500px; width:100%;"></canvas>
+</div>
+</div>
+
 {% endblock %}
