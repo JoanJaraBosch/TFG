@@ -84,7 +84,7 @@ function start_memio_chart(){
                                 },
                                  scaleLabel: {
                                         display: true,
-                                        labelString: 'Bytes'
+                                        labelString: 'kB_read/kB_write'
                                 }
 
                         }]
@@ -192,6 +192,18 @@ chartCPU = new Chart(ctx, {
 	data: {
         	labels: [],
         	datasets: [{
+   			backgroundColor: [
+ 				'rgba(35,31,32,1)',
+				'rgba(35,31,32,1)',
+				'rgba(35,31,32,1)',
+				'rgba(35,31,32,1)',
+				'rgba(35,31,32,1)',
+				'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+			],
             		label: 'CPU USAGE',
             		data: [],
 
@@ -250,6 +262,19 @@ chartEntropy = new Chart(ctx_entropy, {
         data: {
                 labels: [],
                 datasets: [{
+			backgroundColor: [
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                        ],
+
                         label: 'System Entropy',
                         data: [],
 
@@ -381,6 +406,18 @@ chartMEM = new Chart(ctx_mem, {
         data: {
                 labels: [],
                 datasets: [{
+			backgroundColor: [
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                                'rgba(35,31,32,1)',
+                        ],
                         label: 'MEM RAM USAGE',
                         data: [],
                 }],
@@ -538,6 +575,7 @@ function updateChartLoad() {
       }
       chartLoad.update();
 };
+
 
 function getting_ips(){
  var ips = {{ ips|safe }};
