@@ -9,7 +9,7 @@
 <h1>URV-Odroid</h1>
 {% endblock %}
 {% block content %}
-<h2>Descripció</h2>
+<h2>{% trans "Descripció" %}</h2>
 <p align="justify">
 {% blocktrans %}
 En aquesta secció de la plana web, tens la opció per a descarregar el nostre projecte un altre cop en cas de no recordar l'enllaç o en cas de perdre algún arxiu 
@@ -18,17 +18,17 @@ la plana web local  que et permet monitoritzar i mantenir les plaques odroid. A 
 {% endblocktrans %}
 </br></br>
 </p>
-<h2>Automatització</h2>
+<h2>{% trans "Automatització" %}</h2>
 <p align="justify">
 {% blocktrans %}
 En aquest subapartat, trobaràs l'enllaç que et permetrà descarregar els arxius d'automatització per tal de crear el sistema de cues Slurm per a la comunicació de les plaques, el tallafocs per 
 la seguretat, la assignació de ips per a totes les plaques i molt més. A continuació teniu l'enllaç de descàrrega.
 {% endblocktrans %}
 </br>
-<a href="https://github.com/davidf2/odroid-cluster/archive/master.zip">Descàrrega per la automatització</a>
+<a href="https://github.com/davidf2/odroid-cluster/archive/master.zip">{% trans "Descàrrega per la automatització" %}</a>
 </br></br>
 </p>
-<h2>Mnitorització i manteniment</h2>
+<h2>{% trans "Monitorització i manteniment" %}</h2>
 <p align="justify">
 {% blocktrans %}
 En aquest subapartat, pots decarregar la plana web local per al manteniment i monitorització de les plaques odroid. Aquesta plana et permetrà veure els estats essencials de les plauqes com pot ser
@@ -36,10 +36,10 @@ la entropia, la calor, el usage de les cpus i altres. A més a més, proporciona
 outputs (stout i stderr) on podràs executar petites comandes. A continuació teniu l'enllaç de descàrrega.
 {% endblocktrans %}
 </br>
-<a href="https://github.com/JoanJaraBosch/TFG/archive/master.zip">Descàrrega pel manteniment i monitorització</a>
+<a href="https://github.com/JoanJaraBosch/TFG/archive/master.zip">{% trans "Descàrrega pel manteniment i monitorització" %}</a>
 </br></br>
 </p>
-<h2>Manual</h2>
+<h2>{% trans "Manual" %}</h2>
 <p align="justify">
 {% blocktrans %}
 En aquest últim subapartat, tindreu la oportunitat de descarregar el manual en pdf per tal de saber com executar el nostre projecte i per tal de saber com fer-lo servir. En cas de no voler 
@@ -47,7 +47,7 @@ descarregar el manual, no cal que patiu ja que en la barra de navegació de la p
 descàrrega.
 {% endblocktrans %}
 </br>
-<a href="https://drive.google.com/uc?export=download&id=1uE4jGrXDRF8DGDEpexx5h7Hm2OuDEtaA">Descàrrega del manual</a>
+<a href="https://drive.google.com/uc?export=download&id=1uE4jGrXDRF8DGDEpexx5h7Hm2OuDEtaA">{% trans "Descàrrega del manual" %}</a>
 </br></br>
 </p>
 {% endblock %}
