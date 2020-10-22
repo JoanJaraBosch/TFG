@@ -8,3 +8,79 @@
 {% block headers %}
 <h1>URV-Odroid</h1>
 {% endblock %}
+{% block content %}
+<h2>{% trans "Introducció" %}</h2>
+<p align="justify">
+{% blocktrans %}
+Aquest manual té el propòsit de permetre a l'usuari instal·lar de manera
+automatitzada un sistema de cues anomenat Slurm el qual permetrà que es
+pugui paral·lelitzar de manera adequada i eficient.
+A més a més, també automatitzarà la instal·lació de l'aplicació web per tal de
+monitorar i mantenir el nostre sistema.
+{% endblocktrans %}
+</p>
+<h2>{% trans "Material" %}</h2>
+<ul>
+<li>{% trans "Plaques Odroid" %}</li>
+<li>{% trans "Swicth" %}</li>
+<li>{% trans "Cables Ethernet (tants com plaques + 1 per el router)" %}</li>
+<li>{% trans "Un router amb connexió a Internet" %}</li>
+<li>{% trans "Adaptador de USB a Ethernet" %}</li>
+<li>{% trans "Ratolí (opcional)" %}</li>
+<li>{% trans "Tecla (opcional)" %}</li>
+<li>{% trans "HDMI (opcional)" %}</li>
+<li>{% trans "Pantalla amb connexió HDMI (opcional)" %}</li>
+</ul>
+<h2>{% trans "Instal·lació" %}</h2>
+<ul>
+<li>{% trans "Montar el sistema" %}</li>
+<p align="justify">
+{% blocktrans %}
+Primer de tot necessitaràs un lloc on posar les teves plaques Odroid de manera
+que el cada cable Ethernet anirà a un port del Swicth i al port Ethernet de les
+plaques. Després hauràs de connectar l'adaptador USB Etehrnet i el cable
+Ethernet d'aquest USB al router. De manera opcional podràs posar el HDMI, el
+ratolí i el teclat a la placa màster per tal de configurar-la amb l'ajuda d'una
+pantalla. En cas de no vulgueu posar el material opcional, haureu d'anar a la
+configuració del router per saber la IP de la placa màster de manera LAN i
+connectar-se per SSH de la següent manera:
+ssh odroid@ip
+On haurà de posar de contrasenya Odroid. Ara ja està llest per passar a
+l'apartat de descàrregues.
+{% endblocktrans %}
+</p>
+<li>{% trans "Descàrrega, descompressió i instal·lació d’arxius" %}</li>
+<ul>
+<li>{% trans "Un cop dintre a la terminal de la nostra placa màster, aneu al directori Documents amb la següent comanda:" %}</li>
+cd Documents/
+<li>{% trans "Un cop dintre el directori, heu de descarregar els arxius per a la automatització. Haureu d’executar la següent comanda:" %}</li>
+curl -LO https://github.com/davidf2/odroid-cluster/archive/master.zip
+<li>{% trans "Ara haureu de descomprimir el fitxer master.zip amb la següent comanda:" %}</li>
+unzip master.zip
+<li>{% trans "Un cop descomprimit, aneu dintre el directori que heu descomprimit amb la comanda següent:" %}</li>
+cd odroid-cluster-master/
+<li>{% trans "Fnalment, executeu el script com a sudo de la següent manera:" %}</li>
+sudo ./init_master.sh
+</ul>
+<li>{% trans "Aplicació web" %}</li>
+<p align="justify">
+{% blocktrans %}
+Per a poder veure la plana web, només cal que aneu a un navegador d’un
+ordinador que estigui a la mateixa LAN que la placa màster i posseu
+https://ipOdroid.
+On ipOdroid serà la ip de la LAN Odroid. Seguidament haura d’acceptar els
+permisos ja que hem generat un certificat autosignat per tal d’establir una
+conexió segura en el nostre servidor. Ara hauria de poder veure la aplicació
+web. En cas de que estigui utilitzant Firefox, haurà d’anar també a la següent
+plana web: https://ipOdroid:3000 per tal d’acceptar els certificats per el
+servidor node encarregat d’enviar les dades a l’aplicació web.
+Finalment, necessitarà entrar amb usuari i contrasenya odroid odroid per a
+poder monitoritzar i mantenir les plaques. Per a usar la placa amb més d’un
+usuari, haurà d’anar a https://ipOdroid/admin on estarà a la plana
+d’administrador per a poguer crear els usuaris necessaris encarregats de
+monitoritzar les plaques.
+{% endblocktrans %}
+</p>
+</ul>
+</p>
+{% endblock %}
