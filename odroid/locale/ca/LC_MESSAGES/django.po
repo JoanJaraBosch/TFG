@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-20 19:26+0200\n"
+"POT-Creation-Date: 2020-10-22 11:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,19 +19,21 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: core/templates/core/about.html:6 core/templates/core/about.html:11
-#: core/templates/core/base.html:38
+#: core/templates/core/base.html:38 odroid/core/templates/core/about.html:6
+#: odroid/core/templates/core/about.html:11
+#: odroid/core/templates/core/base.html:38
 msgid "Sobre nosaltres"
 msgstr "Sobre nosaltres"
 
-#: core/templates/core/about.html:12
+#: core/templates/core/about.html:12 odroid/core/templates/core/about.html:12
 msgid "Equip"
 msgstr "Equip"
 
-#: core/templates/core/about.html:18
+#: core/templates/core/about.html:16 odroid/core/templates/core/about.html:18
 msgid "Estudiants"
 msgstr "Estudiants"
 
-#: core/templates/core/about.html:22
+#: core/templates/core/about.html:18 odroid/core/templates/core/about.html:22
 msgid ""
 "Sóm un grup format per dos estudiants de la Universitat Rovira i Virgili, "
 "actualment cursant lúltim any de la carrera d'Enginyeria Informàtica. A "
@@ -41,47 +43,11 @@ msgstr ""
 "actualment cursant lúltim any de la carrera d'Enginyeria Informàtica. A "
 "continuació veureu informació sobre nosaltres, els estudiants."
 
-#: core/templates/core/about.html:30
-msgid ""
-"Nascut a reus el 18 de març del 1996. Sóc un dels integrants del grup on la "
-"meva feina ha estat desenvolupar aquesta pàgina web amb Django per tal de "
-"donar informació sobre qui sóm, com fer servir el que hem creat, donar "
-"suport a la descàrrega de codi del meu company i poguer monitoritzar les "
-"plaques odroid."
-msgstr ""
-"Nascut a reus el 18 de març del 1996. Sóc un dels integrants del grup on la "
-"meva feina ha estat desenvolupar aquesta pàgina web amb Django per tal de "
-"donar informació sobre qui sóm, com fer servir el que hem creat, donar "
-"suport a la descàrrega de codi del meu company i poguer monitoritzar les "
-"plaques odroid."
-
-#: core/templates/core/about.html:40
-msgid ""
-"Nascut a reus el 20 de setembre del 1993. Sóc un dels integrants del grup on "
-"la meva feina ha estat desenvolupar tot el sistema d'automatització i cues "
-"per a que les plaques odroid puguin treballar en paral·lel. El material per "
-"automatitzar-ho i instal·lar-ho, està a l'apartat de descàrregues de la "
-"plana web. Pots clicar al següent enllaç "
-msgstr ""
-"Nascut a reus el 20 de setembre del 1993. Sóc un dels integrants del grup on "
-"la meva feina ha estat desenvolupar tot el sistema d'automatització i cues "
-"per a que les plaques odroid puguin treballar en paral·lel. El material per "
-"automatitzar-ho i instal·lar-ho, està a l'apartat de descàrregues de la "
-"plana web. Pots clicar al següent enllaç "
-
-#: core/templates/core/about.html:40
-msgid "enllaç"
-msgstr "enllaç"
-
-#: core/templates/core/about.html:40
-msgid " o navegar-hi desde la barra de navegació."
-msgstr " o navegar-hi desde la barra de navegació."
-
-#: core/templates/core/about.html:45
+#: core/templates/core/about.html:34 odroid/core/templates/core/about.html:38
 msgid "Professors"
 msgstr "Professors"
 
-#: core/templates/core/about.html:46
+#: core/templates/core/about.html:35 odroid/core/templates/core/about.html:39
 msgid ""
 "A continuació, podreu veure informació sobre els professors implicats en el "
 "nostre projecte, tot i què el nostre professor principal ha estat en Carles "
@@ -91,167 +57,440 @@ msgstr ""
 "nostre projecte, tot i què el nostre professor principal ha estat en Carles "
 "Aliagas ja que ens ha fet de tutor del treball de fi de carrera."
 
-#: core/templates/core/about.html:54
-msgid ""
-"Professor de la Universitat Rovira i Virgili desde fa 25 anys, gran "
-"coneixedor del paral·lelisme i sistemes linux. Imparteix classes en una gran "
-"diversitat d'assignatures de la carrera d'Enginyeria Informàtica."
-msgstr ""
-"Professor de la Universitat Rovira i Virgili desde fa 25 anys, gran "
-"coneixedor del paral·lelisme i sistemes linux. Imparteix classes en una gran "
-"diversitat d'assignatures de la carrera d'Enginyeria Informàtica."
-
-#: core/templates/core/about.html:64
-msgid ""
-"Professor de la Universitat Rovira i Virgili, especialitzat en computadors. "
-"Imparteix docència en diverses assignatures de la carrera Enginyeria "
-"Informàtica."
-msgstr ""
-"Professor de la Universitat Rovira i Virgili, especialitzat en computadors. "
-"Imparteix docència en diverses assignatures de la carrera Enginyeria "
-"Informàtica."
-
-#: core/templates/core/about.html:74
-msgid ""
-"Professor de la Universitat Rovira i Virgili, especialitzat en sistemes "
-"linux, android i computadors. Imparteix docència en diverses assignatures de "
-"la carrera Enginyeria Informàtica."
-msgstr ""
-"Professor de la Universitat Rovira i Virgili, especialitzat en sistemes "
-"linux, android i computadors. Imparteix docència en diverses assignatures de "
-"la carrera Enginyeria Informàtica."
-
-#: core/templates/core/base.html:29
+#: core/templates/core/base.html:29 odroid/core/templates/core/base.html:29
 msgid "Menú"
 msgstr "Menú"
 
 #: core/templates/core/base.html:35 core/templates/core/home.html:4
+#: odroid/core/templates/core/base.html:35
+#: odroid/core/templates/core/home.html:4
+#: odroid/pages/templates/pages/pages.html:4
+#: odroid/teachers/templates/teachers/teachers.html:4
+#: pages/templates/pages/pages.html:4
 msgid "Portada"
 msgstr "Portada"
 
-#: core/templates/core/base.html:41
+#: core/templates/core/base.html:41 core/templates/core/monitoring.html:4
+#: odroid/core/templates/core/base.html:41
+#: odroid/core/templates/core/monitoring.html:4
 msgid "Monitorització"
 msgstr "Monitorització"
 
-#: core/templates/core/base.html:44
+#: core/templates/core/base.html:44 core/templates/core/manteniment.html:4
+#: odroid/core/templates/core/base.html:44
+#: odroid/core/templates/core/manteniment.html:4
+msgid "Manteniment"
+msgstr "Manteniment"
+
+#: core/templates/core/base.html:47 core/templates/core/descarrega.html:42
+#: odroid/core/templates/core/base.html:47
 msgid "Manual"
 msgstr "Manual"
 
-#: core/templates/core/base.html:47
+#: core/templates/core/base.html:50 core/templates/core/descarrega.html:4
+#: odroid/core/templates/core/base.html:50
+#: odroid/core/templates/core/descarrega.html:4
 msgid "Descàrregues"
 msgstr "Descàrregues"
 
-#: core/templates/core/base.html:51 core/templates/core/login.html:4
-#: core/templates/core/login.html:14
+#: core/templates/core/base.html:54 core/templates/core/login.html:4
+#: core/templates/core/login.html:14 odroid/core/templates/core/base.html:54
+#: odroid/core/templates/core/login.html:4
+#: odroid/core/templates/core/login.html:14
 msgid "Iniciar Sessió"
 msgstr "Iniciar Sessió"
 
-#: core/templates/core/base.html:54 core/templates/core/registration.html:4
-msgid "Registrar-se"
-msgstr "Registrar-se"
-
-#: core/templates/core/base.html:58
+#: core/templates/core/base.html:58 odroid/core/templates/core/base.html:58
 msgid "Tancar Sessió"
 msgstr "Tancar Sessió"
 
-#: core/templates/core/base.html:64
+#: core/templates/core/base.html:64 odroid/core/templates/core/base.html:64
 msgid "Idiomes"
 msgstr "Idiomes"
 
-#: core/templates/core/base.html:115
+#: core/templates/core/base.html:120 odroid/core/templates/core/base.html:120
 msgid "i"
 msgstr "i"
 
-#: core/templates/core/descarrega.html:4
-msgid "Descarrega"
-msgstr "Descarrega"
+#: core/templates/core/descarrega.html:12
+msgid "Descripció"
+msgstr "Descripció"
 
-#: core/templates/core/descarrega.html:13
+#: core/templates/core/descarrega.html:14
+#: odroid/core/templates/core/descarrega.html:14
 msgid ""
-"En aquesta plana tens la oportunitat de descarregar els arxius "
-"d'automatització i la mateixa plana web de manera local per executar-la "
-"desde la placa odroid master per tal de fer la monitorització de manera "
-"local i per tant més segura.\n"
+"\n"
+"En aquesta secció de la plana web, tens la opció per a descarregar el nostre "
+"projecte un altre cop en cas de no recordar l'enllaç o en cas de perdre "
+"algún arxiu \n"
+"necessari per el funcionament correcte de les plaques. Pots descarregar els "
+"arxius d'automatització fets pel David Ferrer i tens la oportunitat de "
+"descarregar \n"
+"la plana web local  que et permet monitoritzar i mantenir les plaques "
+"odroid. A més a més et donem l'enllaç de descàrrega del manual per si no "
+"vols seguir el manual de la plana web i el vols en pdf.\n"
 msgstr ""
-"En aquesta plana tens la oportunitat de descarregar els arxius "
-"d'automatització i la mateixa plana web de manera local per executar-la "
-"desde la placa odroid master per tal de fer la monitorització de manera "
-"local i per tant més segura.\n"
+"\n"
+"En aquesta secció de la plana web, tens la opció per a descarregar el nostre "
+"projecte un altre cop en cas de no recordar l'enllaç o en cas de perdre "
+"algún arxiu \n"
+"necessari per el funcionament correcte de les plaques. Pots descarregar els "
+"arxius d'automatització fets pel David Ferrer i tens la oportunitat de "
+"descarregar \n"
+"la plana web local  que et permet monitoritzar i mantenir les plaques "
+"odroid. A més a més et donem l'enllaç de descàrrega del manual per si no "
+"vols seguir el manual de la plana web i el vols en pdf.\n"
 
-#: core/templates/core/descarrega.html:16
-msgid "Descarrega d'arxius"
-msgstr "Descarrega d'arxius"
+#: core/templates/core/descarrega.html:21
+msgid "Automatització"
+msgstr "Automatització"
 
-#: core/templates/core/home.html:13
+#: core/templates/core/descarrega.html:23
+#: odroid/core/templates/core/descarrega.html:23
+msgid ""
+"\n"
+"En aquest subapartat, trobaràs l'enllaç que et permetrà descarregar els "
+"arxius d'automatització per tal de crear el sistema de cues Slurm per a la "
+"comunicació de les plaques, el tallafocs per \n"
+"la seguretat, la assignació de ips per a totes les plaques i molt més. A "
+"continuació teniu l'enllaç de descàrrega.\n"
+msgstr ""
+"\n"
+"En aquest subapartat, trobaràs l'enllaç que et permetrà descarregar els "
+"arxius d'automatització per tal de crear el sistema de cues Slurm per a la "
+"comunicació de les plaques, el tallafocs per \n"
+"la seguretat, la assignació de ips per a totes les plaques i molt més. A "
+"continuació teniu l'enllaç de descàrrega.\n"
+
+#: core/templates/core/descarrega.html:28
+msgid "Descàrrega per la automatització"
+msgstr "Descàrrega per la automatització"
+
+#: core/templates/core/descarrega.html:31
+msgid "Monitorització i manteniment"
+msgstr "Monitorització i manteniment"
+
+#: core/templates/core/descarrega.html:33
+#: odroid/core/templates/core/descarrega.html:33
+msgid ""
+"\n"
+"En aquest subapartat, pots decarregar la plana web local per al manteniment "
+"i monitorització de les plaques odroid. Aquesta plana et permetrà veure els "
+"estats essencials de les plauqes com pot ser\n"
+"la entropia, la calor, el usage de les cpus i altres. A més a més, "
+"proporciona un apartat de manteniment on disposaràs de 3 petites terminals "
+"on 1 serà per el input, i les altres pels \n"
+"outputs (stout i stderr) on podràs executar petites comandes. A continuació "
+"teniu l'enllaç de descàrrega.\n"
+msgstr ""
+"\n"
+"En aquest subapartat, pots decarregar la plana web local per al manteniment "
+"i monitorització de les plaques odroid. Aquesta plana et permetrà veure els "
+"estats essencials de les plauqes com pot ser\n"
+"la entropia, la calor, el usage de les cpus i altres. A més a més, "
+"proporciona un apartat de manteniment on disposaràs de 3 petites terminals "
+"on 1 serà per el input, i les altres pels \n"
+"outputs (stout i stderr) on podràs executar petites comandes. A continuació "
+"teniu l'enllaç de descàrrega.\n"
+
+#: core/templates/core/descarrega.html:39
+msgid "Descàrrega pel manteniment i monitorització"
+msgstr "Descàrrega pel manteniment i monitorització"
+
+#: core/templates/core/descarrega.html:44
+#: odroid/core/templates/core/descarrega.html:44
+msgid ""
+"\n"
+"En aquest últim subapartat, tindreu la oportunitat de descarregar el manual "
+"en pdf per tal de saber com executar el nostre projecte i per tal de saber "
+"com fer-lo servir. En cas de no voler \n"
+"descarregar el manual, no cal que patiu ja que en la barra de navegació de "
+"la plana local, hi ha l'apartat manual on podràs veure el manual sense "
+"tindre'l que baixar. A continuació teniu l'enllaç de \n"
+"descàrrega.\n"
+msgstr ""
+"\n"
+"En aquest últim subapartat, tindreu la oportunitat de descarregar el manual "
+"en pdf per tal de saber com executar el nostre projecte i per tal de saber "
+"com fer-lo servir. En cas de no voler \n"
+"descarregar el manual, no cal que patiu ja que en la barra de navegació de "
+"la plana local, hi ha l'apartat manual on podràs veure el manual sense "
+"tindre'l que baixar. A continuació teniu l'enllaç de \n"
+"descàrrega.\n"
+
+#: core/templates/core/descarrega.html:50
+msgid "Descàrrega del manual"
+msgstr "Descàrrega del manual"
+
+#: core/templates/core/home.html:13 odroid/core/templates/core/home.html:13
 msgid ""
 "Entra i descobreix el nostre projecte. Un projecte per a fer "
-"paral·lelització de manera fàcil i ràpida amb la opció de monitorització "
-"Online o LAN."
+"paral·lelització de manera fàcil i ràpida amb la opció de monitorització i "
+"manteniment LAN."
 msgstr ""
 "Entra i descobreix el nostre projecte. Un projecte per a fer "
-"paral·lelització de manera fàcil i ràpida amb la opció de monitorització "
-"Online o LAN."
+"paral·lelització de manera fàcil i ràpida amb la opció de monitorització i "
+"manteniment LAN."
 
-#: core/templates/core/login.html:17
+#: core/templates/core/home.html:14 odroid/core/templates/core/home.html:14
+msgid ""
+"Si no saps de que es tracta la paral·lelització, no et preocupis perquè "
+"nosaltres t'ho expliquem. La paral·lelització tracta de repartir la feina "
+"entre una mateixa màquina"
+msgstr ""
+"Si no saps de que es tracta la paral·lelització, no et preocupis perquè "
+"nosaltres t'ho expliquem. La paral·lelització tracta de repartir la feina "
+"entre una mateixa màquina"
+
+#: core/templates/core/home.html:15 odroid/core/templates/core/home.html:15
+msgid ""
+"i els seus cores o entre diverses màquines. El nostre projecte tratca la "
+"paral·lelització entre diverses màquines i de manera fàcil ja que només "
+"necessitaras plaques odroid, un "
+msgstr ""
+"i els seus cores o entre diverses màquines. El nostre projecte tratca la "
+"paral·lelització entre diverses màquines i de manera fàcil ja que només "
+"necessitaras plaques odroid, un "
+
+#: core/templates/core/home.html:16 odroid/core/templates/core/home.html:16
+msgid ""
+"switch i el teu router. Pots saber d'ordinadors o no, ja que nosaltres "
+"estarem a la seva disposició i també li oferirem un manual per tal de que la "
+"instal·lació sigui fàcil."
+msgstr ""
+"switch i el teu router. Pots saber d'ordinadors o no, ja que nosaltres "
+"estarem a la seva disposició i també li oferirem un manual per tal de que la "
+"instal·lació sigui fàcil."
+
+#: core/templates/core/home.html:17 odroid/core/templates/core/home.html:17
+msgid ""
+"A més a més, nosaltres busquem i tenim l'objectiu de que el nostre projecte "
+"ajudi a gent en l'ambit de la educació."
+msgstr ""
+"A més a més, nosaltres busquem i tenim l'objectiu de que el nostre projecte "
+"ajudi a gent en l'ambit de la educació."
+
+#: core/templates/core/home.html:19 odroid/core/templates/core/home.html:19
+msgid ""
+"A continuació disposa d'un enllaç per a visitar la pàgina de les plaques/"
+"ordinadors que utilitzem."
+msgstr ""
+"A continuació disposa d'un enllaç per a visitar la pàgina de les plaques/"
+"ordinadors que utilitzem."
+
+#: core/templates/core/home.html:20 core/templates/core/manual.html:24
+msgid "Plaques Odroid"
+msgstr "Plaques Odroid"
+
+#: core/templates/core/login.html:17 odroid/core/templates/core/login.html:17
 msgid "Nom d'usuari:"
 msgstr "Nom d'usuari:"
 
-#: core/templates/core/login.html:18
+#: core/templates/core/login.html:18 odroid/core/templates/core/login.html:18
 msgid "Contrasenya:"
 msgstr "Contrasenya:"
 
-#: core/templates/core/registration.html:15
-msgid "Gràcies per egistrar-se"
-msgstr "Gràcies per egistrar-se"
-
-#: core/templates/core/registration.html:17
-msgid "Registris a la web"
-msgstr "Registris a la web"
-
-#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:7
-msgid "Django: the Web framework for perfectionists with deadlines."
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:346
-#, python-format
+#: core/templates/core/manteniment.html:129
+#: odroid/core/templates/core/manteniment.html:121
 msgid ""
-"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
-"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+"En aquesta secció, pots dedicar-te a mantenir els sistemes odroid sempre i "
+"quan no hi hagi problemes amb el ssh. En cas contrari hauras de conectar un "
+"hdmi a la placa master odroid cap a un monitor i desde alla arreglar-ho."
 msgstr ""
+"En aquesta secció, pots dedicar-te a mantenir els sistemes odroid sempre i "
+"quan no hi hagi problemes amb el ssh. En cas contrari hauras de conectar un "
+"hdmi a la placa master odroid cap a un monitor i desde alla arreglar-ho."
 
-#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:368
-msgid "The install worked successfully! Congratulations!"
-msgstr ""
-
-#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:369
-#, python-format
+#: core/templates/core/manteniment.html:130
+#: odroid/core/templates/core/manteniment.html:122
 msgid ""
-"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
-"%(version)s/ref/settings/#debug\" target=\"_blank\" rel=\"noopener"
-"\">DEBUG=True</a> is in your settings file and you have not configured any "
-"URLs."
+"Per a usar la terminal primer has de conectar-te a traves del boto connect. "
+"A partir d'aqui, només podràs utilitzar comandes que no redirigeixin el "
+"output cap a fitxer. Es a dir, no podras fer un echo 'hola' > file."
 msgstr ""
+"Per a usar la terminal primer has de conectar-te a traves del boto connect. "
+"A partir d'aqui, només podràs utilitzar comandes que no redirigeixin el "
+"output cap a fitxer. Es a dir, no podras fer un echo 'hola' > file."
 
-#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:384
-msgid "Django Documentation"
-msgstr ""
+#: core/templates/core/manual.html:12
+msgid "Introducció"
+msgstr "Introducció"
 
-#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:385
-msgid "Topics, references, &amp; how-to’s"
+#: core/templates/core/manual.html:14
+msgid ""
+"\n"
+"Aquest manual té el propòsit de permetre a l'usuari instal·lar de manera\n"
+"automatitzada un sistema de cues anomenat Slurm el qual permetrà que es\n"
+"pugui paral·lelitzar de manera adequada i eficient.\n"
+"A més a més, també automatitzarà la instal·lació de l'aplicació web per tal "
+"de\n"
+"monitorar i mantenir el nostre sistema.\n"
 msgstr ""
+"\n"
+"Aquest manual té el propòsit de permetre a l'usuari instal·lar de manera\n"
+"automatitzada un sistema de cues anomenat Slurm el qual permetrà que es\n"
+"pugui paral·lelitzar de manera adequada i eficient.\n"
+"A més a més, també automatitzarà la instal·lació de l'aplicació web per tal "
+"de\n"
+"monitorar i mantenir el nostre sistema.\n"
 
-#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:396
-msgid "Tutorial: A Polling App"
-msgstr ""
+#: core/templates/core/manual.html:22
+msgid "Material"
+msgstr "Material"
 
-#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:397
-msgid "Get started with Django"
-msgstr ""
+#: core/templates/core/manual.html:25
+msgid "Swicth"
+msgstr "Switch"
 
-#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:408
-msgid "Django Community"
-msgstr ""
+#: core/templates/core/manual.html:26
+msgid "Cables Ethernet (tants com plaques + 1 per el router)"
+msgstr "Cables Ethernet (tants com plaques + 1 per el router)"
 
-#: odroidenv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:409
-msgid "Connect, get help, or contribute"
+#: core/templates/core/manual.html:27
+msgid "Un router amb connexió a Internet"
+msgstr "Un router amb connexió a Internet"
+
+#: core/templates/core/manual.html:28
+msgid "Adaptador de USB a Ethernet"
+msgstr "Adaptador de USB a Ethernet"
+
+#: core/templates/core/manual.html:29
+msgid "Ratolí (opcional)"
+msgstr "Ratolí (opcional)"
+
+#: core/templates/core/manual.html:30
+msgid "Tecla (opcional)"
+msgstr "Tecla (opcional)"
+
+#: core/templates/core/manual.html:31
+msgid "HDMI (opcional)"
+msgstr "HDMI (opcional)"
+
+#: core/templates/core/manual.html:32
+msgid "Pantalla amb connexió HDMI (opcional)"
+msgstr "Pantalla amb connexió HDMI (opcional)"
+
+#: core/templates/core/manual.html:34
+msgid "Instal·lació"
+msgstr "Instal·lació"
+
+#: core/templates/core/manual.html:36
+msgid "Montar el sistema"
+msgstr "Montar el sistema"
+
+#: core/templates/core/manual.html:38
+msgid ""
+"\n"
+"Primer de tot necessitaràs un lloc on posar les teves plaques Odroid de "
+"manera\n"
+"que el cada cable Ethernet anirà a un port del Swicth i al port Ethernet de "
+"les\n"
+"plaques. Després hauràs de connectar l'adaptador USB Etehrnet i el cable\n"
+"Ethernet d'aquest USB al router. De manera opcional podràs posar el HDMI, "
+"el\n"
+"ratolí i el teclat a la placa màster per tal de configurar-la amb l'ajuda "
+"d'una\n"
+"pantalla. En cas de no vulgueu posar el material opcional, haureu d'anar a "
+"la\n"
+"configuració del router per saber la IP de la placa màster de manera LAN i\n"
+"connectar-se per SSH de la següent manera:\n"
+"ssh odroid@ip\n"
+"On haurà de posar de contrasenya Odroid. Ara ja està llest per passar a\n"
+"l'apartat de descàrregues.\n"
 msgstr ""
+"\n"
+"Primer de tot necessitaràs un lloc on posar les teves plaques Odroid de "
+"manera\n"
+"que el cada cable Ethernet anirà a un port del Swicth i al port Ethernet de "
+"les\n"
+"plaques. Després hauràs de connectar l'adaptador USB Etehrnet i el cable\n"
+"Ethernet d'aquest USB al router. De manera opcional podràs posar el HDMI, "
+"el\n"
+"ratolí i el teclat a la placa màster per tal de configurar-la amb l'ajuda "
+"d'una\n"
+"pantalla. En cas de no vulgueu posar el material opcional, haureu d'anar a "
+"la\n"
+"configuració del router per saber la IP de la placa màster de manera LAN i\n"
+"connectar-se per SSH de la següent manera:\n"
+"ssh odroid@ip\n"
+"On haurà de posar de contrasenya Odroid. Ara ja està llest per passar a\n"
+"l'apartat de descàrregues.\n"
+
+#: core/templates/core/manual.html:52
+msgid "Descàrrega, descompressió i instal·lació d’arxius"
+msgstr "Descàrrega, descompressió i instal·lació d’arxius"
+
+#: core/templates/core/manual.html:54
+msgid ""
+"Un cop dintre a la terminal de la nostra placa màster, aneu al directori "
+"Documents amb la següent comanda:"
+msgstr ""
+"Un cop dintre a la terminal de la nostra placa màster, aneu al directori "
+"Documents amb la següent comanda:"
+
+#: core/templates/core/manual.html:56
+msgid ""
+"Un cop dintre el directori, heu de descarregar els arxius per a la "
+"automatització. Haureu d’executar la següent comanda:"
+msgstr ""
+"Un cop dintre el directori, heu de descarregar els arxius per a la "
+"automatització. Haureu d’executar la següent comanda:"
+
+#: core/templates/core/manual.html:58
+msgid "Ara haureu de descomprimir el fitxer master.zip amb la següent comanda:"
+msgstr "Ara haureu de descomprimir el fitxer master.zip amb la següent comanda:"
+
+#: core/templates/core/manual.html:60
+msgid ""
+"Un cop descomprimit, aneu dintre el directori que heu descomprimit amb la "
+"comanda següent:"
+msgstr ""
+"Un cop descomprimit, aneu dintre el directori que heu descomprimit amb la "
+"comanda següent:"
+
+#: core/templates/core/manual.html:62
+msgid "Fnalment, executeu el script com a sudo de la següent manera:"
+msgstr "Fnalment, executeu el script com a sudo de la següent manera:"
+
+#: core/templates/core/manual.html:65
+msgid "Aplicació web"
+msgstr "Aplicació web"
+
+#: core/templates/core/manual.html:67
+msgid ""
+"\n"
+"Per a poder veure la plana web, només cal que aneu a un navegador d’un\n"
+"ordinador que estigui a la mateixa LAN que la placa màster i posseu\n"
+"https://ipOdroid.\n"
+"On ipOdroid serà la ip de la LAN Odroid. Seguidament haura d’acceptar els\n"
+"permisos ja que hem generat un certificat autosignat per tal d’establir una\n"
+"conexió segura en el nostre servidor. Ara hauria de poder veure la "
+"aplicació\n"
+"web. En cas de que estigui utilitzant Firefox, haurà d’anar també a la "
+"següent\n"
+"plana web: https://ipOdroid:3000 per tal d’acceptar els certificats per el\n"
+"servidor node encarregat d’enviar les dades a l’aplicació web.\n"
+"Finalment, necessitarà entrar amb usuari i contrasenya odroid odroid per a\n"
+"poder monitoritzar i mantenir les plaques. Per a usar la placa amb més d’un\n"
+"usuari, haurà d’anar a https://ipOdroid/admin on estarà a la plana\n"
+"d’administrador per a poguer crear els usuaris necessaris encarregats de\n"
+"monitoritzar les plaques.\n"
+msgstr ""
+"\n"
+"Per a poder veure la plana web, només cal que aneu a un navegador d’un\n"
+"ordinador que estigui a la mateixa LAN que la placa màster i posseu\n"
+"https://ipOdroid.\n"
+"On ipOdroid serà la ip de la LAN Odroid. Seguidament haura d’acceptar els\n"
+"permisos ja que hem generat un certificat autosignat per tal d’establir una\n"
+"conexió segura en el nostre servidor. Ara hauria de poder veure la "
+"aplicació\n"
+"web. En cas de que estigui utilitzant Firefox, haurà d’anar també a la "
+"següent\n"
+"plana web: https://ipOdroid:3000 per tal d’acceptar els certificats per el\n"
+"servidor node encarregat d’enviar les dades a l’aplicació web.\n"
+"Finalment, necessitarà entrar amb usuari i contrasenya odroid odroid per a\n"
+"poder monitoritzar i mantenir les plaques. Per a usar la placa amb més d’un\n"
+"usuari, haurà d’anar a https://ipOdroid/admin on estarà a la plana\n"
+"d’administrador per a poguer crear els usuaris necessaris encarregats de\n"
+"monitoritzar les plaques.\n"
+
