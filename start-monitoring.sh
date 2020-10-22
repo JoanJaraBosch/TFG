@@ -20,7 +20,7 @@ pip3 install --upgrade setuptools
 pip3 install virtualenv wheel
 pip3 install --upgrade django
 pip3 install gunicorn requests pillow 
-
+pip3 install django-modeltranslation
 #Change permisions and config of npm for odroid user.
 mkdir -p /home/odroid/.npm-global/
 mkdir -p /home/odroid/.django-monitor/
