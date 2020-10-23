@@ -26,8 +26,8 @@ wsServer.on('request', function (request) {
    //responds it
    connection.on('message', function(message){
 	//if we want the json for monitoring
-	if(message.utf8Data === "monitor"){
-		var child = procesFill.spawn('bash', ['./monitoring.sh', whoami])
+	if(message.utf8Data.includes("monitor-")){
+		var child = procesFill.spawn('bash', ['./monitoring.sh', whoami, message.utf8Data.split("-")[1]])
         	child.stdout.on('data', (data) => {
                 	connection.send(data);
         	});
