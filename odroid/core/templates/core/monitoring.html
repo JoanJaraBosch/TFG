@@ -7,7 +7,123 @@
 {% block headers %}
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
-<script type="text/javascript">
+<style>
+
+h3 {
+  text-align: center;
+}
+
+/* graf 2 por barba */
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/*slider */
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+</style>
+<h1>URV-Odroid</h1>
+{% endblock %}
+{% block content %}
+<form>
+<select id ="ips" name="select">
+<option value="master">master</option>
+</select>
+<input id="clickMe" type="button" value="Monitoritzar" onclick="monitor_odroid();"/>
+</form>
+<input id="continueMe" type="button" value="ContinueMonitoritzar" onclick="continueGraf();"/>
+<input id="pauseMe" type="button" value="PauseMonitoritzar" onclick="pause();"/>
+<input id="stopMe" type="button" value="StopMonitoritzar" onclick="stop();"/>
+<div class="slidecontainer">
+  <p>{%trans "Nombre de punts pels grafics lineals:" %}<span id="value-contador-output"></span></p>
+  <input id="value-contador" type="range" min="10" max="100" value="10">
+</div>
+<div class="slidecontainer">
+  <p>{%trans "Delay en segons per la obtenció de dades:" %}<span id="value-temps-output"></span></p>
+  <input id="value-temps" type="range" min="1" max="60" value="2">
+</div>
+</br></br>
+<h3 aling="justify" id="uptime">Uptime: ---</h3>
+<div id="monitor"></div>
+<div class="row">
+<div  class="column">
+<canvas id="chartContainer" style="height: 500px; width:100%;"></canvas>
+</div>
+<div  class="column">
+<canvas id="chartContainerMem" style="height: 500px; width:100%;"></canvas>
+</div>
+</div>
+<div  class="row">
+<div  class="column">
+<canvas id="chartContainerMemAvail" style="height: 500px; width:100%;"></canvas>
+</div>
+<div  class="column">
+<canvas id="chartContainerTemp" style="height: 500px; width:100%;"></canvas>
+</div>
+</div>
+<div  class="row">
+<div  class="column">
+<canvas id="chartContainerMemIO" style="height: 500px; width:100%;"></canvas>
+</div>
+<div  class="column">
+<canvas id="chartContainerLoad" style="height: 500px; width:100%;"></canvas>
+</div>
+</div>
+<div  class="row">
+<div  class="column">
+<canvas id="chartContainerEntropy" style="height: 500px; width:100%;"></canvas>
+</div>
+<div  class="column">
+<canvas id="chartContainerBandwidth" style="height: 500px; width:100%;"></canvas>
+</div>
+</div>
+</div>
+<script>
 const reader = new FileReader();
 
 var stopGraf = 0;
@@ -15,10 +131,8 @@ var whoami = 1;
 var net = 1;
 var reset = 0;
 var count = 0;
-var dataLength = 10;
 
 var chartLoad;
-var chartUP;
 var chartNET;
 var chartCPU;
 var chartEntropy;
@@ -26,6 +140,9 @@ var chartMEM;
 var chartMEMAvail;
 var chartTemp;
 var chartMemIO;
+
+var dataLength = 10;
+var temps = 2;
 
 var network;
 var timer_json;
@@ -451,7 +568,7 @@ chartMEM = new Chart(ctx_mem, {
                                 'rgba(35,31,32,1)',
                                 'rgba(35,31,32,1)',
                         ],
-                        label: 'MEM RAM AVAILABLE',
+                        label: 'MEM RAM USAGE',
                         data: [],
                 }],
         },
@@ -499,58 +616,14 @@ function updateChartRam(contador_mem ,dataLength_mem) {
      chartMEM.update();
 };
 
-function start_uptime_chart(){
-var ctx_up = document.getElementById("chartContainerUptime");
-chartUP = new Chart(ctx_up, {
-        type: "bar",
-        data: {
-                labels: ['days', 'hours', 'minutes'],
-                datasets: [{
-                        data: [0, 0, 0, 0, 0],
-			backgroundColor: [
-                               'rgba(247, 168, 0, 1)',
-                               'rgba(164, 169, 173, 1)',
-			       'rgba(35, 31, 32, 1)',
-                        ],
-                }],
-        },
-        options: {
-                responsive: true,
-                title: {
-                        display: true,
-                        text: 'Monitoring System Uptime'
-                },
-                scales: {
-                        xAxes: [{
-                                scaleLabel: {
-                                        display: true,
-                                        labelString: 'Time Up'
-                                }
-                        }],
-                        yAxes: [{
-                                ticks: {
-                                        beginAtZero: true
-				 },
-                                scaleLabel: {
-					display: true,
-                                        labelString: ''
-                                }
-                        }]
-                },
-		legend: {
-                	display: false
-         	},
-        }
-});
-
-};
-
-function updateChartUp() {
-      for(var i = 0; i<up_time.length; i++){
-      	chartUP.data.datasets[0].data[i] = parseFloat(up_time[i]);
-      }
-      chartUP.update();
-};
+function updateUptime(valor) {
+	var h3 = document.getElementById("uptime");
+	if(valor==1){
+	        h3.innerHTML="Uptime: "+up_time[0]+"days "+up_time[1]+"h "+up_time[2]+"min";
+	}else{
+		h3.innerHTML="Uptime: ---";
+	}
+}
 
 function start_load_chart(){
 var ctx_load = document.getElementById("chartContainerLoad");
@@ -633,8 +706,16 @@ function monitor_odroid(){
  if(started == 0){
    stop();
    contador = 0;
+   chartLoad.clear();
+   chartNET.clear();
+   chartCPU.clear();
+   chartEntropy.clear();
+   chartMEM.clear();
+   chartMEMAvail.clear();
+   chartTemp.clear();
+   chartMemIO.clear();
+
    chartLoad.destroy();
-   chartUP.destroy();
    chartNET.destroy();
    chartCPU.destroy();
    chartEntropy.destroy();
@@ -642,6 +723,16 @@ function monitor_odroid(){
    chartMEMAvail.destroy();
    chartTemp.destroy();
    chartMemIO.destroy(); 
+   
+   chartLoad="";
+   chartNET="";
+   chartCPU="";
+   chartEntropy="";
+   chartMEM="";
+   chartMEMAvail="";
+   chartTemp="";
+   chartMemIO="";
+   
    console.log("Faig reseteig");
    ws = "";
    ws = new WebSocket("wss://"+ip_private+":3000");
@@ -652,12 +743,11 @@ function monitor_odroid(){
       start_mem_chart();
       start_mem_avail_chart();
       start_temp_chart();
-      start_uptime_chart();
       start_load_chart();
       start_entropy_chart();
       start_memio_chart();
       ws.send(select);
-      ws.send("monitor");
+      ws.send("monitor-"+temps);
    };
 
    ws.onmessage = function(e) {
@@ -669,10 +759,6 @@ function monitor_odroid(){
    };  
  }else{
    started = 0;
-   var capa = document.getElementById("monitor");
-   var p = document.createElement("p");
-   p.innerHTML = "Comencem a fer la connexió per monitorejar la placa.";
-   capa.appendChild(p);
    try{
      select = document.getElementById("ips").value;
      console.log(ws);
@@ -691,7 +777,7 @@ var cpu_boolean = 0;
 
 function jsonGLobal(){
  console.log("Entro amb linterval");
- ws.send("monitor");
+ ws.send("monitor-"+temps);
 
  reader.onload = function() {
     console.log(reader.result);
@@ -732,7 +818,7 @@ function jsonGLobal(){
   };
 
   updateChartRam(count, dataLength);
-  updateChartUp();
+  updateUptime(1);
   updateChartLoad();
   updateChartEntropy(count, dataLength);
   updateCartNet(count, dataLength);
@@ -749,7 +835,6 @@ ws.onopen = function() {
       start_mem_chart();
       start_mem_avail_chart();
       start_temp_chart();
-      start_uptime_chart();
       start_load_chart();
       start_entropy_chart();
       start_memio_chart();
@@ -761,7 +846,7 @@ function pause(){
 
 function continueGraf(){
 	stopGraf=0;
-        ws.send("monitor");
+        ws.send("monitor-"+temps);
 };
 
 ws.onmessage = function(e) {
@@ -775,88 +860,40 @@ ws.onmessage = function(e) {
 
 function start(select){
 	ws.send(select);
-	ws.send("monitor");
+	ws.send("monitor-"+temps);
 };
 
 function stop(){
   interficies = [];
   net_info = [];
   net_info_2 = [];
-  
+  updateUptime(0);
   net=1;  
   ws.close();
   whoami=1;
 };
+
 window.onload = getting_ips;
+
+var slider = document.getElementById("value-contador");
+var output = document.getElementById("value-contador-output");
+output.innerHTML = slider.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+  output.innerHTML= this.value;
+  dataLength=this.value;
+}
+
+var slider2 = document.getElementById("value-temps");
+var output2 = document.getElementById("value-temps-output");
+output2.innerHTML = slider2.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+slider2.oninput = function() {
+  output2.innerHTML= this.value;
+  temps=this.value;
+}
+
 </script>
-<style>
-* {
-  box-sizing: border-box;
-}
-
-.column {
-  float: left;
-  width: 50%;
-  padding: 5px;
-}
-
-/* Clearfix (clear floats) */
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-</style>
-<h1>URV-Odroid</h1>
-{% endblock %}
-{% block content %}
-<form>
-<select id ="ips" name="select">
-<option value="master">master</option>
-</select>
-<input id="clickMe" type="button" value="Monitoritzar" onclick="monitor_odroid();"/>
-</form>
-<input id="continueMe" type="button" value="ContinueMonitoritzar" onclick="continueGraf();"/>
-<input id="pauseMe" type="button" value="PauseMonitoritzar" onclick="pause();"/>
-<input id="stopMe" type="button" value="StopMonitoritzar" onclick="stop();"/>
-<div id="monitor"></div>
-<div class="row">
-<div  class="column">
-<canvas id="chartContainer" style="height: 500px; width:100%;"></canvas>
-</div>
-<div  class="column">
-<canvas id="chartContainerMem" style="height: 500px; width:100%;"></canvas>
-</div>
-</div>
-<div  class="row">
-<div  class="column">
-<canvas id="chartContainerMemAvail" style="height: 500px; width:100%;"></canvas>
-</div>
-<div  class="column">
-<canvas id="chartContainerTemp" style="height: 500px; width:100%;"></canvas>
-</div>
-</div>
-<div  class="row">
-<div  class="column">
-<canvas id="chartContainerUptime" style="height: 500px; width:100%;"></canvas>
-</div>
-<div  class="column">
-<canvas id="chartContainerLoad" style="height: 500px; width:100%;"></canvas>
-</div>
-</div>
-<div  class="row">
-<div  class="column">
-<canvas id="chartContainerEntropy" style="height: 500px; width:100%;"></canvas>
-</div>
-<div  class="column">
-<canvas id="chartContainerBandwidth" style="height: 500px; width:100%;"></canvas>
-</div>
-</div>
-</div>
-<div  class="row">
-<div  class="column">
-<canvas id="chartContainerMemIO" style="height: 500px; width:100%;"></canvas>
-</div>
-</div>
-
 {% endblock %}
