@@ -11,5 +11,5 @@ else
 	json=$(ssh -o StrictHostKeyChecking=no $1 "/home/odroid/.django-monitor/json-server.sh")
 fi
 
-sleep 2
+sleep $2
 echo $json
