@@ -9,6 +9,36 @@
 <script type="text/javascript">
 var ws;
 
+function remove_output(){
+	var term1 = document.getElementById('terminal2');
+	var term2 = document.getElementById('terminal3');
+	let lis_out = term1.getElementsByTagName('li');
+	let lis_err = term2.getElementsByTagName('li');
+	
+	var selected = document.getElementById("removes").value;
+        console.log(lis_out);
+
+	for (let item of lis_out) {
+	   console.log(item.innerHTML);
+ 	   if(item.innerHTML.includes(selected+"-&gt")){
+               	console.log("Elimino");
+		term1.removeChild(item);
+           }
+	    
+	}
+
+	for (let item of lis_err) {
+           console.log(item.innerHTML);
+           if(item.innerHTML.includes(selected+"-&gt")){
+                console.log("Elimino");
+                term2.removeChild(item);
+           }
+
+        }
+
+}
+
+
 function close_connection(){ 
   ws.close();
   document.getElementById("inputterminal").disabled = true;
@@ -38,6 +68,28 @@ function getting_ips(){
   }else{
      alert("If you have nodes, your dnsmaq is not working or there was an error. Restart or repair dnsmasq. If you don't have nodes, don't worry, all is working fine.");
   }
+
+ var ips = {{ ips|safe }};
+ var capa = document.getElementById("removes");
+ var paso;
+ if(ips.length > 0 ){
+   var option = document.createElement("option");
+   option.value = "odroids";
+   option.innerHTML = "odroids";
+   capa.appendChild(option);
+
+   for (paso = 0; paso < ips.length-1; paso++) {
+     console.log("entra al bucle");
+     var option = document.createElement("option");
+     var aux = ips[paso].split(",");
+     option.value = aux[1];
+     option.innerHTML = aux[1];
+     capa.appendChild(option);
+   };
+  }else{
+     alert("If you have nodes, your dnsmaq is not working or there was an error. Restart or repair dnsmasq. If you don't have nodes, don't worry, all is working fine.");
+  }
+
 };
 
 function start_manteniment(){
@@ -129,11 +181,19 @@ ul{
 	{% trans "En aquesta secció, pots dedicar-te a mantenir els sistemes odroid sempre i quan no hi hagi problemes amb el ssh. En cas contrari hauras de conectar un hdmi a la placa master odroid cap a un monitor i desde alla arreglar-ho." %}
 	{% trans "Per a usar la terminal primer has de conectar-te a traves del boto connect. A partir d'aqui, només podràs utilitzar comandes que no redirigeixin el output cap a fitxer. Es a dir, no podras fer un echo 'hola' > file." %}
 </p>
+<div>
 <select id ="ips" name="select">
 <option value="master">master</option>
-</select>
 <input id="clickMe2" type="button" value="Connect" onclick="manteniment_odroid();"/>
 <input id="clickMe3" type="button" value="Close" onclick="close_connection();" style="visibility:hidden;"/>
+</select>
+</div>
+<div>
+<select id ="removes" name="select">
+<option value="master">master</option>
+</select>
+<input id="clickMe4" type="button" value="Remove Output" onclick="remove_output();"/>
+</div>
 <div  class="row">
 <div  class="column"> 
 	<ul id="terminal" class="main-description-text" style="height: 500px; width:100%;">
