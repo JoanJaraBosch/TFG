@@ -126,6 +126,11 @@ h3 {
 <script>
 const reader = new FileReader();
 
+var aux_read;
+var aux_write;
+var aux_first=0;
+var aux_first2=0;
+
 var stopGraf = 0;
 var whoami = 1;
 var net = 1;
@@ -170,18 +175,6 @@ function start_memio_chart(){
                 labels: [],
                 datasets: [{
 			fill: false,
-			 backgroundColor: [
-                                'rgba(257,168,0,1)',
-                                'rgba(257,168,0,1)',
-                                'rgba(257,168,0,1)',
-                                'rgba(257,168,0,1)',
-                                'rgba(257,168,0,1)',
-                                'rgba(257,168,0,1)',
-                               	'rgba(257,168,0,1)',
-                                'rgba(257,168,0,1)',
-                                'rgba(257,168,0,1)',
-                                'rgba(257,168,0,1)',
-                        ],
 			borderColor: [
 				'rgba(257,168,0,1)',
 			],
@@ -191,18 +184,6 @@ function start_memio_chart(){
 		{
 			fill: false,
 			borderColor: [
-                                'rgba(164,169,173,1)',
-                        ],
-			backgroundColor: [
-                                'rgba(164,169,173,1)',
-                                'rgba(164,169,173,1)',
-                                'rgba(164,169,173,1)',
-                                'rgba(164,169,173,1)',
-                                'rgba(164,169,173,1)',
-                                'rgba(164,169,173,1)',
-                                'rgba(164,169,173,1)',
-                                'rgba(164,169,173,1)',
-                                'rgba(164,169,173,1)',
                                 'rgba(164,169,173,1)',
                         ],
 			label: "Output", 
@@ -243,22 +224,26 @@ function start_memio_chart(){
 };
 
 function updateChartMemIO(contador, dataLength){
-	if(chartMemIO.data.datasets[0].data.length==dataLength){
-         for(var j = 0; j<dataLength-1; j++){
-                chartMemIO.data.datasets[0].data[j] = chartMemIO.data.datasets[0].data[j+1];
-                chartMemIO.data.datasets[1].data[j] = chartMemIO.data.datasets[1].data[j+1];
-		chartMemIO.data.labels[j] = chartMemIO.data.labels[j+1];
-         }
+    if(aux_first==0){
+	aux_read = parseFloat(mem_io[0]);
+	aux_write = parseFloat(mem_io[1]); 
+	aux_first=1;
+    }else{
+	chartMemIO.data.datasets[0].data.push(parseFloat(mem_io[0])-aux_read);
+        chartMemIO.data.datasets[1].data.push(parseFloat(mem_io[1])-aux_write);
+        chartMemIO.data.labels.push(contador);
+	
+	while(chartMemIO.data.datasets[0].data.length > dataLength){
+		chartMemIO.data.datasets[0].data.shift();
+		chartMemIO.data.datasets[1].data.shift();
+		chartMemIO.data.labels.shift();
+	}
+	
+	aux_read = parseFloat(mem_io[0]);
+        aux_write = parseFloat(mem_io[1]);
 
-         chartMemIO.data.datasets[0].data[chartMemIO.data.datasets[0].data.length-1] = parseFloat(mem_io[0]);
-         chartMemIO.data.datasets[1].data[chartMemIO.data.datasets[1].data.length-1] = parseFloat(mem_io[1]);
-         chartMemIO.data.labels[chartMemIO.data.datasets[0].data.length-1] = contador;
-     }else{
-         chartMemIO.data.datasets[0].data[contador] = parseFloat(mem_io[0]);
-         chartMemIO.data.datasets[1].data[contador] = parseFloat(mem_io[1]);
-	 chartMemIO.data.labels[contador] = contador;
-     }
-     chartMemIO.update();
+	chartMemIO.update();
+    } 
 };
 
 function start_network_chart(noms){
@@ -311,27 +296,29 @@ chartNET = new Chart(ctx_net, {
 };
 
 function updateCartNet(contador, dataLength) {
-     for(var t=0; t < chartNET.data.datasets.length; t++){
-        if(chartNET.data.datasets[t].data.length==dataLength){
-                for(var j = 0; j<dataLength-1; j++){
-                        chartNET.data.datasets[t].data[j] = chartNET.data.datasets[t].data[j+1];
-                }
-                chartNET.data.datasets[t].data[chartNET.data.datasets[t].data.length-1] = parseFloat(net_info_2[t])-parseFloat(net_info[t]);
-        }else{
-                chartNET.data.datasets[t].data[contador] = parseFloat(net_info_2[t])-parseFloat(net_info[t]);
-                chartNET.data.labels[contador] = contador;
-        }
-        net_info[t]=net_info_2[t];
-     }
+	if(aux_first2 ==0 ){	
+		for(var i = 0; i<net_info.length ;i++){
+			net_info_2[i]=net_info[i];
+		};
+		aux_first2 = 1;
+		console.log("Entro primer cop red");
+		console.log(net_info);
+		console.log(net_info_2);
+	}else{
+		for(var t=0; t<net_info_2.length; t++){
+			chartNET.data.datasets[t].data.push(parseFloat(net_info[t])-parseFloat(net_info_2[t]));
+			net_info_2[t] = net_info[t];
+			while(chartNET.data.datasets[t].data.length > dataLength){
+				chartNET.data.datasets[t].data.shift();
+			}		
+		};
 
-     if(chartNET.data.labels.length==dataLength){
-        for(var j = 0; j<dataLength-1; j++){
-                chartNET.data.labels[j] = chartNET.data.labels[j+1];
-        }
-        chartNET.data.labels[dataLength-1] = contador;
-     }
-
-     chartNET.update();
+		chartNET.data.labels.push(contador);
+		while(chartNET.data.labels.length > dataLength){
+			chartNET.data.labels.shift();
+		}
+		chartNET.update();
+	}     
 };
 
 
@@ -342,18 +329,8 @@ chartCPU = new Chart(ctx, {
 	data: {
         	labels: [],
         	datasets: [{
-   			backgroundColor: [
- 				'rgba(35,31,32,1)',
-				'rgba(35,31,32,1)',
-				'rgba(35,31,32,1)',
-				'rgba(35,31,32,1)',
-				'rgba(35,31,32,1)',
-				'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-			],
+   			fill: false,
+			borderColor: 'rgba(35, 31, 32, 1)',
             		label: 'CPU USAGE',
             		data: [],
 
@@ -390,17 +367,11 @@ chartCPU = new Chart(ctx, {
 };
 
 function updateChartCpu(contador, dataLength) {
-     if(chartCPU.data.datasets[0].data.length==dataLength){
-         for(var j = 0; j<dataLength-1; j++){
-		chartCPU.data.datasets[0].data[j] = chartCPU.data.datasets[0].data[j+1];
-		chartCPU.data.labels[j] = chartCPU.data.labels[j+1];
-	 }
-        
-    	 chartCPU.data.datasets[0].data[chartCPU.data.datasets[0].data.length-1] = parseFloat(cpu_usage);     
-     	 chartCPU.data.labels[chartCPU.data.datasets[0].data.length-1] = contador;
-     }else{
-         chartCPU.data.datasets[0].data[contador] = parseFloat(cpu_usage);
-         chartCPU.data.labels[contador] = contador;
+     chartCPU.data.datasets[0].data.push(parseFloat(cpu_usage));
+     chartCPU.data.labels.push(contador);
+     while(chartCPU.data.datasets[0].data.length > dataLength){
+        chartCPU.data.datasets[0].data.shift();
+        chartCPU.data.labels.shift();
      }
      chartCPU.update();
 };
@@ -412,19 +383,8 @@ chartEntropy = new Chart(ctx_entropy, {
         data: {
                 labels: [],
                 datasets: [{
-			backgroundColor: [
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                        ],
-
+			fill: false,
+                        borderColor: 'rgba(35, 31, 32, 1)',
                         label: 'System Entropy',
                         data: [],
 
@@ -461,19 +421,13 @@ chartEntropy = new Chart(ctx_entropy, {
 };
 
 function updateChartEntropy(contador, dataLengthEntropy) {
-     if(chartEntropy.data.datasets[0].data.length==dataLengthEntropy){
-         for(var j = 0; j<dataLengthEntropy-1; j++){
-                chartEntropy.data.datasets[0].data[j] = chartEntropy.data.datasets[0].data[j+1];
-                chartEntropy.data.labels[j] = chartEntropy.data.labels[j+1];
-         }
-
-         chartEntropy.data.datasets[0].data[chartEntropy.data.datasets[0].data.length-1] = parseFloat(entropy);
-         chartEntropy.data.labels[chartEntropy.data.datasets[0].data.length-1] = contador;
-     }else{
-         chartEntropy.data.datasets[0].data[contador] = parseFloat(entropy);
-         chartEntropy.data.labels[contador] = contador;
+     chartEntropy.data.datasets[0].data.push(parseFloat(entropy));
+     chartEntropy.data.labels.push(contador);
+     while(chartEntropy.data.datasets[0].data.length > dataLength){
+        chartEntropy.data.datasets[0].data.shift();
+        chartEntropy.data.labels.shift();
      }
-
+     
      chartEntropy.update();
 };
 
@@ -556,18 +510,8 @@ chartMEM = new Chart(ctx_mem, {
         data: {
                 labels: [],
                 datasets: [{
-			backgroundColor: [
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                                'rgba(35,31,32,1)',
-                        ],
+			fill: false,
+                        borderColor: 'rgba(35, 31, 32, 1)',
                         label: 'MEM RAM USAGE',
                         data: [],
                 }],
@@ -601,18 +545,13 @@ chartMEM = new Chart(ctx_mem, {
 };
 
 function updateChartRam(contador_mem ,dataLength_mem) {
-      if(chartMEM.data.labels.length<dataLength_mem){
-         chartMEM.data.datasets[0].data[contador_mem] = parseFloat(mem);
-         chartMEM.data.labels[contador_mem] = contador_mem;
-      }else{
-
-              for(var i =0; i<dataLength_mem-1 ;i++){
-                chartMEM.data.datasets[0].data[i] = chartMEM.data.datasets[0].data[i+1];
-                chartMEM.data.labels[i] = chartMEM.data.labels[i+1];
-              }
-              chartMEM.data.datasets[0].data[chartMEM.data.datasets[0].data.length-1] = parseFloat(mem);
-              chartMEM.data.labels[chartMEM.data.datasets[0].data.length-1]=contador_mem;
+     chartMEM.data.datasets[0].data.push(parseFloat(mem));
+     chartMEM.data.labels.push(contador_mem);
+     while(chartMEM.data.datasets[0].data.length > dataLength_mem){
+        chartMEM.data.datasets[0].data.shift();
+        chartMEM.data.labels.shift();
      }
+
      chartMEM.update();
 };
 
@@ -808,12 +747,18 @@ function jsonGLobal(){
       console.log(net_info);
       net=0;
       start_network_chart(interficies);
-     }else {
-	net_info_2 = [];
-	for(var i=1; i<network.length;i++){
-          net_info_2.push(network[i].split(" ")[1]);
-	  net_info_2.push(network[i].split(" ")[2]);
+     }else{
+
+	while(net_info.length > 0 ){
+		net_info.pop();
 	}
+
+	for(var i=1; i<network.length;i++){
+          interficies.push(network[i].split(" ")[0].replace(":", "").concat("_recieved"));
+          interficies.push(network[i].split(" ")[0].replace(":", "").concat("_send"));
+          net_info.push(network[i].split(" ")[1]);
+          net_info.push(network[i].split(" ")[2]);
+      	}
      }      
   };
 
@@ -868,7 +813,10 @@ function stop(){
   net_info = [];
   net_info_2 = [];
   updateUptime(0);
-  net=1;  
+  net=1;
+  aux_first=0;
+  aux_first2 = 0;
+  count=0;  
   ws.close();
   whoami=1;
 };
