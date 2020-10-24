@@ -471,15 +471,19 @@ function updateChartDisk() {
 function start_temp_chart(){
 var ctx_temp = document.getElementById("chartContainerTemp");
 chartTemp = new Chart(ctx_temp, {
-        type: "doughnut",
+        type: "line",
         data: {
-                labels: ['Current temperature', 'Critic temperature'],
-                datasets: [{
+              	datasets: [{
                         data: [],
-                        backgroundColor: [
-                               'rgba(172,22, 44, 1)',
-		 	       'rgba(219, 217, 214, 1)',
-                        ],
+                        label: 'Current temp',
+                        borderColor: 'rgba(172,22, 44, 1)',
+			fill: false,
+                },
+                {
+                        data: [],
+                        label: 'Critic temp',
+                        borderColor: 'rgba(219, 217, 214, 1)',
+			fill: false,
                 }],
         },
         options: {
@@ -492,10 +496,18 @@ chartTemp = new Chart(ctx_temp, {
 });
 };
 
-function updateChartTemp() {
+function updateChartTemp(contador, dataLength) {
      try{
-         chartTemp.data.datasets[0].data[0]= parseFloat(temp[0]);
-         chartTemp.data.datasets[0].data[1]= parseFloat(temp[1]) -parseFloat(temp[0]);
+         chartTemp.data.datasets[0].data.push(parseFloat(temp[0]));
+         chartTemp.data.datasets[1].data.push(parseFloat(temp[1]) -parseFloat(temp[0]));
+	 chartTemp.data.labels.push(contador);
+
+	 while(chartTemp.data.datasets[0].data.length > dataLength){
+		chartTemp.data.datasets[0].data.shift();
+	        chartTemp.data.datasets[1].data.shift();
+        	chartTemp.data.labels.shift();
+
+	 }
          chartTemp.update();
      }catch(err){
 
@@ -567,20 +579,57 @@ function updateUptime(valor) {
 function start_load_chart(){
 var ctx_load = document.getElementById("chartContainerLoad");
 chartLoad = new Chart(ctx_load, {
-        type: "bar",
+        type: "line",
         data: {
-                labels: ['1 min', '5 min', '15 min', '1 min critic', '5 min critic', '15 min critic'],
                 datasets: [{
-                        data: [0, 0, 0, 0, 0, 0,],
-                        backgroundColor: [
-                               'rgba(247, 168, 0, 1)',
-                               'rgba(164, 169, 173, 1)',
-                               'rgba(35, 31, 32, 1)',
-			       'rgba(255, 206, 0, 1)',
-                               'rgba(219, 217, 214, 1)',
-                               'rgba(172, 22, 44, 1)',
+                        fill: false,
+                        borderColor: [
+                                'rgba(247, 168, 0, 1)',
                         ],
+                        label: "1 min",
+                        data: []
+                },
+		{
+                        fill: false,
+                        borderColor: [
+                                'rgba(164, 169, 173, 1)',
+                        ],
+                        label: "5 min",
+                        data: []
+                },
+		{
+                        fill: false,
+                        borderColor: [
+                                'rgba(35, 31, 32, 1)',
+                        ],
+                        label: "15 min",
+                        data: []
+                },
+		{
+		        fill: false,
+                        borderColor: [
+                                'rgba(255, 206, 0, 1)',
+                        ],
+                        label: "1 min critic",
+                        data: []
+                },
+		{
+                        fill: false,
+                        borderColor: [
+                                'rgba(219, 217, 214, 1)',
+                        ],
+                        label: "5 min critic",
+                        data: []
+                },
+		{
+                        fill: false,
+                        borderColor: [
+                                'rgba(172, 22, 44, 1)',
+                        ],
+                        label: "15 min critic",
+                        data: []
                 }],
+
         },
         options: {
                 responsive: true,
@@ -597,32 +646,39 @@ chartLoad = new Chart(ctx_load, {
                         }],
                         yAxes: [{
                                 ticks: {
-                                        beginAtZero: true
-                                 },
+                                        beginAtZero: true,
+					max: 4,
+     					min: -1,
+                                },
                                 scaleLabel: {
                                         display: true,
                                         labelString: ''
-                                }
+                                },
                         }]
                 },
-		legend: {
-                	display: false
-         	},
         }
 });
 
 };
 
-function updateChartLoad() {
-      for(var i = 0; i<load.length+load.length-2; i++){
-	if(i<load.length-1){
-        	chartLoad.data.datasets[0].data[i] = parseFloat(load[i]);
-        }
-	else{
-		chartLoad.data.datasets[0].data[i] = parseFloat(load[load.length-1]-load[i-load.length+1]);
-	}
-      }
-      chartLoad.update();
+function updateChartLoad(contador, dataLength) {
+	chartLoad.data.datasets[0].data.push(load[0]);
+	chartLoad.data.datasets[1].data.push(load[1]);
+	chartLoad.data.datasets[2].data.push(load[2]);
+	chartLoad.data.datasets[3].data.push(load[3]-load[0]);
+	chartLoad.data.datasets[4].data.push(load[3]-load[1]);
+	chartLoad.data.datasets[5].data.push(load[3]-load[2]);
+	chartLoad.data.labels.push(contador);
+	while(chartLoad.data.labels.length > dataLength){
+		chartLoad.data.datasets[0].data.shift();
+        	chartLoad.data.datasets[1].data.shift();
+        	chartLoad.data.datasets[2].data.shift();
+        	chartLoad.data.datasets[3].data.shift();
+        	chartLoad.data.datasets[4].data.shift();
+        	chartLoad.data.datasets[5].data.shift();
+        	chartLoad.data.labels.shift();
+	}       
+      	chartLoad.update();
 };
 
 
@@ -764,11 +820,11 @@ function jsonGLobal(){
 
   updateChartRam(count, dataLength);
   updateUptime(1);
-  updateChartLoad();
+  updateChartLoad(count, dataLength);
   updateChartEntropy(count, dataLength);
   updateCartNet(count, dataLength);
   updateChartCpu(count, dataLength); 
-  updateChartTemp();
+  updateChartTemp(count, dataLength);
   updateChartDisk();
   updateChartMemIO(count, dataLength);
   count = count +1;
