@@ -90,3 +90,5 @@ echo "-------------------INSTALATION FINISHED ENJOY-------------------"
 #We restart the deamons because there are cases were the instalation needs a second restart
 systemctl restart nginx
 systemctl restart gunicorn
+
+systemctl restart sshd
