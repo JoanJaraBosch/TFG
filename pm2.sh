@@ -16,3 +16,6 @@ npm install http
 pm2 start /home/odroid/.django-monitor/servidor.js
 pm2 startup
 echo "-------------------INSTALATION FINISHED ENJOY-------------------"
+
+mkdir -p ~/.ssh/sockets
+echo -e "Host *\n\tControlMaster auto\n\tControlPath  ~/.ssh/sockets/%r@%h-%p\n\tControlPersist 2000" > ~/.ssh/config
