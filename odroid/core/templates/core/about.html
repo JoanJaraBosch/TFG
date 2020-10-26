@@ -5,15 +5,13 @@
 
 {% block title %}{% trans "Sobre nosaltres" %} {% endblock %}
 
-{% block background %}{% load static %}{% static 'core/img/about-bg.jpg' %}{% endblock %}
-
 {% block headers %}
 <h1>{% trans "Sobre nosaltres" %}</h1>
 <span class="subheading">{% trans "Equip" %}</span>
 {% endblock %}
 
 {% block content %}
- <h2>{% trans "Estudiants" %}</h2>
+<h2>{% trans "Estudiants" %}</h2>
 <p align="justify">
 {% blocktrans %}Sóm un grup format per dos estudiants de la Universitat Rovira i Virgili, actualment cursant lúltim any de la carrera d'Enginyeria Informàtica. A continuació veureu informació sobre nosaltres, els estudiants.{% endblocktrans %}
 </p>
@@ -24,7 +22,8 @@
         <img class="img-fluid avatar" src="/static/{{student.image}}" alt="">
     </div>
     <div class="col-lg-7 col-md-8">
-        <h2 class="section-heading">{{student.name}}</h2>
+        <h3>{{student.name}}</h2>
+	</br>
         <p align="justify">{% translate student.description %}</p>
     </div>
 </div>
@@ -40,7 +39,8 @@
         <img class="img-fluid avatar" src="/static/{{teacher.image}}" alt="">
     </div>
     <div class="col-lg-7 col-md-8">
-        <h2 class="section-heading">{{teacher.name}}</h2>
+        <h3>{{teacher.name}}</h2>
+	</br>	
         <p align="justify">{% translate teacher.description %}</p>
     </div>
 </div>
