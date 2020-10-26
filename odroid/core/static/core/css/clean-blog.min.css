@@ -1,7 +1,7 @@
 body{
 	font-size:20px;
 	color:#212529;
-	font-family:Lora,'Times New Roman',serif
+	font-family:Optima;
 }
 
 p{
@@ -14,8 +14,8 @@ p a{
 }
 
 h1,h2,h3,h4,h5,h6{
-	font-weight:800;f
-	ont-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif
+	font-weight:800;
+	font-family:Optima;
 }
 
 a{
@@ -89,7 +89,7 @@ img::-moz-selection{
 	position:absolute;
 	border-bottom:1px solid #e9ecef;
 	background-color:#fff;
-	font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif
+	font-family:Optima;
 }
 
 #mainNav .navbar-brand{
