@@ -51,7 +51,7 @@ def manteniment(request):
         data = json.dumps(data)
         context = {"ips": data, "IP_PRIVATE": settings.IP_PRIVATE}
     except:
-	context = {"ips": "", "IP_PRIVATE": settings.IP_PRIVATE}
+        context = {"ips": "", "IP_PRIVATE": settings.IP_PRIVATE}
     return render(request, "core/manteniment.html", context)
 
 
