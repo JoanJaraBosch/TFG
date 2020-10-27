@@ -1,6 +1,28 @@
+select{
+	font-size:20px;
+        color: white;
+        font-family: Optima;
+        background-color: #90292A;   
+}
+
+option{
+	font-size:20px;
+        color: white;
+        font-family: Optima;
+        background-color: #90292A;   
+}
+
+input[type=button]{
+	font-size:20px;
+	color: white;
+	font-family: Optima;
+	background-color: #90292A;	
+}
+
+
 body{
 	font-size:20px;
-	color:#212529;
+	color:#231f20;
 	font-family:Optima;
 }
 
@@ -9,8 +31,25 @@ p{
 	margin:10px 0 10px
 }
 
+.text-muted {
+    color: #231f20;
+}
+
 p a{
 	text-decoration:underline
+}
+
+footer{
+	color: white;
+	background-color: #90292A;		
+}
+
+input{
+	font-family: Optima;
+}
+
+footer a{
+	color: white;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -19,19 +58,23 @@ h1,h2,h3,h4,h5,h6{
 }
 
 a{
-	color:#212529;
+	color:#231f20;
 	-webkit-transition:all .2s;
 	-moz-transition:all .2s;
 	transition:all .2s
 }
 
-a:focus,a:hover{
-	color:#0085a1
+a:hover,a:focus{
+	color:grey;
+}
+
+#mainNav{
+	background-color: #90292A;
 }
 
 #dropdownMenuButton {
 	background-color: transparent; 
-	color: white;
+	color: #ac162d;
 	font-size: 12px;
     font-weight: 800;
     letter-spacing: 1px;
@@ -88,7 +131,7 @@ img::-moz-selection{
 #mainNav{
 	position:absolute;
 	border-bottom:1px solid #e9ecef;
-	background-color:#fff;
+	background-color:#90292A;
 	font-family:Optima;
 }
 

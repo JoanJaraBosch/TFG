@@ -37,9 +37,9 @@ h3 {
 
 .slider {
   -webkit-appearance: none;
-  width: 100%;
+  width: 50%;
   height: 25px;
-  background: #d3d3d3;
+  background: transparent;
   outline: none;
   opacity: 0.7;
   -webkit-transition: .2s;
@@ -55,69 +55,95 @@ h3 {
   appearance: none;
   width: 25px;
   height: 25px;
-  background: #4CAF50;
+  background: #90292A;
   cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
   width: 25px;
   height: 25px;
-  background: #4CAF50;
+  background: #90292A;
   cursor: pointer;
 }
+
+input[type=range]{
+    background: #90292A;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    background: #90292A;
+}
+input[type=range]::-moz-range-thumb {
+    background: #90292A;
+}
+input[type=range]::-ms-thumb {
+    background: #90292A;
+}
+
+#slider1, #slider2{
+        display: inline;
+}
+
 </style>
 <h1>URV-Odroid</h1>
 {% endblock %}
 {% block content %}
-<form>
+<form align="center">
 <select id ="ips" name="select">
 <option value="master">master</option>
 </select>
-<input id="clickMe" type="button" value="Monitoritzar" onclick="monitor_odroid();"/>
+<input id="clickMe" type="button" value="Monitoring" onclick="monitor_odroid();"/>
+<input id="continueMe" type="button" value="Continue Monitoring" onclick="continueGraf();"/>
+<input id="pauseMe" type="button" value="Pause Monitoring" onclick="pause();"/>
+<input id="stopMe" type="button" value="Stop Monitoring" onclick="stop();"/>
 </form>
-<input id="continueMe" type="button" value="ContinueMonitoritzar" onclick="continueGraf();"/>
-<input id="pauseMe" type="button" value="PauseMonitoritzar" onclick="pause();"/>
-<input id="stopMe" type="button" value="StopMonitoritzar" onclick="stop();"/>
-<div class="slidecontainer">
-  <p>{%trans "Nombre de punts pels grafics lineals:" %}<span id="value-contador-output"></span></p>
-  <input id="value-contador" type="range" min="10" max="100" value="10">
+<div class="row" align="center">
+<div  class="column">
+	<div class="slidecontainer">
+  	<p>{%trans "Nombre de punts pels grafics lineals:" %}<span id="value-contador-output"></span></p>
+  		<input id="value-contador" type="range" min="10" max="100" value="10">
+	</div>
 </div>
-<div class="slidecontainer">
-  <p>{%trans "Delay en segons per la obtenció de dades:" %}<span id="value-temps-output"></span></p>
-  <input id="value-temps" type="range" min="0" max="60" value="2">
+<div  class="column">
+	<div class="slidecontainer">  
+  		<p>{%trans "Delay en segons per la obtenció de dades:" %}<span id="value-temps-output"></span></p>
+  		<input id="value-temps" type="range" min="0" max="60" value="2">
+	</div>
 </div>
+</div>
+
 </br></br>
 <h3 aling="justify" id="uptime">Uptime: ---</h3>
 <div id="monitor"></div>
 <div class="row">
-<div  class="column">
+<div  class="column" id="cpuChart">
 <canvas id="chartContainer" style="height: 500px; width:100%;"></canvas>
 </div>
-<div  class="column">
+<div  class="column" id="memChart">
 <canvas id="chartContainerMem" style="height: 500px; width:100%;"></canvas>
 </div>
 </div>
 <div  class="row">
-<div  class="column">
+<div  class="column" id="diskChart">
 <canvas id="chartContainerMemAvail" style="height: 500px; width:100%;"></canvas>
 </div>
-<div  class="column">
+<div  class="column" id="tempChart">
 <canvas id="chartContainerTemp" style="height: 500px; width:100%;"></canvas>
 </div>
 </div>
 <div  class="row">
-<div  class="column">
+<div  class="column" id="memioChart">
 <canvas id="chartContainerMemIO" style="height: 500px; width:100%;"></canvas>
 </div>
-<div  class="column">
+<div  class="column" id="loadChart">
 <canvas id="chartContainerLoad" style="height: 500px; width:100%;"></canvas>
 </div>
 </div>
 <div  class="row">
-<div  class="column">
+<div  class="column" id="entropyChart">
 <canvas id="chartContainerEntropy" style="height: 500px; width:100%;"></canvas>
 </div>
-<div  class="column">
+<div  class="column" id="netChart">
 <canvas id="chartContainerBandwidth" style="height: 500px; width:100%;"></canvas>
 </div>
 </div>
@@ -135,6 +161,8 @@ var whoami = 1;
 var net = 1;
 var reset = 0;
 var count = 0;
+var count_mem_io=0;
+var count_net=0;
 
 var chartLoad;
 var chartNET;
@@ -222,7 +250,7 @@ function start_memio_chart(){
 });
 };
 
-function updateChartMemIO(contador, dataLength){
+function updateChartMemIO(dataLength){
     if(aux_first==0){
 	aux_read = parseFloat(mem_io[0]);
 	aux_write = parseFloat(mem_io[1]); 
@@ -230,7 +258,7 @@ function updateChartMemIO(contador, dataLength){
     }else{
 	chartMemIO.data.datasets[0].data.push(parseFloat(mem_io[0])-aux_read);
         chartMemIO.data.datasets[1].data.push(parseFloat(mem_io[1])-aux_write);
-        chartMemIO.data.labels.push(contador);
+        chartMemIO.data.labels.push(count_mem_io);
 	
 	while(chartMemIO.data.datasets[0].data.length > dataLength){
 		chartMemIO.data.datasets[0].data.shift();
@@ -242,6 +270,7 @@ function updateChartMemIO(contador, dataLength){
         aux_write = parseFloat(mem_io[1]);
 
 	chartMemIO.update();
+        count_mem_io=count_mem_io+1;
     } 
 };
 
@@ -294,8 +323,9 @@ chartNET = new Chart(ctx_net, {
 
 };
 
-function updateCartNet(contador, dataLength) {
-	if(aux_first2 ==0 ){	
+function updateCartNet(dataLength) {
+	if(net_info.length>0){	
+	if(aux_first2 == 0 ){	
 		for(var i = 0; i<net_info.length ;i++){
 			net_info_2[i]=net_info[i];
 		};
@@ -312,12 +342,14 @@ function updateCartNet(contador, dataLength) {
 			}		
 		};
 
-		chartNET.data.labels.push(contador);
+		chartNET.data.labels.push(count_net);
 		while(chartNET.data.labels.length > dataLength){
 			chartNET.data.labels.shift();
 		}
+		count_net=count_net+1;
 		chartNET.update();
 	}     
+	}
 };
 
 
@@ -549,7 +581,6 @@ chartMEM = new Chart(ctx_mem, {
 					labelString: 'Free MB RAM'
 				}
                         }]
-
                 }
         }
 });
@@ -559,6 +590,7 @@ chartMEM = new Chart(ctx_mem, {
 function updateChartRam(contador_mem ,dataLength_mem) {
      chartMEM.data.datasets[0].data.push(parseFloat(mem));
      chartMEM.data.labels.push(contador_mem);
+
      while(chartMEM.data.datasets[0].data.length > dataLength_mem){
         chartMEM.data.datasets[0].data.shift();
         chartMEM.data.labels.shift();
@@ -701,24 +733,32 @@ function monitor_odroid(){
  if(started == 0){
    stop();
    contador = 0;
-   chartLoad.clear();
-   chartNET.clear();
-   chartCPU.clear();
-   chartEntropy.clear();
-   chartMEM.clear();
-   chartMEMAvail.clear();
-   chartTemp.clear();
-   chartMemIO.clear();
 
-   chartLoad.destroy();
-   chartNET.destroy();
-   chartCPU.destroy();
-   chartEntropy.destroy();
-   chartMEM.destroy();
-   chartMEMAvail.destroy();
-   chartTemp.destroy();
-   chartMemIO.destroy(); 
-   
+   $("canvas#chartContainer").remove();
+   $("div#cpuChart").append('<canvas id="chartContainer" style="height: 500px; width:100%;"></canvas>');
+  
+   $("canvas#chartContainerMem").remove();
+   $("div#memChart").append('<canvas id="chartContainerMem" style="height: 500px; width:100%;"></canvas>');
+  
+   $("canvas#chartContainerMemAvail").remove();
+   $("div#diskChart").append('<canvas id="chartContainerMemAvail" style="height: 500px; width:100%;"></canvas>');
+  
+   $("canvas#chartContainerTemp").remove();
+   $("div#tempChart").append('<canvas id="chartContainerTemp" style="height: 500px; width:100%;"></canvas>');
+  
+   $("canvas#chartContainerMemIO").remove();
+   $("div#memioChart").append('<canvas id="chartContainerMemIO" style="height: 500px; width:100%;"></canvas>');
+  
+   $("canvas#chartContainerLoad").remove();
+   $("div#loadChart").append('<canvas id="chartContainerLoad" style="height: 500px; width:100%;"></canvas>');
+  
+   $("canvas#chartContainerEntropy").remove();
+   $("div#entropyChart").append('<canvas id="chartContainerEntropy" style="height: 500px; width:100%;"></canvas>');
+  
+   $("canvas#chartContainerBandwidth").remove();
+   $("div#netChart").append('<canvas id="chartContainerBandwidth" style="height: 500px; width:100%;"></canvas>');
+
+
    chartLoad="";
    chartNET="";
    chartCPU="";
@@ -732,6 +772,14 @@ function monitor_odroid(){
    ws = "";
    ws = new WebSocket("wss://"+ip_private+":3000");
    select = document.getElementById("ips").value;
+   ws.onmessage = function(e) {
+    if(stopGraf==0){
+        console.log('json resposta: '+e.data);
+        reader.readAsText(e.data);
+        jsonGLobal();
+    }
+   };
+
    ws.onopen = function() {
       console.log('connected');
       start_cpu_chart();
@@ -743,14 +791,6 @@ function monitor_odroid(){
       start_memio_chart();
       ws.send(select);
       ws.send("monitor-"+temps);
-   };
-
-   ws.onmessage = function(e) {
-    if(stopGraf==0){
-        console.log('json resposta: '+e.data);
-        reader.readAsText(e.data);
-        jsonGLobal();
-    }
    };  
  }else{
    started = 0;
@@ -818,15 +858,15 @@ function jsonGLobal(){
      }      
   };
 
-  updateChartRam(count, dataLength);
-  updateUptime(1);
   updateChartLoad(count, dataLength);
   updateChartEntropy(count, dataLength);
-  updateCartNet(count, dataLength);
+  updateCartNet(dataLength);
   updateChartCpu(count, dataLength); 
   updateChartTemp(count, dataLength);
   updateChartDisk();
-  updateChartMemIO(count, dataLength);
+  updateChartMemIO(dataLength);
+  updateChartRam(count, dataLength);
+  updateUptime(1);
   count = count +1;
 };
 
@@ -870,9 +910,11 @@ function stop(){
   net_info_2 = [];
   updateUptime(0);
   net=1;
-  aux_first=0;
+  aux_first = 0;
   aux_first2 = 0;
   count=0;  
+  count_mem_io=0;
+  count_net=0;  
   ws.close();
   whoami=1;
 };
