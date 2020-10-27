@@ -268,15 +268,18 @@ input[type=password]:placeholder {
 </style>
 {% endblock %}
 {% block content %}
+{% translate "Iniciar Sessió" as login %}
+{% translate "Nom d'usuari" as username %}
+{% translate "Contrasenya" as password %}
 	<div class="wrapper fadeInDown">
   		<div id="formContent">
 		    <h2>{% trans "Iniciar Sessió" %}:</h2>
 		    </br>
     		    <form method="post" action="{% url 'login' %}">
 			{% csrf_token %}
-      			<label for="username">{% trans "Nom d'usuari:" %}</label><input type="text" id="login" class="fadeIn second" name="username" placeholder="Username">
-      			<label for="password">{% trans "Contrasenya:" %}</label><input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
-      			<input type="submit" class="fadeIn fourth" value="Login">
+      			<label for="username">{% trans "Nom d'usuari:" %}</label><input type="text" id="login" class="fadeIn second" name="username" placeholder="{{username}}">
+      			<label for="password">{% trans "Contrasenya:" %}</label><input type="password" id="password" class="fadeIn third" name="password" placeholder="{{password}}">
+      			<input type="submit" class="fadeIn fourth" value="{{login}}">
          	    </form>
      		</div>
 	</div>

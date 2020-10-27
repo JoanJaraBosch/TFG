@@ -176,39 +176,43 @@ ul{
 {% endblock %}
 {% block content %}
 <p align="justify">
-	{% trans "En aquesta secció, pots dedicar-te a mantenir els sistemes odroid sempre i quan no hi hagi problemes amb el ssh. En cas contrari hauras de conectar un hdmi a la placa master odroid cap a un monitor i desde alla arreglar-ho." %}
-	{% trans "Per a usar la terminal primer has de conectar-te a traves del boto connect. A partir d'aqui, només podràs utilitzar comandes que no redirigeixin el output cap a fitxer. Es a dir, no podras fer un echo 'hola' > file." %}
+	{% trans "En aquesta secció, pots dedicar-te a mantenir els sistemes Odroid sempre que no hi hagi problemes amb el SSH. En cas contrari hauràs de connectar un HDMI a la placa master Odroid cap a un monitor i des d'allà arreglar-ho." %}
+	{% trans "Per a usar la terminal primer tens de connectar-te a través del botó connectar. A partir d'aquí, només podràs utilitzar comandes que no redirigeixin l'output cap a fitxer. És a dir, no podràs fer un echo 'hola' > file." %}
 </p>
+{% translate "Connect" as connect %}
+{% translate "Tancar" as tancar %}
+{% translate "Remove Output" as eliminar %}
+{% translate "Send Command" as send %}
 <div>
 <select id ="ips" name="select">
 <option value="master">master</option>
-<input id="clickMe2" type="button" value="Connect" onclick="manteniment_odroid();"/>
-<input id="clickMe3" type="button" value="Close" onclick="close_connection();" style="visibility:hidden;"/>
+<input id="clickMe2" type="button" value="{{connect}}" onclick="manteniment_odroid();"/>
+<input id="clickMe3" type="button" value="{{tancar}}" onclick="close_connection();" style="visibility:hidden;"/>
 </select>
 </div>
 <div>
 <select id ="removes" name="select">
 <option value="master">master</option>
 </select>
-<input id="clickMe4" type="button" value="Remove Output" onclick="remove_output();"/>
+<input id="clickMe4" type="button" value="{{eliminar}}" onclick="remove_output();"/>
 </div>
 <div  class="row">
 <div  class="column"> 
 	<ul id="terminal" class="main-description-text" style="height: 500px; width:100%;">
-		<li>INPUT TERMINAL: </li>
+		<li>{% trans "INPUT TERMINAL:" %} </li>
 	</ul>
 </div>
 <div  class="column">	
 	<ul id="terminal2" class="main-description-text" style="height: 500px; width:100%;">
-		<li>OUTPUT TERMINAL: </li>
+		<li>{% trans "OUTPUT TERMINAL:" %} </li>
 	</ul>
 </div>
 <div  class="column">
 	<ul id="terminal3" class="main-description-text" style="height: 500px; width:100%;">
-		<li>OUTPUT ERROR TERMINAL: </li>
+		<li>{% trans "OUTPUT ERROR TERMINAL:" %} </li>
 	</ul>
 </div>
 </div>
 <input type="text" id="inputterminal" style="width:33%;" disabled=true></text>
-<input id="clickMe" type="button" value="Send Command" disabled=true onclick="start_manteniment();"/>
+<input id="clickMe" type="button" value="{{send}}" disabled=true onclick="start_manteniment();"/>
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-22 11:11+0200\n"
+"POT-Creation-Date: 2020-10-27 22:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,296 +18,386 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/templates/core/about.html:6 core/templates/core/about.html:11
-#: core/templates/core/base.html:38 odroid/core/templates/core/about.html:6
-#: odroid/core/templates/core/about.html:11
-#: odroid/core/templates/core/base.html:38
+#: core/templates/core/about.html:6 core/templates/core/about.html:9
+#: core/templates/core/base.html:37
 msgid "Sobre nosaltres"
 msgstr "About us"
 
-#: core/templates/core/about.html:12 odroid/core/templates/core/about.html:12
+#: core/templates/core/about.html:10
 msgid "Equip"
 msgstr "Team"
 
-#: core/templates/core/about.html:16 odroid/core/templates/core/about.html:18
+#: core/templates/core/about.html:14
 msgid "Estudiants"
 msgstr "Students"
 
-#: core/templates/core/about.html:18 odroid/core/templates/core/about.html:22
+#: core/templates/core/about.html:16
+#, fuzzy
+#| msgid ""
+#| "Sóm un grup format per dos estudiants de la Universitat Rovira i Virgili, "
+#| "actualment cursant lúltim any de la carrera d'Enginyeria Informàtica. A "
+#| "continuació veureu informació sobre nosaltres, els estudiants."
 msgid ""
-"Sóm un grup format per dos estudiants de la Universitat Rovira i Virgili, "
-"actualment cursant lúltim any de la carrera d'Enginyeria Informàtica. A "
+"Som un grup format per dos estudiants de la Universitat Rovira i Virgili, "
+"actualment cursant l'últim any de la carrera d'Enginyeria Informàtica. A "
 "continuació veureu informació sobre nosaltres, els estudiants."
 msgstr ""
 "We are a group of two students of the Rovira and Virgili University. "
-"Currently, we are in our last year of Computer Engeenering degree. "
-"You can see more information about us."
+"Currently, we are in our last year of Computer Engeenering degree. You can "
+"see more information about us."
 
-#: core/templates/core/about.html:34 odroid/core/templates/core/about.html:38
+#: core/templates/core/about.html:33
 msgid "Professors"
 msgstr "Teachers"
 
-#: core/templates/core/about.html:35 odroid/core/templates/core/about.html:39
+#: core/templates/core/about.html:34
 msgid ""
 "A continuació, podreu veure informació sobre els professors implicats en el "
 "nostre projecte, tot i què el nostre professor principal ha estat en Carles "
 "Aliagas ja que ens ha fet de tutor del treball de fi de carrera."
 msgstr ""
 "Now you can see information about teachers who works in this project "
-"eventhough our principal teacher is Carles "
-"Aliagas because he is our mentor in our final degree project."
+"eventhough our principal teacher is Carles Aliagas because he is our mentor "
+"in our final degree project."
 
-#: core/templates/core/base.html:29 odroid/core/templates/core/base.html:29
+#: core/templates/core/base.html:28
 msgid "Menú"
 msgstr "Menu"
 
-#: core/templates/core/base.html:35 core/templates/core/home.html:4
-#: odroid/core/templates/core/base.html:35
-#: odroid/core/templates/core/home.html:4
-#: odroid/pages/templates/pages/pages.html:4
-#: odroid/teachers/templates/teachers/teachers.html:4
+#: core/templates/core/base.html:34 core/templates/core/home.html:4
 #: pages/templates/pages/pages.html:4
 msgid "Portada"
 msgstr "Home"
 
-#: core/templates/core/base.html:41 core/templates/core/monitoring.html:4
-#: odroid/core/templates/core/base.html:41
-#: odroid/core/templates/core/monitoring.html:4
+#: core/templates/core/base.html:40 core/templates/core/monitoring.html:4
 msgid "Monitorització"
 msgstr "Monitoring"
 
-#: core/templates/core/base.html:44 core/templates/core/manteniment.html:4
-#: odroid/core/templates/core/base.html:44
-#: odroid/core/templates/core/manteniment.html:4
+#: core/templates/core/base.html:43 core/templates/core/manteniment.html:4
 msgid "Manteniment"
 msgstr "Maintenance"
 
-#: core/templates/core/base.html:47 core/templates/core/descarrega.html:42
-#: odroid/core/templates/core/base.html:47
+#: core/templates/core/base.html:46 core/templates/core/descarrega.html:40
 msgid "Manual"
 msgstr "Manual/Guide"
 
-#: core/templates/core/base.html:50 core/templates/core/descarrega.html:4
-#: odroid/core/templates/core/base.html:50
-#: odroid/core/templates/core/descarrega.html:4
+#: core/templates/core/base.html:49 core/templates/core/descarrega.html:4
 msgid "Descàrregues"
 msgstr "Downloads"
 
-#: core/templates/core/base.html:54 core/templates/core/login.html:4
-#: core/templates/core/login.html:14 odroid/core/templates/core/base.html:54
-#: odroid/core/templates/core/login.html:4
-#: odroid/core/templates/core/login.html:14
+#: core/templates/core/base.html:53 core/templates/core/login.html:4
+#: core/templates/core/login.html:271 core/templates/core/login.html:276
 msgid "Iniciar Sessió"
 msgstr "Sign in"
 
-#: core/templates/core/base.html:58 odroid/core/templates/core/base.html:58
+#: core/templates/core/base.html:57
 msgid "Tancar Sessió"
 msgstr "Sign out"
 
-#: core/templates/core/base.html:64 odroid/core/templates/core/base.html:64
-msgid "Idiomes"
-msgstr "Languages"
-
-#: core/templates/core/base.html:120 odroid/core/templates/core/base.html:120
+#: core/templates/core/base.html:116
 msgid "i"
 msgstr "and"
 
-#: core/templates/core/descarrega.html:12
+#: core/templates/core/base.html:116
+msgid "Made with"
+msgstr "Made with"
+
+#: core/templates/core/base.html:116
+msgid "by"
+msgstr "by"
+
+#: core/templates/core/descarrega.html:10
 msgid "Descripció"
 msgstr "Description"
 
-#: core/templates/core/descarrega.html:14
-#: odroid/core/templates/core/descarrega.html:14
+#: core/templates/core/descarrega.html:12
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "En aquesta secció de la plana web, tens la opció per a descarregar el "
+#| "nostre projecte un altre cop en cas de no recordar l'enllaç o en cas de "
+#| "perdre algún arxiu \n"
+#| "necessari per el funcionament correcte de les plaques. Pots descarregar "
+#| "els arxius d'automatització fets pel David Ferrer i tens la oportunitat "
+#| "de descarregar \n"
+#| "la plana web local  que et permet monitoritzar i mantenir les plaques "
+#| "odroid. A més a més et donem l'enllaç de descàrrega del manual per si no "
+#| "vols seguir el manual de la plana web i el vols en pdf.\n"
 msgid ""
 "\n"
-"En aquesta secció de la plana web, tens la opció per a descarregar el nostre "
+"En aquesta secció de la plana web, tens l'opció per a descarregar el nostre "
 "projecte un altre cop en cas de no recordar l'enllaç o en cas de perdre "
-"algún arxiu \n"
-"necessari per el funcionament correcte de les plaques. Pots descarregar els "
-"arxius d'automatització fets pel David Ferrer i tens la oportunitat de "
-"descarregar \n"
-"la plana web local  que et permet monitoritzar i mantenir les plaques "
-"odroid. A més a més et donem l'enllaç de descàrrega del manual per si no "
-"vols seguir el manual de la plana web i el vols en pdf.\n"
+"algun arxiu\n"
+"necessari pel funcionament correcte de les plaques. Pots descarregar els "
+"arxius d'automatització fets pel David Ferrer i tens l'oportunitat de "
+"descarregar\n"
+"la plana web local que et permet monitorar i mantenir les plaques Odroid. A "
+"més a més et donem l'enllaç de descàrrega del manual per si no vols seguir "
+"el manual de la plana web i el vols en PDF.\n"
 msgstr ""
 "\n"
-"In this section, you can download our project again if you forgot the link or you lost "
-"any file "
-"\n"
-"needed for the correct use of our system. You can download the files "
-"of the automation made by David Ferrer and you can download the App Web that let you "
-"monitor \n"
-"and keep the odroid system. In addition, we give you the link to download the guide "
-"or the guide itself in the section Manual/Guide. "
-"\n"
+"In this section, you can download our project again if you forgot the link "
+"or you lost any file \n"
+"needed for the correct use of our system. You can download the files of the "
+"automation made by David Ferrer and you can download the App Web that let "
+"you monitor \n"
+"and keep the odroid system. In addition, we give you the link to download "
+"the guide or the guide itself in the section Manual/Guide. \n"
 
-#: core/templates/core/descarrega.html:21
+#: core/templates/core/descarrega.html:19
 msgid "Automatització"
 msgstr "Automation"
 
-#: core/templates/core/descarrega.html:23
-#: odroid/core/templates/core/descarrega.html:23
+#: core/templates/core/descarrega.html:21
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "En aquest subapartat, trobaràs l'enllaç que et permetrà descarregar els "
+#| "arxius d'automatització per tal de crear el sistema de cues Slurm per a "
+#| "la comunicació de les plaques, el tallafocs per \n"
+#| "la seguretat, la assignació de ips per a totes les plaques i molt més. A "
+#| "continuació teniu l'enllaç de descàrrega.\n"
 msgid ""
 "\n"
 "En aquest subapartat, trobaràs l'enllaç que et permetrà descarregar els "
 "arxius d'automatització per tal de crear el sistema de cues Slurm per a la "
-"comunicació de les plaques, el tallafocs per \n"
-"la seguretat, la assignació de ips per a totes les plaques i molt més. A "
-"continuació teniu l'enllaç de descàrrega.\n"
+"comunicació de les plaques, el tallafoc per\n"
+"la seguretat, l'assignació de les adrecesses IP per a totes les plaques i "
+"molt més. A continuació teniu l'enllaç de descàrrega.\n"
 msgstr ""
 "\n"
-"In this subsection, you will find the link that will allow you to download them"
-"automation files for creating the Slurm queuing system for the"
-"communication of the boards, the firewall for \n"
-"the security status, the ips allocation for all boards and much more. In"
-"Continuation you have the download link. \n"
+"In this subsection, you will find the link that will allow you to download "
+"themautomation files for creating the Slurm queuing system for "
+"thecommunication of the boards, the firewall for \n"
+"the security status, the ips allocation for all boards and much more. "
+"InContinuation you have the download link. \n"
 
-#: core/templates/core/descarrega.html:28
+#: core/templates/core/descarrega.html:26
 msgid "Descàrrega per la automatització"
 msgstr "Automation download"
 
-#: core/templates/core/descarrega.html:31
+#: core/templates/core/descarrega.html:29
 msgid "Monitorització i manteniment"
 msgstr "Monitoring and maintenance"
 
-#: core/templates/core/descarrega.html:33
-#: odroid/core/templates/core/descarrega.html:33
+#: core/templates/core/descarrega.html:31
 msgid ""
 "\n"
-"En aquest subapartat, pots decarregar la plana web local per al manteniment "
-"i monitorització de les plaques odroid. Aquesta plana et permetrà veure els "
-"estats essencials de les plauqes com pot ser\n"
-"la entropia, la calor, el usage de les cpus i altres. A més a més, "
+"En aquest subapartat, pots descarregar la plana web local per al manteniment "
+"i monitoratge de les plaques Odroid. Aquesta plana et permetrà veure els "
+"estats essencials de les plaques com pot ser\n"
+"l'entropia, la calor, la utilització de les CPUs i altres. A més a més, "
 "proporciona un apartat de manteniment on disposaràs de 3 petites terminals "
-"on 1 serà per el input, i les altres pels \n"
-"outputs (stout i stderr) on podràs executar petites comandes. A continuació "
+"on 1 serà per l'input, i les altres pels\n"
+"outputs (stdout i stderr) on podràs executar petites comandes. A continuació "
 "teniu l'enllaç de descàrrega.\n"
 msgstr ""
 
-#: core/templates/core/descarrega.html:39
+#: core/templates/core/descarrega.html:37
 msgid "Descàrrega pel manteniment i monitorització"
 msgstr "Monitoring and maintenance download"
 
-#: core/templates/core/descarrega.html:44
-#: odroid/core/templates/core/descarrega.html:44
+#: core/templates/core/descarrega.html:42
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "En aquest últim subapartat, tindreu la oportunitat de descarregar el "
+#| "manual en pdf per tal de saber com executar el nostre projecte i per tal "
+#| "de saber com fer-lo servir. En cas de no voler \n"
+#| "descarregar el manual, no cal que patiu ja que en la barra de navegació "
+#| "de la plana local, hi ha l'apartat manual on podràs veure el manual sense "
+#| "tindre'l que baixar. A continuació teniu l'enllaç de \n"
+#| "descàrrega.\n"
 msgid ""
 "\n"
-"En aquest últim subapartat, tindreu la oportunitat de descarregar el manual "
-"en pdf per tal de saber com executar el nostre projecte i per tal de saber "
-"com fer-lo servir. En cas de no voler \n"
-"descarregar el manual, no cal que patiu ja que en la barra de navegació de "
+"En aquest últim subapartat, tindreu l'oportunitat de descarregar el manual "
+"en PDF per tal de saber com executar el nostre projecte i per tal de saber "
+"com fer-lo servir. En cas de no voler\n"
+"descarregar el manual, no cal que patiu, ja que en la barra de navegació de "
 "la plana local, hi ha l'apartat manual on podràs veure el manual sense "
-"tindre'l que baixar. A continuació teniu l'enllaç de \n"
+"tindre'l que baixar. A continuació teniu l'enllaç de\n"
 "descàrrega.\n"
 msgstr ""
 "\n"
-"In this last subsection, you will have the opportunity to download the manual"
-"in pdf in order to know how to execute our project and in order to know"
-"how to use it. If you don't want to \n"
-"download the manual, you don't have to suffer because in the navigation bar"
-"the local page, there is the manual section where you can see the manual without"
-"have to download it. Below is the link to \n"
+"In this last subsection, you will have the opportunity to download the "
+"manualin pdf in order to know how to execute our project and in order to "
+"knowhow to use it. If you don't want to \n"
+"download the manual, you don't have to suffer because in the navigation "
+"barthe local page, there is the manual section where you can see the manual "
+"withouthave to download it. Below is the link to \n"
 "download. \n"
 
-#: core/templates/core/descarrega.html:50
+#: core/templates/core/descarrega.html:48
 msgid "Descàrrega del manual"
 msgstr "Manual/guide download"
 
-#: core/templates/core/home.html:13 odroid/core/templates/core/home.html:13
+#: core/templates/core/home.html:11
+#, fuzzy
+#| msgid ""
+#| "Entra i descobreix el nostre projecte. Un projecte per a fer "
+#| "paral·lelització de manera fàcil i ràpida amb la opció de monitorització "
+#| "i manteniment LAN."
 msgid ""
 "Entra i descobreix el nostre projecte. Un projecte per a fer "
-"paral·lelització de manera fàcil i ràpida amb la opció de monitorització i "
+"paral·lelització de manera fàcil i ràpida amb l'opció de monitoratge i "
 "manteniment LAN."
 msgstr ""
-"Come in and discover our project. A project to do"
-"parallelization easily and quickly with the monitoring option and"
-"LAN maintenance."
+"Come in and discover our project. A project to doparallelization easily and "
+"quickly with the monitoring option andLAN maintenance."
 
-#: core/templates/core/home.html:14 odroid/core/templates/core/home.html:14
+#: core/templates/core/home.html:12
+#, fuzzy
+#| msgid ""
+#| "Si no saps de que es tracta la paral·lelització, no et preocupis perquè "
+#| "nosaltres t'ho expliquem. La paral·lelització tracta de repartir la feina "
+#| "entre una mateixa màquina"
 msgid ""
-"Si no saps de que es tracta la paral·lelització, no et preocupis perquè "
+"Si no saps de què es tracta la paral·lelització, no et preocupis perquè "
 "nosaltres t'ho expliquem. La paral·lelització tracta de repartir la feina "
 "entre una mateixa màquina"
 msgstr ""
-"If you don't know what parallelism is all about, don't worry because"
-"We tell you. Parallelization is about sharing the work"
-"between the same machine"
+"If you don't know what parallelism is all about, don't worry becauseWe tell "
+"you. Parallelization is about sharing the workbetween the same machine"
 
-#: core/templates/core/home.html:15 odroid/core/templates/core/home.html:15
+#: core/templates/core/home.html:13
+#, fuzzy
+#| msgid ""
+#| "i els seus cores o entre diverses màquines. El nostre projecte tratca la "
+#| "paral·lelització entre diverses màquines i de manera fàcil ja que només "
+#| "necessitaras plaques odroid, un "
 msgid ""
-"i els seus cores o entre diverses màquines. El nostre projecte tratca la "
-"paral·lelització entre diverses màquines i de manera fàcil ja que només "
-"necessitaras plaques odroid, un "
+"i els seus cores o entre diverses màquines. El nostre projecte tracta la "
+"paral·lelització entre diverses màquines i de manera fàcil, ja que només "
+"necessitaràs plaques Odroid, un "
 msgstr ""
-"and their cores or between various machines. Our project deals with the"
-"parallelization between several machines and easily since only"
-"you'll need odroid boards, one"
+"and their cores or between various machines. Our project deals with "
+"theparallelization between several machines and easily since onlyyou'll need "
+"odroid boards, one"
 
-#: core/templates/core/home.html:16 odroid/core/templates/core/home.html:16
+#: core/templates/core/home.html:14
+#, fuzzy
+#| msgid ""
+#| "switch i el teu router. Pots saber d'ordinadors o no, ja que nosaltres "
+#| "estarem a la seva disposició i també li oferirem un manual per tal de que "
+#| "la instal·lació sigui fàcil."
 msgid ""
 "switch i el teu router. Pots saber d'ordinadors o no, ja que nosaltres "
-"estarem a la seva disposició i també li oferirem un manual per tal de que la "
+"estarem a la seva disposició i també li oferirem un manual per tal que la "
 "instal·lació sigui fàcil."
 msgstr ""
-"Come in and discover our project. A project to do"
-"parallelization easily and quickly with the monitoring option and"
-"LAN maintenance."
+"Come in and discover our project. A project to doparallelization easily and "
+"quickly with the monitoring option andLAN maintenance."
 
-#: core/templates/core/home.html:17 odroid/core/templates/core/home.html:17
+#: core/templates/core/home.html:15
+#, fuzzy
+#| msgid ""
+#| "A més a més, nosaltres busquem i tenim l'objectiu de que el nostre "
+#| "projecte ajudi a gent en l'ambit de la educació."
 msgid ""
-"A més a més, nosaltres busquem i tenim l'objectiu de que el nostre projecte "
-"ajudi a gent en l'ambit de la educació."
+"A més a més, nosaltres busquem i tenim l'objectiu que el nostre projecte "
+"ajudi a gent en l'àmbit de l'educació."
 msgstr ""
-"In addition, we seek and aim for our project"
-"help people in the field of education."
+"In addition, we seek and aim for our projecthelp people in the field of "
+"education."
 
-#: core/templates/core/home.html:19 odroid/core/templates/core/home.html:19
+#: core/templates/core/home.html:17
 msgid ""
 "A continuació disposa d'un enllaç per a visitar la pàgina de les plaques/"
 "ordinadors que utilitzem."
-msgstr ""
-"Below is a link to visit the plates/computer "
-"we use."
+msgstr "Below is a link to visit the plates/computer we use."
 
-#: core/templates/core/home.html:20 core/templates/core/manual.html:24
+#: core/templates/core/home.html:18 core/templates/core/manual.html:22
 msgid "Plaques Odroid"
 msgstr "Odroid boards"
 
-#: core/templates/core/login.html:17 odroid/core/templates/core/login.html:17
+#: core/templates/core/login.html:272
+#, fuzzy
+#| msgid "Nom d'usuari:"
+msgid "Nom d'usuari"
+msgstr "Username"
+
+#: core/templates/core/login.html:273
+#, fuzzy
+#| msgid "Contrasenya:"
+msgid "Contrasenya"
+msgstr "Password"
+
+#: core/templates/core/login.html:280
 msgid "Nom d'usuari:"
 msgstr "Username:"
 
-#: core/templates/core/login.html:18 odroid/core/templates/core/login.html:18
+#: core/templates/core/login.html:281
 msgid "Contrasenya:"
 msgstr "Password:"
 
-#: core/templates/core/manteniment.html:129
-#: odroid/core/templates/core/manteniment.html:121
+#: core/templates/core/manteniment.html:179
+#, fuzzy
+#| msgid ""
+#| "En aquesta secció, pots dedicar-te a mantenir els sistemes odroid sempre "
+#| "i quan no hi hagi problemes amb el ssh. En cas contrari hauras de "
+#| "conectar un hdmi a la placa master odroid cap a un monitor i desde alla "
+#| "arreglar-ho."
 msgid ""
-"En aquesta secció, pots dedicar-te a mantenir els sistemes odroid sempre i "
-"quan no hi hagi problemes amb el ssh. En cas contrari hauras de conectar un "
-"hdmi a la placa master odroid cap a un monitor i desde alla arreglar-ho."
+"En aquesta secció, pots dedicar-te a mantenir els sistemes Odroid sempre que "
+"no hi hagi problemes amb el SSH. En cas contrari hauràs de connectar un HDMI "
+"a la placa master Odroid cap a un monitor i des d'allà arreglar-ho."
 msgstr ""
-"In this section, you can dedicate yourself to maintaining odroid systems forever and"
-"when there are no problems with ssh. Otherwise you will need to connect a"
-"hdmi on the odroid master board to a monitor and from there fix it."
+"In this section, you can dedicate yourself to maintaining odroid systems "
+"forever andwhen there are no problems with ssh. Otherwise you will need to "
+"connect ahdmi on the odroid master board to a monitor and from there fix it."
 
-#: core/templates/core/manteniment.html:130
-#: odroid/core/templates/core/manteniment.html:122
+#: core/templates/core/manteniment.html:180
+#, fuzzy
+#| msgid ""
+#| "Per a usar la terminal primer has de conectar-te a traves del boto "
+#| "connect. A partir d'aqui, només podràs utilitzar comandes que no "
+#| "redirigeixin el output cap a fitxer. Es a dir, no podras fer un echo "
+#| "'hola' > file."
 msgid ""
-"Per a usar la terminal primer has de conectar-te a traves del boto connect. "
-"A partir d'aqui, només podràs utilitzar comandes que no redirigeixin el "
-"output cap a fitxer. Es a dir, no podras fer un echo 'hola' > file."
+"Per a usar la terminal primer tens de connectar-te a través del botó "
+"connectar. A partir d'aquí, només podràs utilitzar comandes que no "
+"redirigeixin l'output cap a fitxer. És a dir, no podràs fer un echo 'hola' > "
+"file."
 msgstr ""
-"To use the terminal you must first connect through the connect button."
-"From here, you can only use commands that do not redirect the"
-"output to file. That is, you will not be able to echo 'hello'> file."
+"To use the terminal you must first connect through the connect button.From "
+"here, you can only use commands that do not redirect theoutput to file. That "
+"is, you will not be able to echo 'hello'> file."
 
-#: core/templates/core/manual.html:12
+#: core/templates/core/manteniment.html:182
+msgid "Connect"
+msgstr "Connect"
+
+#: core/templates/core/manteniment.html:183
+#, fuzzy
+#| msgid "Tancar Sessió"
+msgid "Tancar"
+msgstr "Sign out"
+
+#: core/templates/core/manteniment.html:184
+msgid "Remove Output"
+msgstr "Remove Output"
+
+#: core/templates/core/manteniment.html:185
+msgid "Send Command"
+msgstr "Send Command"
+
+#: core/templates/core/manteniment.html:202
+msgid "INPUT TERMINAL:"
+msgstr "INPUT TERMINAL:"
+
+#: core/templates/core/manteniment.html:207
+msgid "OUTPUT TERMINAL:"
+msgstr "OUTPUT TERMINAL:"
+
+#: core/templates/core/manteniment.html:212
+msgid "OUTPUT ERROR TERMINAL:"
+msgstr "OUTPUT ERROR TERMINAL:"
+
+#: core/templates/core/manual.html:10
 msgid "Introducció"
 msgstr "Introduction"
 
-#: core/templates/core/manual.html:14
+#: core/templates/core/manual.html:12
 msgid ""
 "\n"
 "Aquest manual té el propòsit de permetre a l'usuari instal·lar de manera\n"
@@ -321,55 +411,55 @@ msgstr ""
 "This manual is intended to allow the user to install \n"
 "automated a queuing system called Slurm which will allow \n"
 "can parallelize efficiently and efficiently. \n"
-"In addition, it will also automate the installation of the web application in order to"
-"of \n"
+"In addition, it will also automate the installation of the web application "
+"in order toof \n"
 "monitor and maintain our system. \n"
 
-#: core/templates/core/manual.html:22
+#: core/templates/core/manual.html:20
 msgid "Material"
 msgstr "Material"
 
-#: core/templates/core/manual.html:25
+#: core/templates/core/manual.html:23
 msgid "Swicth"
 msgstr "Switch"
 
-#: core/templates/core/manual.html:26
+#: core/templates/core/manual.html:24
 msgid "Cables Ethernet (tants com plaques + 1 per el router)"
 msgstr "Ethernet wires (as much as odroid boards + 1 for the router)"
 
-#: core/templates/core/manual.html:27
+#: core/templates/core/manual.html:25
 msgid "Un router amb connexió a Internet"
 msgstr "Router with internet connection"
 
-#: core/templates/core/manual.html:28
+#: core/templates/core/manual.html:26
 msgid "Adaptador de USB a Ethernet"
 msgstr "USB to Ethernet adapter"
 
-#: core/templates/core/manual.html:29
+#: core/templates/core/manual.html:27
 msgid "Ratolí (opcional)"
 msgstr "Mouse (optional)"
 
-#: core/templates/core/manual.html:30
+#: core/templates/core/manual.html:28
 msgid "Tecla (opcional)"
 msgstr "Keyboard (optional)"
 
-#: core/templates/core/manual.html:31
+#: core/templates/core/manual.html:29
 msgid "HDMI (opcional)"
 msgstr "HDMI (optional)"
 
-#: core/templates/core/manual.html:32
+#: core/templates/core/manual.html:30
 msgid "Pantalla amb connexió HDMI (opcional)"
 msgstr "Screen with HDMI connection (optional)"
 
-#: core/templates/core/manual.html:34
+#: core/templates/core/manual.html:32
 msgid "Instal·lació"
 msgstr "Instalation"
 
-#: core/templates/core/manual.html:36
+#: core/templates/core/manual.html:34
 msgid "Montar el sistema"
 msgstr "Mount the system"
 
-#: core/templates/core/manual.html:38
+#: core/templates/core/manual.html:36
 msgid ""
 "\n"
 "Primer de tot necessitaràs un lloc on posar les teves plaques Odroid de "
@@ -390,64 +480,59 @@ msgid ""
 "l'apartat de descàrregues.\n"
 msgstr ""
 "\n"
-"First of all you'll need a place to put your Odroid boards from"
-"way \n"
-"that each Ethernet cable will go to a Swicth port and the Ethernet port of"
-"the \n"
+"First of all you'll need a place to put your Odroid boards fromway \n"
+"that each Ethernet cable will go to a Swicth port and the Ethernet port "
+"ofthe \n"
 "boards. You will then need to connect the Etehrnet USB adapter and cable \n"
-"Ethernet from this USB to the router. Optionally you can set HDMI,"
-"the \n"
-"mouse and keyboard on the master board in order to configure it with the help"
-"from \n"
-"screen. If you do not want to put the optional material, you must go to"
-"the \n"
+"Ethernet from this USB to the router. Optionally you can set HDMI,the \n"
+"mouse and keyboard on the master board in order to configure it with the "
+"helpfrom \n"
+"screen. If you do not want to put the optional material, you must go tothe \n"
 "configuring the router to know the IP of the master board in LAN mode and \n"
 "connect via SSH as follows: \n"
 "ssh odroid @ ip \n"
 "Where to put Odroid password. Now it's ready to go to \n"
 "the downloads section. \n"
 
-#: core/templates/core/manual.html:52
+#: core/templates/core/manual.html:50
 msgid "Descàrrega, descompressió i instal·lació d’arxius"
 msgstr "Download and file instalation"
 
-#: core/templates/core/manual.html:54
+#: core/templates/core/manual.html:52
 msgid ""
 "Un cop dintre a la terminal de la nostra placa màster, aneu al directori "
 "Documents amb la següent comanda:"
 msgstr ""
-"Once inside the terminal of our master plate, go to the directory"
-"Documents with the following command:"
+"Once inside the terminal of our master plate, go to the directoryDocuments "
+"with the following command:"
 
-#: core/templates/core/manual.html:56
+#: core/templates/core/manual.html:54
 msgid ""
 "Un cop dintre el directori, heu de descarregar els arxius per a la "
 "automatització. Haureu d’executar la següent comanda:"
 msgstr ""
-"Once inside the directory, you must download the files for the"
-"automation. You must run the following command:"
+"Once inside the directory, you must download the files for theautomation. "
+"You must run the following command:"
 
-#: core/templates/core/manual.html:58
+#: core/templates/core/manual.html:56
 msgid "Ara haureu de descomprimir el fitxer master.zip amb la següent comanda:"
 msgstr "Now you need to unzip the master.zip file with the following command:"
 
-#: core/templates/core/manual.html:60
+#: core/templates/core/manual.html:58
 msgid ""
 "Un cop descomprimit, aneu dintre el directori que heu descomprimit amb la "
 "comanda següent:"
-msgstr ""
-"Once unzipped, go to the directory you unzipped with the"
-"next command:"
+msgstr "Once unzipped, go to the directory you unzipped with thenext command:"
 
-#: core/templates/core/manual.html:62
+#: core/templates/core/manual.html:60
 msgid "Fnalment, executeu el script com a sudo de la següent manera:"
 msgstr "Finally, run the script as sudo as follows:"
 
-#: core/templates/core/manual.html:65
+#: core/templates/core/manual.html:63
 msgid "Aplicació web"
 msgstr "Web Aplication"
 
-#: core/templates/core/manual.html:67
+#: core/templates/core/manual.html:65
 msgid ""
 "\n"
 "Per a poder veure la plana web, només cal que aneu a un navegador d’un\n"
@@ -471,18 +556,47 @@ msgstr ""
 "To view the webpage, all you have to do is go to a browser \n"
 "computer that is on the same LAN as the master board and has \n"
 "https://ipOdroid. \n"
-"Where ipOdroid will be the ip of the Odroid LAN. You will then need to accept the \n"
+"Where ipOdroid will be the ip of the Odroid LAN. You will then need to "
+"accept the \n"
 "permissions since we generated a self - signed certificate to establish a \n"
-"secure connection to our server. You should now be able to see the"
-"application \n"
-"web. If you're using Firefox, you'll need to go to the"
-"next \n"
+"secure connection to our server. You should now be able to see "
+"theapplication \n"
+"web. If you're using Firefox, you'll need to go to thenext \n"
 "web page: https://ipOdroid:3000 in order to accept certificates for \n"
 "node server responsible for sending data to the web application. \n"
-"Finally, you will need to log in with your odroid username and password for \n"
-"be able to monitor and maintain the boards. To use the board with more than one \n"
+"Finally, you will need to log in with your odroid username and password "
+"for \n"
+"be able to monitor and maintain the boards. To use the board with more than "
+"one \n"
 "user, must go to https://ipOdroid/admin where it will be on the page \n"
 "administrator to be able to create the necessary users in charge of \n"
 "monitor plates. \n"
 
+#: core/templates/core/monitoring.html:91
+#, fuzzy
+#| msgid "Monitorització"
+msgid "Monitoring"
+msgstr "Monitoring"
 
+#: core/templates/core/monitoring.html:92
+msgid "Continue Monitoring"
+msgstr "Continue Monitoring"
+
+#: core/templates/core/monitoring.html:93
+msgid "Pause Monitoring"
+msgstr "Pause Monitoring"
+
+#: core/templates/core/monitoring.html:94
+msgid "Stop Monitoring"
+msgstr "Stop Monitoring"
+
+#: core/templates/core/monitoring.html:108
+msgid "Nombre de punts pels grafics lineals:"
+msgstr "Number of points in a lineal graphic:"
+
+#: core/templates/core/monitoring.html:114
+msgid "Delay en segons per la obtenció de dades:"
+msgstr "Delay in the obtention of data in seconds:"
+
+#~ msgid "Idiomes"
+#~ msgstr "Languages"

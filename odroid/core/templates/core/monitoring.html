@@ -88,14 +88,19 @@ input[type=range]::-ms-thumb {
 <h1>URV-Odroid</h1>
 {% endblock %}
 {% block content %}
+{% translate "Monitoring" as monitor %}
+{% translate "Continue Monitoring" as continuemonitor %}
+{% translate "Pause Monitoring" as pausemonitor %}
+{% translate "Stop Monitoring" as stopmonitor %}
+
 <form align="center">
 <select id ="ips" name="select">
 <option value="master">master</option>
 </select>
-<input id="clickMe" type="button" value="Monitoring" onclick="monitor_odroid();"/>
-<input id="continueMe" type="button" value="Continue Monitoring" onclick="continueGraf();"/>
-<input id="pauseMe" type="button" value="Pause Monitoring" onclick="pause();"/>
-<input id="stopMe" type="button" value="Stop Monitoring" onclick="stop();"/>
+<input id="clickMe" type="button" value="{{monitor}}" onclick="monitor_odroid();"/>
+<input id="continueMe" type="button" value="{{continuemonitor}}" onclick="continueGraf();"/>
+<input id="pauseMe" type="button" value="{{pausemonitor}}" onclick="pause();"/>
+<input id="stopMe" type="button" value="{{stopmonitor}}" onclick="stop();"/>
 </form>
 <div class="row" align="center">
 <div  class="column">
