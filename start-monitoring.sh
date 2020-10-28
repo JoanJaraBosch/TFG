@@ -44,13 +44,6 @@ cp -rp json-server.sh /home/odroid/.django-monitor/
 #We made a variable to know where we are.
 descarregues=$(pwd)
 
-#Make migrations.
-python3 /home/odroid/.django-monitor/odroid/manage.py makemigrations
-python3 /home/odroid/.django-monitor/odroid/manage.py migrate
-
-#Obtain static files. 
-python3 /home/odroid/.django-monitor/odroid/manage.py collectstatic --noinput
-
 #If this file/link already exist because of previous test, 
 #we gonna delete it. If not we gonna create the hard link.
 if [ -f /home/odroid/.django-monitor/odroid/ips ]; then

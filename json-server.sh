@@ -4,7 +4,7 @@
 #Version: 1
 #Date: 26/9/2020
 
-cpu=$(ps -A -o pcpu | tail -n+2 | paste -sd+ | bc)
+cpu=$(iostat | head -4 | tail -1 | awk '{print $1}')
 mem=$(free -m | awk '{print $7}' | head -2 | tail -1)
 mem_avail=$(df -t ext4 --output=used,avail | head -2 | tail -1)
 temp=$(sensors | tail -2 | head -1 | cut -d " " -f 9,13)
