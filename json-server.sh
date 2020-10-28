@@ -4,7 +4,7 @@
 #Version: 1
 #Date: 26/9/2020
 
-cpu=$(iostat | head -4 | tail -1 | awk '{print $1}')
+cpu=$(ps -A -o pcpu | tail -n+2 | paste -sd+ | bc)
 mem=$(free -m | awk '{print $7}' | head -2 | tail -1)
 mem_avail=$(df -t ext4 --output=used,avail | head -2 | tail -1)
 temp=$(sensors | tail -2 | head -1 | cut -d " " -f 9,13)
@@ -17,7 +17,6 @@ sec=$(echo "(($(awk '{print $1}' /proc/uptime) %86400)%3600)/60" | bc)
 writeread=$(iostat | tail -n +7 | awk '{r+=$5}{w+=$6}END{print w" "r}')
 
 for i in /sys/class/net/*; do RX=$(cat $i/statistics/tx_bytes); TX=$(cat $i/statistics/rx_bytes); network=$(echo "_"$(basename $i)": "$RX" "$TX" "$network) ; done
-
 
 temp=$(echo "${temp//[+,),C,°]/}")
 load=$(echo $load" "$cpunum)

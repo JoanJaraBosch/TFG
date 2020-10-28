@@ -528,6 +528,26 @@ chartTemp = new Chart(ctx_temp, {
                         display: true,
                         text: 'Monitoring Temperature'
                 },
+                scales: {
+                        xAxes: [{
+                                scaleLabel: {
+                                        display: true,
+                                        labelString: 'Updates'
+                                }
+                        }],
+                        yAxes: [{
+                                ticks: {
+                                        beginAtZero: true,
+                                        max: 100,
+                                        min: 0,
+                                },
+                                scaleLabel: {
+                                        display: true,
+                                        labelString: '°C'
+                                },
+                        }]
+                },
+
         }
 });
 };
@@ -535,7 +555,7 @@ chartTemp = new Chart(ctx_temp, {
 function updateChartTemp(contador, dataLength) {
      try{
          chartTemp.data.datasets[0].data.push(parseFloat(temp[0]));
-         chartTemp.data.datasets[1].data.push(parseFloat(temp[1]) -parseFloat(temp[0]));
+         chartTemp.data.datasets[1].data.push(parseFloat(temp[1]));
 	 chartTemp.data.labels.push(contador);
 
 	 while(chartTemp.data.datasets[0].data.length > dataLength){
@@ -647,23 +667,7 @@ chartLoad = new Chart(ctx_load, {
                         borderColor: [
                                 'rgba(255, 206, 0, 1)',
                         ],
-                        label: "1 min critic",
-                        data: []
-                },
-		{
-                        fill: false,
-                        borderColor: [
-                                'rgba(219, 217, 214, 1)',
-                        ],
-                        label: "5 min critic",
-                        data: []
-                },
-		{
-                        fill: false,
-                        borderColor: [
-                                'rgba(172, 22, 44, 1)',
-                        ],
-                        label: "15 min critic",
+                        label: "Max Load",
                         data: []
                 }],
 
@@ -685,7 +689,7 @@ chartLoad = new Chart(ctx_load, {
                                 ticks: {
                                         beginAtZero: true,
 					max: 4,
-     					min: -1,
+     					min: 0,
                                 },
                                 scaleLabel: {
                                         display: true,
@@ -702,17 +706,13 @@ function updateChartLoad(contador, dataLength) {
 	chartLoad.data.datasets[0].data.push(load[0]);
 	chartLoad.data.datasets[1].data.push(load[1]);
 	chartLoad.data.datasets[2].data.push(load[2]);
-	chartLoad.data.datasets[3].data.push(load[3]-load[0]);
-	chartLoad.data.datasets[4].data.push(load[3]-load[1]);
-	chartLoad.data.datasets[5].data.push(load[3]-load[2]);
+	chartLoad.data.datasets[3].data.push(load[3]);
 	chartLoad.data.labels.push(contador);
 	while(chartLoad.data.labels.length > dataLength){
 		chartLoad.data.datasets[0].data.shift();
         	chartLoad.data.datasets[1].data.shift();
         	chartLoad.data.datasets[2].data.shift();
         	chartLoad.data.datasets[3].data.shift();
-        	chartLoad.data.datasets[4].data.shift();
-        	chartLoad.data.datasets[5].data.shift();
         	chartLoad.data.labels.shift();
 	}       
       	chartLoad.update();
@@ -823,6 +823,9 @@ function jsonGLobal(){
     console.log(reader.result);
     json_message = JSON.parse(reader.result);
     cpu_usage = json_message.cpu;
+    if(parseFloat(cpu_usage) > 400){
+	cpu_usage=400;
+    }
     mem_avail = json_message.mem_avail;
     mem_avail = mem_avail.split(" ");
     mem = json_message.mem;
