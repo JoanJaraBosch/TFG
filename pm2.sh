@@ -7,11 +7,15 @@
 
 #Installing npm modules for my project
 cd /home/odroid/.django-monitor
-npm install pm2 -g
-npm install os 
-npm install websocket
-npm install child_process 
-npm install http
+update="utf-8-validate bufferutil pm2"
+for package in $update; do
+	if [ $(npm list -g | grep -c "ok installed") -eq 0 ]; then   npm install -g $package; fi
+done
+
+update="os websocket http child_process"
+for package in $update; do
+	if [ $(npm list | grep -c "ok installed") -eq 0 ]; then   npm install $package; fi
+done
 
 pm2 start /home/odroid/.django-monitor/servidor.js
 pm2 startup
