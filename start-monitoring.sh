@@ -20,10 +20,11 @@ for package in $update; do
 done
 
 pip3 install --upgrade setuptools
-pip3 install virtualenv wheel
 pip3 install --upgrade django
-pip3 install gunicorn requests pillow 
-pip3 install django-modeltranslation
+install="virtualenv wheel gunicorn requests pillow django-modeltranslation"
+for package in $install;do
+	if [ $(pip3 list --format=columns | grep -c $package) -eq 0 ];then pip3 install $package; fi
+done
 #Change permisions and config of npm for odroid user.
 mkdir -p /home/odroid/.npm-global/
 mkdir -p /home/odroid/.django-monitor/
