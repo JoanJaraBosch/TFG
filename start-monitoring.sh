@@ -40,7 +40,7 @@ cp -rp servidor.js /home/odroid/.django-monitor/
 cp -rp monitoring.sh /home/odroid/.django-monitor/
 cp -rp maintenance.sh /home/odroid/.django-monitor/
 cp -rp json-server.sh /home/odroid/.django-monitor/
-
+cp -rp pm2.sh /home/odroid/.django-monitor/
 #We made a variable to know where we are.
 descarregues=$(pwd)
 
