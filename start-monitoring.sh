@@ -31,6 +31,7 @@ mkdir -p /home/odroid/.django-monitor/
 mkdir -p /home/odroid/.pm2/
 su odroid -c "npm config set prefix '/home/odroid/.npm-global'"
 
+chmod 644 monitor
 cp -p monitor /etc/default/
 
 if [ $(grep "source /etc/default/monitor" /etc/profile | wc -l) -eq 0 ]; then
