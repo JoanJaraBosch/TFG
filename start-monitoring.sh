@@ -30,9 +30,32 @@ mkdir -p /home/odroid/.npm-global/
 mkdir -p /home/odroid/.django-monitor/
 mkdir -p /home/odroid/.pm2/
 su odroid -c "npm config set prefix '/home/odroid/.npm-global'"
-runuser -l odroid -c 'echo "export NODE_PATH=/home/odroid/.django-monitor/node_modules" >> /home/odroid/.profile'
-runuser -l odroid -c 'echo "export PATH=/home/odroid/.npm-global/bin:\$PATH" >> /home/odroid/.profile'
-runuser -l odroid -c 'source /home/odroid/.profile'
+
+cp -p monitor /etc/default/
+
+if [ $(grep "source /etc/default/monitor" /etc/profile | wc -l) -eq 0 ]; then
+	echo "source /etc/default/monitor" >> /etc/profile
+fi
+
+if [ $(grep "source /etc/default/monitor" /etc/bash.bashrc | wc -l) -eq 0 ]; then
+	echo "source /etc/default/monitor" >> /etc/bash.bashrc
+fi
+
+if [ $(grep "source /etc/default/monitor" /root/.profile | wc -l) -eq 0 ]; then
+	echo "source /etc/default/monitor" >> /root/.profile
+fi
+
+if [ $(grep "source /etc/default/monitor" /root/.bashrc | wc -l) -eq 0 ]; then
+	echo "source /etc/default/monitor" >> /root/.bashrc
+fi
+
+if [ $(grep "source /etc/default/monitor" /home/odroid/.profile | wc -l) -eq 0 ]; then
+	echo "source /etc/default/monitor" >> /home/odroid/.profile
+fi
+
+if [ $(grep "source /etc/default/monitor" /home/odroid/.bashrc | wc -l) -eq 0 ]; then
+	echo "source /etc/default/monitor" >> /home/odroid/.bashrc
+fi
 
 chown -R odroid:odroid /home/odroid/.pm2/
 chown -R odroid:odroid /home/odroid/.npm-global/
@@ -40,11 +63,11 @@ chown -R odroid:odroid /home/odroid/.django-monitor/
 
 #Copy scripts and webapp to the default folder
 cp -rp odroid/ /home/odroid/.django-monitor/
-cp -rp servidor.js /home/odroid/.django-monitor/ 
-cp -rp monitoring.sh /home/odroid/.django-monitor/
-cp -rp maintenance.sh /home/odroid/.django-monitor/
-cp -rp json-server.sh /home/odroid/.django-monitor/
-cp -rp pm2.sh /home/odroid/.django-monitor/
+cp -p servidor.js /home/odroid/.django-monitor/ 
+cp -p monitoring.sh /home/odroid/.django-monitor/
+cp -p maintenance.sh /home/odroid/.django-monitor/
+cp -p json-server.sh /home/odroid/.django-monitor/
+cp -p pm2.sh /home/odroid/.django-monitor/
 #We made a variable to know where we are.
 descarregues=$(pwd)
 
