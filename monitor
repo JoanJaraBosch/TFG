@@ -1,0 +1,2 @@
+export NODE_PATH=/home/odroid/.django-monitor/node_modules
+export PATH=/home/odroid/.npm-global/bin:\$PATH
