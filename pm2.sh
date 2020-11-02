@@ -9,12 +9,12 @@
 cd /home/odroid/.django-monitor
 update="utf-8-validate bufferutil pm2"
 for package in $update; do
-	if [ $(npm list -g | grep -c "ok installed") -eq 0 ]; then   npm install -g $package; fi
+	if [ $(npm list -g | grep -c $package) -eq 0 ]; then   npm install -g $package; fi
 done
 
 update="os websocket http child_process"
 for package in $update; do
-	if [ $(npm list | grep -c "ok installed") -eq 0 ]; then   npm install $package; fi
+	if [ $(npm list | grep -c $package) -eq 0 ]; then   npm install $package; fi
 done
 
 pm2 start /home/odroid/.django-monitor/servidor.js
