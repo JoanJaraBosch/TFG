@@ -14,8 +14,11 @@ fi
 
 #Upgrades and instalations needed.
 apt update -y
-apt install python3-pip python3 gunicorn nginx python3-django gettext nload npm sysstat -y
-apt install libjpeg8-dev zlib1g-dev -y
+update="python3-pip python3 gunicorn nginx python3-django gettext nload npm sysstat libjpeg8-dev zlib1g-dev"
+for package in $update; do
+	if [ $(dpkg-query -W -f='${Status}' $package 2>/dev/null | grep -c "ok installed") -eq 0 ]; then   apt-get install $package -y; fi
+done
+
 pip3 install --upgrade setuptools
 pip3 install virtualenv wheel
 pip3 install --upgrade django
