@@ -29,7 +29,7 @@ done
 mkdir -p /home/odroid/.npm-global/
 mkdir -p /home/odroid/.django-monitor/
 mkdir -p /home/odroid/.pm2/
-npm config set prefix '/home/odroid/.npm-global'
+su odroid -c "npm config set prefix '/home/odroid/.npm-global'"
 runuser -l odroid -c 'echo "export NODE_PATH=/home/odroid/.django-monitor/node_modules" >> /home/odroid/.profile'
 runuser -l odroid -c 'echo "export PATH=/home/odroid/.npm-global/bin:\$PATH" >> /home/odroid/.profile'
 runuser -l odroid -c 'source /home/odroid/.profile'
