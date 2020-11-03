@@ -76,8 +76,8 @@ chown -R odroid: /usr/local/bin
 su odroid -c "./pm2.sh"
 
 #Finally the instalation is completed.
-env PATH=$PATH:/usr/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
-
+sudo env PATH=$PATH:/usr/bin /usr/local/lib/node_modules/pm2/bin/pm2 startup systemd -u odroid --hp /home/odroid
+su odroid -c "pm2 save"
 
 echo "-------------------INSTALATION FINISHED ENJOY-------------------"
 
