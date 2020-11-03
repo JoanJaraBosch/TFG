@@ -29,8 +29,6 @@ done
 mkdir -p /home/odroid/.django-monitor/
 mkdir -p /home/odroid/.pm2/
 
-chown -R odroid: /usr/local/lib
-
 chown -R odroid:odroid /home/odroid/.pm2/
 chown -R odroid:odroid /home/odroid/.django-monitor/
 
@@ -72,6 +70,9 @@ systemctl enable nginx
 systemctl start nginx 
 
 #Installing node 
+chown -R odroid: /usr/local/lib
+chown -R odroid: /usr/local/bin
+
 su odroid -c "./pm2.sh"
 
 #Finally the instalation is completed.
