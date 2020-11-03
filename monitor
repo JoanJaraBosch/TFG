@@ -1,4 +1,0 @@
-export NODE_PATH=/home/odroid/.django-monitor/node_modules
-if [ ! $(echo "$PATH" | grep "/home/odroid/.npm-global/bin") ];then
-  PATH=/home/odroid/.npm-global/bin:$PATH
-fi
