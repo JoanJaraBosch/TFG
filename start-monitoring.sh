@@ -26,40 +26,12 @@ for package in $install;do
 	if [ $(pip3 list --format=columns | grep -c $package) -eq 0 ];then pip3 install $package; fi
 done
 #Change permisions and config of npm for odroid user.
-mkdir -p /home/odroid/.npm-global/
 mkdir -p /home/odroid/.django-monitor/
 mkdir -p /home/odroid/.pm2/
-su odroid -c "npm config set prefix '/home/odroid/.npm-global'"
 
-chmod 744 monitor
-cp -p monitor /etc/default/
-
-if [ $(grep "source /etc/default/monitor" /etc/profile | wc -l) -eq 0 ]; then
-	echo "source /etc/default/monitor" >> /etc/profile
-fi
-
-if [ $(grep "source /etc/default/monitor" /etc/bash.bashrc | wc -l) -eq 0 ]; then
-	echo "source /etc/default/monitor" >> /etc/bash.bashrc
-fi
-
-if [ $(grep "source /etc/default/monitor" /root/.profile | wc -l) -eq 0 ]; then
-	echo "source /etc/default/monitor" >> /root/.profile
-fi
-
-if [ $(grep "source /etc/default/monitor" /root/.bashrc | wc -l) -eq 0 ]; then
-	echo "source /etc/default/monitor" >> /root/.bashrc
-fi
-
-if [ $(grep "source /etc/default/monitor" /home/odroid/.profile | wc -l) -eq 0 ]; then
-	echo "source /etc/default/monitor" >> /home/odroid/.profile
-fi
-
-if [ $(grep "source /etc/default/monitor" /home/odroid/.bashrc | wc -l) -eq 0 ]; then
-	echo "source /etc/default/monitor" >> /home/odroid/.bashrc
-fi
+chown -R odroid: /usr/local/bin
 
 chown -R odroid:odroid /home/odroid/.pm2/
-chown -R odroid:odroid /home/odroid/.npm-global/
 chown -R odroid:odroid /home/odroid/.django-monitor/
 
 #Copy scripts and webapp to the default folder
