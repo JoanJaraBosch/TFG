@@ -822,6 +822,11 @@ function jsonGLobal(){
  reader.onload = function() {
     console.log(reader.result);
     json_message = JSON.parse(reader.result);
+	 
+    if(json_message.hasOwnProperty('error')){
+         stop();
+         alert("Aquest node no funciona o esta apagat");
+    }
     cpu_usage = json_message.cpu;
     if(parseFloat(cpu_usage) > 400){
 	cpu_usage=400;
